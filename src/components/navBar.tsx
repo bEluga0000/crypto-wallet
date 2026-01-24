@@ -1,4 +1,6 @@
 import { BiSolidWallet } from "react-icons/bi"
+import { IoMdHelpCircle } from "react-icons/io"
+import { MdOutlineSecurity } from "react-icons/md"
 
 const NavBar = () => {
     return <header className="flex items-center justify-between border-b border-[#e5e7eb] bg-white px-6 py-4 dark:border-gray-800 dark:bg-[#1a212f] md:px-20">
@@ -22,11 +24,11 @@ const NavBar = () => {
             </div>
 
             <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#f0f2f4] hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <span className="material-symbols-outlined">security</span>
+                <span className="material-symbols-outlined"><MdOutlineSecurity /></span>
             </button>
 
             <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#f0f2f4] hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
-                <span className="material-symbols-outlined">help</span>
+                <span className="material-symbols-outlined"><IoMdHelpCircle /></span>
             </button>
 
             <div
