@@ -3,7 +3,7 @@ import { IoMdHelpCircle } from "react-icons/io"
 import { MdOutlineSecurity } from "react-icons/md"
 
 const NavBar = () => {
-    return <header className="flex items-center justify-between border-b border-[#e5e7eb] bg-white px-6 py-4 dark:border-gray-800 dark:bg-[#1a212f] md:px-20">
+    return <div className="flex items-center justify-between border-b border-[#e5e7eb] bg-white px-6 py-4 dark:border-gray-800 dark:bg-[#1a212f] md:px-20">
         <div className="flex items-center gap-3">
             <div className="flex items-center justify-center rounded-lg bg-primary/10 p-2 text-primary">
                 <span className="material-symbols-outlined text-[28px]">
@@ -13,10 +13,10 @@ const NavBar = () => {
             <h2 className="text-xl font-bold tracking-tight">CryptoHD</h2>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 align-middle">
             <div className="hidden items-center gap-2 rounded-full border border-green-100 bg-green-50 px-3 py-1.5 text-green-600 dark:border-green-800/30 dark:bg-green-900/20 dark:text-green-400 md:flex">
-                <span className="material-symbols-outlined text-[18px]">
-                    verified_user
+                <span className="material-symbols-outlined text-[16px]">
+                    verified user
                 </span>
                 <span className="text-xs font-semibold uppercase tracking-wider">
                     Network: Mainnet
@@ -39,7 +39,7 @@ const NavBar = () => {
                 }}
             />
         </div>
-    </header>
+    </div>
 }
 
 export default NavBar

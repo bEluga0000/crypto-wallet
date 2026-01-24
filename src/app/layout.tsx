@@ -30,10 +30,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <NavBar/>
       <body
         className={`${inter.variable} bg-background-light dark:bg-background-dark min-h-screen text-[#111318] dark:text-white transition-colors duration-200`}
       >
+        <NavBar/>
         {children}
       </body>
     </html>
