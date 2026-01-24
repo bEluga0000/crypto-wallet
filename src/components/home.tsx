@@ -1,3 +1,5 @@
+import { BiSolidWallet } from "react-icons/bi";
+
 export default function HomePage() {
     return (
       <div className="layout-container flex min-h-screen flex-col">
@@ -6,7 +8,7 @@ export default function HomePage() {
           <div className="flex items-center gap-3">
             <div className="flex items-center justify-center rounded-lg bg-primary/10 p-2 text-primary">
               <span className="material-symbols-outlined text-[28px]">
-              {/* <BiSolidWallet /> */}
+              <BiSolidWallet />
               </span>
             </div>
             <h2 className="text-xl font-bold tracking-tight">CryptoHD</h2>
