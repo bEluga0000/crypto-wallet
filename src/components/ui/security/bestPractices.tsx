@@ -10,7 +10,7 @@ const BestPracticesCard: React.FC<BestPracticeCardProps> = ({
     desc,
     icon
 }) => {
-    return <div key={key}>
+    return <div >
         <span className="material-symbols-outlined text-primary">
             {icon}
         </span>
