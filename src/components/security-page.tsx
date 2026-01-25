@@ -1,7 +1,9 @@
 import { IoMdLock, IoMdWarning } from "react-icons/io";
 import { BackupReminder } from "./ui/security/backupReminder";
-import { MdOutlineContentCopy, MdOutlineFileDownload, MdVisibilityOff } from "react-icons/md";
+import { MdDiversity3, MdOfflineBolt, MdOutlineContentCopy, MdOutlineFileDownload, MdVisibilityOff } from "react-icons/md";
 import { SecretRecoveryPhrase } from "./ui/security/recoveryPhrase";
+import BestPracticesCard from "./ui/security/bestPractices";
+import { IoCloudOffline } from "react-icons/io5";
 
 export default function SecurityPage() {
   return (
@@ -34,14 +36,8 @@ export default function SecurityPage() {
         <section className="border-t border-slate-200 pt-6 dark:border-slate-800">
           <h3 className="mb-4 font-bold">Security Best Practices</h3>
           <div className="grid gap-6 md:grid-cols-3">
-            {bestPractices.map((item) => (
-              <div key={item.title}>
-                <span className="material-symbols-outlined text-primary">
-                  {item.icon}
-                </span>
-                <p className="mt-2 text-sm font-bold">{item.title}</p>
-                <p className="text-sm text-slate-400">{item.desc}</p>
-              </div>
+            {bestPractices.map((item,index) => (
+              <BestPracticesCard index={index} icon={item.icon} title={item.title} desc={item.desc}/>
             ))}
           </div>
         </section>
@@ -65,34 +61,19 @@ export default function SecurityPage() {
   );
 }
 
-const mnemonicWords = [
-  "acoustic",
-  "venture",
-  "glance",
-  "mystery",
-  "pioneer",
-  "wisdom",
-  "harvest",
-  "orbit",
-  "quartz",
-  "safari",
-  "uphold",
-  "yacht",
-];
-
 const bestPractices = [
   {
-    icon: "offline_bolt",
+    icon: <MdOfflineBolt />,
     title: "Offline Storage",
     desc: "Store your phrase on physical paper or cold storage.",
   },
   {
-    icon: "diversity_3",
+    icon: <MdDiversity3 />,
     title: "Never Share",
     desc: "Anyone with your phrase can steal your funds.",
   },
   {
-    icon: "cloud_off",
+    icon: <IoCloudOffline />,
     title: "No Cloud Backup",
     desc: "Never upload your phrase to cloud services.",
   },
