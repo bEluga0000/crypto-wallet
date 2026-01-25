@@ -1,40 +1,10 @@
+import { MdMoreHoriz, MdOutlineBackpack, MdOutlineToken, MdOutlineUsb, MdOutlineVerifiedUser } from "react-icons/md";
 import WalletsPageCard from "./ui/import-wallet/walletsPageCard";
+import { FaWandMagicSparkles } from "react-icons/fa6";
 
 export default function ImportWalletPage() {
     return (
         <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark">
-            {/* Header */}
-            <header className="mx-auto flex w-full max-w-[960px] items-center justify-between border-b border-gray-200 px-4 py-4 dark:border-gray-800 md:px-10">
-                <div className="flex items-center gap-3">
-                    <span className="material-symbols-outlined text-3xl text-primary">
-                        account_balance_wallet
-                    </span>
-                    <h2 className="text-lg font-bold text-gray-900 dark:text-white">
-                        CryptoVault
-                    </h2>
-                </div>
-
-                <nav className="hidden items-center gap-8 md:flex">
-                    {["Dashboard", "Assets", "Security", "Settings"].map((item) => (
-                        <a
-                            key={item}
-                            href="#"
-                            className="text-sm font-medium text-gray-900 transition-colors hover:text-primary dark:text-gray-200"
-                        >
-                            {item}
-                        </a>
-                    ))}
-                </nav>
-
-                <div
-                    className="size-10 rounded-full border border-gray-200 bg-cover bg-center dark:border-gray-700"
-                    style={{
-                        backgroundImage:
-                            'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBF8YocuQQjNfcrK7Xxu5Ymi1EBZtGF1gHf3BTBDW6x_g2R49MI5eK0LYO6G-8GP2HtDLrNXOKmmWVUVJ82QU97A6PzsEizPdkCaMgBzwSY17zz-FJFUh-1gzlNTFBPBGmnz4kfxFDJ9AJ2TKrtPdFoDAbxvujeQGNiqzXdBrbyeYvu6EcCSTOfMh8KlZcGgVY18HLP2AQ3MznD54Nlr3Z1Eqi_km6AQ_a-d4pYb9R3jn18bSobYOmfAXc9YYzMPH7dl6YHMZwFTmM")',
-                    }}
-                />
-            </header>
-
             {/* Main */}
             <main className="mx-auto w-full max-w-[960px] flex-1 px-4 py-12">
                 {/* Heading */}
@@ -90,32 +60,32 @@ export default function ImportWalletPage() {
 const wallets = [
     {
         title: "Backpack",
-        icon: "backpack",
+        icon: <MdOutlineBackpack />,
         desc: "Import using your Backpack account securely.",
     },
     {
         title: "Phantom",
-        icon: "auto_fix_high",
+        icon: <FaWandMagicSparkles />,
         desc: "Connect your Phantom Solana wallet extension.",
     },
     {
         title: "MetaMask",
-        icon: "token",
+        icon: <MdOutlineToken />,
         desc: "The most popular Ethereum & ERC-20 wallet.",
     },
     {
         title: "Trust Wallet",
-        icon: "verified_user",
+        icon: <MdOutlineVerifiedUser />,
         desc: "Import via mobile app or browser extension.",
     },
     {
         title: "Other Wallet",
-        icon: "more_horiz",
+        icon: <MdMoreHoriz />,
         desc: "Import via Seed Phrase, Private Key, or Hardware.",
     },
     {
         title: "Hardware Wallet",
-        icon: "usb",
+        icon: <MdOutlineUsb />,
         desc: "Connect your Ledger, Trezor, or Keystone.",
         primary: true,
     },
