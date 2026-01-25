@@ -37,7 +37,7 @@ export default function SecurityPage() {
           <h3 className="mb-4 font-bold">Security Best Practices</h3>
           <div className="grid gap-6 md:grid-cols-3">
             {bestPractices.map((item,index) => (
-              <BestPracticesCard index={index} icon={item.icon} title={item.title} desc={item.desc}/>
+              <BestPracticesCard  icon={item.icon} title={item.title} desc={item.desc} key={index}/>
             ))}
           </div>
         </section>

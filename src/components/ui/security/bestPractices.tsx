@@ -1,16 +1,16 @@
 interface BestPracticeCardProps {
-    index: number;
+    key: number;
     title: string;
     desc: string;
     icon:React.ReactNode
 };
 const BestPracticesCard: React.FC<BestPracticeCardProps> = ({
-    index,
+    key,
     title,
     desc,
     icon
 }) => {
-    return <div key={index}>
+    return <div key={key}>
         <span className="material-symbols-outlined text-primary">
             {icon}
         </span>
