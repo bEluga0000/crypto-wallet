@@ -1,12 +1,14 @@
 interface WalletsPageCardProps {
-    title: string
-    primary?: boolean
-    icon: React.ReactNode
-    desc: string
-    onClick: () => void
+    wallets: {
+        title: string
+        primary?: boolean
+        icon: React.ReactNode
+        desc: string
+        // onClick: () => void
+    }[]
 }
 
-const WalletsPageCard: React.FC<WalletsPageCardProps[]> = (wallets) => {
+const WalletsPageCard: React.FC<WalletsPageCardProps> = ({ wallets }) => {
     return <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
             wallets.map((wallet) => (
