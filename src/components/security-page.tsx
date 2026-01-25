@@ -1,5 +1,7 @@
-import { IoMdWarning } from "react-icons/io";
+import { IoMdLock, IoMdWarning } from "react-icons/io";
 import { BackupReminder } from "./ui/security/backupReminder";
+import { MdOutlineContentCopy, MdOutlineFileDownload, MdVisibilityOff } from "react-icons/md";
+import { SecretRecoveryPhrase } from "./ui/security/recoveryPhrase";
 
 export default function SecurityPage() {
   return (
@@ -19,79 +21,13 @@ export default function SecurityPage() {
         </div>
 
         {/* Backup Reminder */}
-        <BackupReminder />
+        <section>
+          <BackupReminder />
+        </section>
 
         {/* Recovery Phrase */}
         <section>
-          <div className="mb-4 flex items-center justify-between">
-            <h2 className="text-xl font-bold">Secret Recovery Phrase</h2>
-            <span className="rounded-full bg-red-900/30 px-2.5 py-0.5 text-xs font-medium text-red-400">
-              Unsecured
-            </span>
-          </div>
-
-          <div className="relative">
-            <div className="grid grid-cols-3 gap-3 rounded-xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900/50 md:grid-cols-4">
-              {mnemonicWords.map((word, i) => (
-                <div
-                  key={word}
-                  className="flex items-center gap-3 rounded-lg border border-white/10 bg-white/5 p-3"
-                >
-                  <span className="font-mono text-xs text-slate-500">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="select-none font-mono blur-sm">
-                    {word}
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center rounded-xl bg-slate-900/60 backdrop-blur">
-              <div className="max-w-sm text-center">
-                <div className="mx-auto mb-4 rounded-full bg-primary/20 p-4">
-                  <span className="material-symbols-outlined text-3xl text-primary">
-                    visibility_off
-                  </span>
-                </div>
-                <p className="text-lg font-bold">
-                  Reveal Recovery Phrase
-                </p>
-                <p className="mt-1 text-sm text-slate-400">
-                  Make sure no one is looking at your screen.
-                </p>
-                <button className="mt-4 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-2.5 font-bold text-white shadow-lg shadow-primary/20 hover:bg-blue-600">
-                  <span className="material-symbols-outlined text-base">
-                    visibility
-                  </span>
-                  Reveal Phrase
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="mt-4 flex items-center justify-between text-sm text-slate-400">
-            <div className="flex gap-4">
-              <button className="flex items-center gap-2 hover:text-white">
-                <span className="material-symbols-outlined text-lg">
-                  content_copy
-                </span>
-                Copy to Clipboard
-              </button>
-              <button className="flex items-center gap-2 hover:text-white">
-                <span className="material-symbols-outlined text-lg">
-                  download
-                </span>
-                Download Backup
-              </button>
-            </div>
-            <span className="flex items-center gap-1 text-xs italic">
-              <span className="material-symbols-outlined text-sm">lock</span>
-              Stored locally on this device
-            </span>
-          </div>
+          <SecretRecoveryPhrase />
         </section>
 
         {/* Best Practices */}
