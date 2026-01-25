@@ -1,70 +1,9 @@
 export default function SecurityPage() {
     return (
       <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
-        {/* Header */}
-        <header className="flex items-center justify-between border-b border-slate-200 px-10 py-3 dark:border-slate-800">
-          <div className="flex items-center gap-4">
-            <div className="size-8 text-primary">
-              <svg viewBox="0 0 48 48" fill="currentColor">
-                <path d="M6 6H42L36 24L42 42H6L12 24L6 6Z" />
-              </svg>
-            </div>
-            <h2 className="text-lg font-bold tracking-tight">
-              CryptoWallet Pro
-            </h2>
-          </div>
-  
-          <div className="flex items-center gap-8">
-            <nav className="flex gap-9 text-sm font-medium">
-              {["Dashboard", "Assets", "Transactions", "Security"].map((item) => (
-                <a
-                  key={item}
-                  href="#"
-                  className={`transition-colors hover:text-primary ${
-                    item === "Security" ? "text-primary" : ""
-                  }`}
-                >
-                  {item}
-                </a>
-              ))}
-            </nav>
-  
-            <div className="flex gap-2">
-              <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-200 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700">
-                <span className="material-symbols-outlined text-[20px]">
-                  settings
-                </span>
-              </button>
-              <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-200 transition-colors hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700">
-                <span className="material-symbols-outlined text-[20px]">
-                  notifications
-                </span>
-              </button>
-            </div>
-  
-            <div
-              className="size-10 rounded-full border border-slate-300 bg-cover bg-center dark:border-slate-700"
-              style={{
-                backgroundImage:
-                  'url("https://lh3.googleusercontent.com/aida-public/AB6AXuCs6_F0BKoEdx8Za8Y7ROTWY53xL9JeJUMoM-EupcMy-H2dZg0zenXxNt3QnLn75sAWsbQOzyjVuIsl48lk-32zS1YaO7-_jZcFqhy6JnrhOlvkLkznqj5D47LdLGf_o5s8vKTwceeNBuksPSXF01nMsWW9VhLSEP0QX3i_InvVzYe5oBxrVL5LUJ7bHJEP1-WWwlPwiywu8U_UdpMERmdtNSR-25M-eptPhY3FhqD4P1vib3QNGQh7IP2s9iu6mXjImWv1HpIkc9w")',
-              }}
-            />
-          </div>
-        </header>
   
         {/* Main */}
         <main className="mx-auto flex w-full max-w-[960px] flex-1 flex-col gap-6 px-4 py-10">
-          {/* Breadcrumb */}
-          <nav className="flex gap-2 text-sm text-slate-500 dark:text-slate-400">
-            <a href="#" className="hover:underline">
-              Settings
-            </a>
-            <span>/</span>
-            <span className="text-slate-900 dark:text-white">
-              Security & Recovery
-            </span>
-          </nav>
-  
           {/* Title */}
           <div>
             <h1 className="text-4xl font-black tracking-tight">
