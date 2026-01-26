@@ -20,17 +20,16 @@ export const BackupReminder = () => {
               Backup Reminder
             </p>
             <p className="max-w-xl text-sm text-slate-300">
-              Your wallet is not backed up. If you lose this device, your funds
-              are gone forever. Please write down your recovery phrase and store
-              it in a safe place.
+            Your recovery phrase is the only way to restore your wallet.
+            Anyone with access to it can control your funds. Store it securely offline and never share it.
             </p>
           </div>
         </div>
 
         {/* CTA */}
-        <button className="inline-flex h-11 items-center justify-center rounded-lg bg-blue-500 px-6 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400/40">
+        {/* <button className="inline-flex h-11 items-center justify-center rounded-lg bg-blue-500 px-6 text-sm font-semibold text-white transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400/40">
           Start Backup
-        </button>
+        </button> */}
       </div>
     </div>
   );

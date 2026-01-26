@@ -32,7 +32,7 @@ export default function SecurityPage() {
             Security & Recovery
           </h1>
           <p className="mt-2 text-slate-500 dark:text-slate-400">
-            Manage your private keys and mnemonic recovery phrase to ensure
+            Manage your mnemonic recovery phrase to ensure
             long-term fund safety.
           </p>
         </div>
