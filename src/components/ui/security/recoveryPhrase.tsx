@@ -12,25 +12,37 @@ import { useRouter } from "next/navigation";
 import { MnemonicWord } from "./mnemonicWord";
 import { copyToClipboard } from "@/utils/copyToClipBoard";
 import { handleDownloadFile } from "@/utils/download";
+import { LuCopyCheck } from "react-icons/lu";
 
 export const SecretRecoveryPhrase = () => {
   const router = useRouter();
   const [mnemonicWords, setMnemonicWords] = useState<string[] | null>(null);
   const [showPhrase, setShowPhrase] = useState<boolean>(false)
-
+  const [textCopied, setTextCopied] = useState<boolean>(false)
   const handleTogglePreview = () => {
     setShowPhrase(prev => !prev);
   };
   const handleCopyMnemonic = async () => {
-    if (mnemonicWords)
+    if (mnemonicWords) {
       await copyToClipboard(mnemonicWords.join(" "), {
         label: "recovery phrase",
       });
+      setTextCopied(true)
+    }
   }
+  useEffect(() => {
+    if (!textCopied) return;
+
+    const timer = setTimeout(() => {
+      setTextCopied(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [textCopied]);
 
   const handleDownloadBackup = () => {
     if (!mnemonicWords) return;
-    handleDownloadFile({data:mnemonicWords.join(" "),fileName:"recovery-phrase.txt",type:"text/plain"})
+    handleDownloadFile({ data: mnemonicWords.join(" "), fileName: "recovery-phrase.txt", type: "text/plain" })
   };
   useEffect(() => {
     const storedMnemonic = localStorage.getItem("mnemonic");
@@ -138,15 +150,34 @@ export const SecretRecoveryPhrase = () => {
           <div className="flex items-center justify-between text-sm text-slate-400">
             <div className="flex gap-5">
               <button
-                className="flex items-center gap-2 hover:text-white"
                 onClick={handleCopyMnemonic}
+                className="group flex items-center gap-2 text-slate-400 transition-colors hover:text-white"
               >
-                <MdOutlineContentCopy className="text-lg" />
-                Copy to Clipboard
+                {/* Icon */}
+                <span
+                  className={`transition-all duration-300 ${textCopied ? "scale-110 text-green-400" : "scale-100"
+                    }`}
+                >
+                  {!textCopied ? (
+                    <MdOutlineContentCopy className="text-lg" />
+                  ) : (
+                    <LuCopyCheck className="text-lg" />
+                  )}
+                </span>
+
+                {/* Text */}
+                <span
+                  className={`transition-all duration-300 ${textCopied
+                      ? "text-green-400 translate-y-0 opacity-100"
+                      : "translate-y-0 opacity-100"
+                    }`}
+                >
+                  {textCopied ? "Copied" : "Copy to Clipboard"}
+                </span>
               </button>
-              <button 
-              className="flex items-center gap-2 hover:text-white"
-              onClick={handleDownloadBackup}
+              <button
+                className="flex items-center gap-2 hover:text-white"
+                onClick={handleDownloadBackup}
               >
                 <MdOutlineFileDownload className="text-lg" />
                 Download Backup
