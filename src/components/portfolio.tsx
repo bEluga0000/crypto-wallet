@@ -1,5 +1,6 @@
 "use client";
 
+import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import BalanceCard from "./ui/portfolio/balance";
 import PortfolioSideBar from "./ui/portfolio/sideBar";
 import ProfileTopBar from "./ui/portfolio/topBar";
@@ -14,27 +15,24 @@ export default function PortfolioPage() {
           <BalanceCard />
           {/* Assets */}
           <div className="space-y-4">
-            {[
-              ["Solana", "500.00 SOL", "$29,500.00", "purple"],
-              ["Ethereum", "20.00 ETH", "$45,000.00", "blue"],
-              ["Bitcoin", "1.20 BTC", "$50,000.00", "orange"],
-            ].map(([name, amount, value, color]) => (
-              <div
-                key={name}
-                className={`group relative rounded-xl border border-slate-200 bg-white p-6 transition-all hover:border-${color}-500/50 hover:shadow-xl dark:border-slate-800 dark:bg-[#16181d]`}
+            {cointTypes.map((c,ind) => {
+              const coin = COIN_TYPES[c]
+              return <div
+                key={ind}
+                className={`group relative rounded-xl border border-slate-200 bg-white p-6 transition-all hover:border-${coin.color}-500/50 hover:shadow-xl dark:border-slate-800 dark:bg-[#16181d]`}
               >
                 <div
-                  className={`absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-full bg-${color}-500`}
+                  className={`absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-full bg-${coin.color}-500`}
                 />
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold">{name}</h3>
+                  <h3 className="text-lg font-bold">{coin.label}</h3>
                   <div className="text-right">
-                    <p className="text-xl font-bold">{amount}</p>
-                    <p className="text-sm text-slate-500">{value}</p>
+                    <p className="text-xl font-bold">{100}</p>
+                    <p className="text-sm text-slate-500">{"oghalshgas"}</p>
                   </div>
                 </div>
               </div>
-            ))}
+            })}
           </div>
 
           {/* Allocation */}
@@ -53,3 +51,9 @@ export default function PortfolioPage() {
     </div>
   );
 }
+
+const cointTypes: COIN_TYPES_KEYS[] = [
+  "solana",
+  "ethereum",
+  "bitcoin"
+]

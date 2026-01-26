@@ -6,7 +6,7 @@ type CoinTypeSchem = {
     // derivationPath:string
 }
 
-const COIN_TYPES:Record<string, CoinTypeSchem> = {
+export const COIN_TYPES:Record<string, CoinTypeSchem> = {
     solana: {
         label: "Solana",
         short: "SOL",
@@ -26,3 +26,5 @@ const COIN_TYPES:Record<string, CoinTypeSchem> = {
         image:"btc.png"
     }
 }
+
+export type COIN_TYPES_KEYS = keyof typeof COIN_TYPES
