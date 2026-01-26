@@ -35,7 +35,7 @@ export default function HomePage() {
                             title={"Create New Wallet"}
                             desc="Generate a new 24-word recovery phrase for a fresh start."
                             button="Get Started"
-                            onClick={() => { console.log("okay") }}
+                            onClick={createNewWalletOnClick}
                             buttonIcon={<IoMdArrowForward />}
                         />
 
