@@ -21,14 +21,6 @@ export const ACCOUNT_TYPES:Record<string,AccountTypeSchema> = {
         label:"Cold Storage",
         icon:<IoMdLock />
     },
-    HARDWARE:{
-        label:"Hardware",
-        icon:<MdMemory />
-    },
-    STACKING:{
-        label:"Stacking",
-        icon:<MdLayers />
-    }
 }
 
 export type AccountTypeKey = keyof typeof ACCOUNT_TYPES
