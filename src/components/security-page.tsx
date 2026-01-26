@@ -1,15 +1,19 @@
 "use client";
-import { IoMdLock, IoMdWarning } from "react-icons/io";
 import { BackupReminder } from "./ui/security/backupReminder";
-import { MdDiversity3, MdOfflineBolt, MdOutlineContentCopy, MdOutlineFileDownload, MdVisibilityOff } from "react-icons/md";
+import { MdDiversity3, MdOfflineBolt } from "react-icons/md";
 import { SecretRecoveryPhrase } from "./ui/security/recoveryPhrase";
 import BestPracticesCard from "./ui/security/bestPractices";
 import { IoCloudOffline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default function SecurityPage() {
   const router = useRouter()
-  const handleDeleteAccount = ()=>{
+  const [mnemonic, setMnemonic] = useState<string | null>(null)
+  useEffect(() => {
+    setMnemonic(localStorage.getItem("mnemonic"))
+  })
+  const handleDeleteAccount = () => {
     // here we need to delete everything from localstorage about the account  
     // show the confirmation popup also for confirmation
     // right now only recovery phrase 
@@ -31,44 +35,38 @@ export default function SecurityPage() {
             long-term fund safety.
           </p>
         </div>
-
-        {/* Backup Reminder */}
         <section>
           <BackupReminder />
         </section>
-
-        {/* Recovery Phrase */}
         <section>
           <SecretRecoveryPhrase />
         </section>
-
-        {/* Best Practices */}
         <section className="border-t border-slate-200 pt-6 dark:border-slate-800">
           <h3 className="mb-4 font-bold">Security Best Practices</h3>
           <div className="grid gap-6 md:grid-cols-3">
-            {bestPractices.map((item,index) => (
-              <BestPracticesCard  icon={item.icon} title={item.title} desc={item.desc} key={index}/>
+            {bestPractices.map((item, index) => (
+              <BestPracticesCard icon={item.icon} title={item.title} desc={item.desc} key={index} />
             ))}
           </div>
         </section>
-
-        {/* Danger Zone */}
-        <div className="rounded-xl border border-red-900/30 bg-red-900/10 p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-bold text-red-400">Delete Wallet Data</p>
-              <p className="text-sm text-slate-400">
-                This will remove all wallet information from this device.
-              </p>
+        {
+          mnemonic && <div className="rounded-xl border border-red-900/30 bg-red-900/10 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-bold text-red-400">Delete Wallet Data</p>
+                <p className="text-sm text-slate-400">
+                  This will remove all wallet information from this device.
+                </p>
+              </div>
+              <button
+                className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white"
+                onClick={handleDeleteAccount}
+              >
+                Delete Account
+              </button>
             </div>
-            <button 
-            className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white"
-            onClick={handleDeleteAccount}
-            >
-              Delete Account
-            </button>
           </div>
-        </div>
+        }
       </main>
     </div>
   );
