@@ -5,6 +5,7 @@ import {
   MdVisibilityOff,
   MdOutlineContentCopy,
   MdOutlineFileDownload,
+  MdVisibility,
 } from "react-icons/md";
 import { IoMdLock } from "react-icons/io";
 import { useRouter } from "next/navigation";
@@ -13,6 +14,7 @@ import { MnemonicWord } from "./mnemonicWord";
 export const SecretRecoveryPhrase = () => {
   const router = useRouter();
   const [mnemonicWords, setMnemonicWords] = useState<string[] | null>(null);
+  const [showPhrase, setShowPhrase] = useState<boolean>(false)
 
   useEffect(() => {
     const storedMnemonic = localStorage.getItem("mnemonic");
@@ -32,12 +34,32 @@ export const SecretRecoveryPhrase = () => {
           Secret Recovery Phrase
         </h2>
         <span
-          className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${hasMnemonic
+          className={`inline-flex items-center gap-2 rounded-full px-2.5 py-0.5 text-xs font-medium ${hasMnemonic
             ? "bg-red-500/15 text-red-400"
             : "bg-slate-500/15 text-slate-400"
             }`}
         >
-          {hasMnemonic ? "Unsecured" : "Not Generated"}
+          {/* Toggle preview / hide */}
+          {hasMnemonic && (
+            <button
+              onClick={() => setShowPhrase(prev => !prev)}
+              className="rounded-full p-0.5 transition hover:bg-white/10"
+              aria-label={showPhrase ? "Hide recovery phrase" : "Preview recovery phrase"}
+              title={showPhrase ? "Hide recovery phrase" : "Preview recovery phrase"}
+            >
+              {showPhrase ? (
+                <MdVisibilityOff className="text-sm" />
+              ) : (
+                <MdVisibility className="text-sm" />
+              )}
+            </button>
+          )}
+
+          {/* Status text */}
+          {
+            !hasMnemonic && <span>"Not Generated"</span>
+          }
+
         </span>
       </div>
       {!hasMnemonic && (
@@ -63,32 +85,38 @@ export const SecretRecoveryPhrase = () => {
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f1b34] to-[#0b1428] p-6">
             <div className="grid grid-cols-3 gap-3 md:grid-cols-4">
               {mnemonicWords!.map((word, i) => (
-                <MnemonicWord key={i} index={i} word={word} />
+                <MnemonicWord key={i} index={i} word={word} blurred={!showPhrase}/>
               ))}
             </div>
 
             {/* Glass Overlay */}
-            <div className="pointer-events-none absolute inset-0 bg-black/60 backdrop-blur-md" />
-            <div className="pointer-events-auto absolute inset-0 z-10 flex items-center justify-center">
-              <div className="flex max-w-sm flex-col items-center text-center px-4">
-                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
-                  <MdVisibilityOff className="text-2xl text-blue-400" />
-                </div>
+            {!showPhrase && (
+              <div className="pointer-events-none absolute inset-0 bg-black/60 backdrop-blur-md" />
+            )}
 
-                <h3 className="text-lg font-semibold text-white">
-                  Reveal Recovery Phrase
-                </h3>
+            {!showPhrase && (
+              <div className="pointer-events-auto absolute inset-0 z-10 flex items-center justify-center">
+                <div className="flex max-w-sm flex-col items-center text-center px-4">
+                  <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
+                    <MdVisibilityOff className="text-2xl text-blue-400" />
+                  </div>
 
-                <p className="mt-1 text-sm text-slate-400">
-                  Make sure no one is looking at your screen before revealing your private keys.
-                </p>
+                  <h3 className="text-lg font-semibold text-white">
+                    Reveal Recovery Phrase
+                  </h3>
 
-                <button className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-900/30 transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400/40">
+                  <p className="mt-1 text-sm text-slate-400">
+                    Make sure no one is looking at your screen before revealing your private keys.
+                  </p>
+
+                  {/* <button className="mt-5 inline-flex items-center gap-2 rounded-lg bg-blue-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-blue-900/30 transition-all hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400/40" onClick={() => setShowPhrase(prev => !prev)}>
                   <MdVisibilityOff className="text-lg" />
                   Reveal Phrase
-                </button>
+                </button> */}
+                </div>
               </div>
-            </div>
+            )}
+
           </div>
           {/* Actions */}
           <div className="flex items-center justify-between text-sm text-slate-400">
