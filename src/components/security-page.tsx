@@ -72,9 +72,9 @@ export default function SecurityPage() {
       <ConfirmDialog
         open={openModal}
         onOpenChange={setOpenModal}
-        title="Delete Wallet"
-        description="This will permanently remove your wallet from this device. Make sure you have backed up your recovery phrase."
-        confirmText="Delete Wallet"
+        title="Delete Account"
+        description="This will permanently remove your Account from this device. Make sure you have backed up your recovery phrase."
+        confirmText="Delete Account"
         danger
         onConfirm={handleDeleteAccount}
       />
