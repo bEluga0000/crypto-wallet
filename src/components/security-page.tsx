@@ -1,11 +1,21 @@
+"use client";
 import { IoMdLock, IoMdWarning } from "react-icons/io";
 import { BackupReminder } from "./ui/security/backupReminder";
 import { MdDiversity3, MdOfflineBolt, MdOutlineContentCopy, MdOutlineFileDownload, MdVisibilityOff } from "react-icons/md";
 import { SecretRecoveryPhrase } from "./ui/security/recoveryPhrase";
 import BestPracticesCard from "./ui/security/bestPractices";
 import { IoCloudOffline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
 
 export default function SecurityPage() {
+  const router = useRouter()
+  const handleDeleteAccount = ()=>{
+    // here we need to delete everything from localstorage about the account  
+    // show the confirmation popup also for confirmation
+    // right now only recovery phrase 
+    localStorage.removeItem("mnemonic")
+    router.push("/")
+  }
   return (
     <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
 
@@ -51,7 +61,10 @@ export default function SecurityPage() {
                 This will remove all wallet information from this device.
               </p>
             </div>
-            <button className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white">
+            <button 
+            className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white"
+            onClick={handleDeleteAccount}
+            >
               Delete Account
             </button>
           </div>
