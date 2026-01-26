@@ -10,12 +10,28 @@ import {
 import { IoMdLock } from "react-icons/io";
 import { useRouter } from "next/navigation";
 import { MnemonicWord } from "./mnemonicWord";
+import { copyToClipboard } from "@/utils/copyToClipBoard";
+import { handleDownloadFile } from "@/utils/download";
 
 export const SecretRecoveryPhrase = () => {
   const router = useRouter();
   const [mnemonicWords, setMnemonicWords] = useState<string[] | null>(null);
   const [showPhrase, setShowPhrase] = useState<boolean>(false)
 
+  const handleTogglePreview = () => {
+    setShowPhrase(prev => !prev);
+  };
+  const handleCopyMnemonic = async () => {
+    if (mnemonicWords)
+      await copyToClipboard(mnemonicWords.join(" "), {
+        label: "recovery phrase",
+      });
+  }
+
+  const handleDownloadBackup = () => {
+    if (!mnemonicWords) return;
+    handleDownloadFile({data:mnemonicWords.join(" "),fileName:"recovery-phrase.txt",type:"text/plain"})
+  };
   useEffect(() => {
     const storedMnemonic = localStorage.getItem("mnemonic");
     if (!storedMnemonic) {
@@ -42,7 +58,7 @@ export const SecretRecoveryPhrase = () => {
           {/* Toggle preview / hide */}
           {hasMnemonic && (
             <button
-              onClick={() => setShowPhrase(prev => !prev)}
+              onClick={handleTogglePreview}
               className="rounded-full p-0.5 transition hover:bg-white/10"
               aria-label={showPhrase ? "Hide recovery phrase" : "Preview recovery phrase"}
               title={showPhrase ? "Hide recovery phrase" : "Preview recovery phrase"}
@@ -85,7 +101,7 @@ export const SecretRecoveryPhrase = () => {
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f1b34] to-[#0b1428] p-6">
             <div className="grid grid-cols-3 gap-3 md:grid-cols-4">
               {mnemonicWords!.map((word, i) => (
-                <MnemonicWord key={i} index={i} word={word} blurred={!showPhrase}/>
+                <MnemonicWord key={i} index={i} word={word} blurred={!showPhrase} />
               ))}
             </div>
 
@@ -121,11 +137,17 @@ export const SecretRecoveryPhrase = () => {
           {/* Actions */}
           <div className="flex items-center justify-between text-sm text-slate-400">
             <div className="flex gap-5">
-              <button className="flex items-center gap-2 hover:text-white">
+              <button
+                className="flex items-center gap-2 hover:text-white"
+                onClick={handleCopyMnemonic}
+              >
                 <MdOutlineContentCopy className="text-lg" />
                 Copy to Clipboard
               </button>
-              <button className="flex items-center gap-2 hover:text-white">
+              <button 
+              className="flex items-center gap-2 hover:text-white"
+              onClick={handleDownloadBackup}
+              >
                 <MdOutlineFileDownload className="text-lg" />
                 Download Backup
               </button>
