@@ -24,9 +24,7 @@ export default function SecurityPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
 
-      {/* Main */}
       <main className="mx-auto flex w-full max-w-[960px] flex-1 flex-col gap-6 px-4 py-10">
-        {/* Title */}
         <div>
           <h1 className="text-4xl font-black tracking-tight">
             Security & Recovery

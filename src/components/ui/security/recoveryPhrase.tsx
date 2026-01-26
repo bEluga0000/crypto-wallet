@@ -68,7 +68,6 @@ export const SecretRecoveryPhrase = () => {
             : "bg-slate-500/15 text-slate-400"
             }`}
         >
-          {/* Toggle preview / hide */}
           {hasMnemonic && (
             <button
               onClick={handleTogglePreview}
@@ -84,7 +83,6 @@ export const SecretRecoveryPhrase = () => {
             </button>
           )}
 
-          {/* Status text */}
           {
             !hasMnemonic && <span>"Not Generated"</span>
           }
@@ -154,7 +152,6 @@ export const SecretRecoveryPhrase = () => {
                 onClick={handleCopyMnemonic}
                 className="group flex items-center gap-2 text-slate-400 transition-colors hover:text-white"
               >
-                {/* Icon */}
                 <span
                   className={`transition-all duration-300 ${textCopied ? "scale-110 text-green-400" : "scale-100"
                     }`}
@@ -165,12 +162,10 @@ export const SecretRecoveryPhrase = () => {
                     <LuCopyCheck className="text-lg" />
                   )}
                 </span>
-
-                {/* Text */}
                 <span
                   className={`transition-all duration-300 ${textCopied
-                      ? "text-green-400 translate-y-0 opacity-100"
-                      : "translate-y-0 opacity-100"
+                    ? "text-green-400 translate-y-0 opacity-100"
+                    : "translate-y-0 opacity-100"
                     }`}
                 >
                   {textCopied ? "Copied" : "Copy to Clipboard"}

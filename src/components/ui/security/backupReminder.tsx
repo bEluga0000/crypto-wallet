@@ -3,25 +3,20 @@ import { IoMdWarning } from "react-icons/io";
 export const BackupReminder = () => {
   return (
     <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-gradient-to-br from-[#0f1b34] to-[#0b1428] p-6 shadow-lg shadow-blue-900/20">
-      {/* subtle glow */}
       <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-blue-500/10" />
 
       <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        {/* Left content */}
         <div className="flex items-start gap-4">
-          {/* Icon */}
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-500/20 text-blue-400">
             <IoMdWarning className="text-2xl" />
           </div>
-
-          {/* Text */}
           <div className="space-y-1">
             <p className="text-base font-semibold text-white">
               Backup Reminder
             </p>
             <p className="max-w-xl text-sm text-slate-300">
-            Your recovery phrase is the only way to restore your wallet.
-            Anyone with access to it can control your funds. Store it securely offline and never share it.
+              Your recovery phrase is the only way to restore your wallet.
+              Anyone with access to it can control your funds. Store it securely offline and never share it.
             </p>
           </div>
         </div>
