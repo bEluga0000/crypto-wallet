@@ -1,10 +1,12 @@
+import { RiShieldUserFill } from "react-icons/ri"
+
 const PortfolioSideBar = () => {
     return <aside className="flex w-72 flex-col border-r border-slate-200 dark:border-slate-800">
         <div className="p-6">
             <div className="mb-8 flex items-center gap-3">
                 <div className="rounded-lg bg-primary/10 p-2">
                     <span className="material-symbols-outlined text-3xl text-primary">
-                        shield_person
+                        <RiShieldUserFill />
                     </span>
                 </div>
                 <div>
