@@ -13,7 +13,7 @@ const ProfileTopBar = () => {
         <div className="flex items-center gap-4">
             <div className="flex overflow-hidden rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
                 {Icons.map((i, ind) => (
-                    <TopBarButton ind={ind} icon={i.icon} />
+                    <TopBarButton ind={ind} icon={i.icon} key={ind} />
                 ))}
             </div>
 
