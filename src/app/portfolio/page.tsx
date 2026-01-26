@@ -1,4 +1,4 @@
-import PortfolioPage from "@/components/ui/portfolio"
+import PortfolioPage from "@/components/portfolio"
 
 const Portfolio = ()=>{
     return <div>
