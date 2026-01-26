@@ -27,7 +27,6 @@ export const SecretRecoveryPhrase = () => {
 
   return (
     <section className="space-y-4">
-      {/* Header */}
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-white">
           Secret Recovery Phrase
@@ -41,10 +40,6 @@ export const SecretRecoveryPhrase = () => {
           {hasMnemonic ? "Unsecured" : "Not Generated"}
         </span>
       </div>
-
-      {/* =========================
-          STATE 1: NO MNEMONIC
-      ========================== */}
       {!hasMnemonic && (
         <div className="rounded-2xl border border-white/10 bg-[#0b1428] p-8 text-center">
           <h3 className="text-xl font-semibold text-white">
@@ -63,15 +58,9 @@ export const SecretRecoveryPhrase = () => {
           </button>
         </div>
       )}
-
-      {/* =========================
-          STATE 2: MNEMONIC EXISTS
-      ========================== */}
       {hasMnemonic && (
         <>
-          {/* Glass Container */}
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f1b34] to-[#0b1428] p-6">
-            {/* Mnemonic Grid (only if present) */}
             <div className="grid grid-cols-3 gap-3 md:grid-cols-4">
               {mnemonicWords!.map((word, i) => (
                 <MnemonicWord key={i} index={i} word={word} />
@@ -80,8 +69,6 @@ export const SecretRecoveryPhrase = () => {
 
             {/* Glass Overlay */}
             <div className="pointer-events-none absolute inset-0 bg-black/60 backdrop-blur-md" />
-
-            {/* Center CTA */}
             <div className="pointer-events-auto absolute inset-0 z-10 flex items-center justify-center">
               <div className="flex max-w-sm flex-col items-center text-center px-4">
                 <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
@@ -103,7 +90,6 @@ export const SecretRecoveryPhrase = () => {
               </div>
             </div>
           </div>
-
           {/* Actions */}
           <div className="flex items-center justify-between text-sm text-slate-400">
             <div className="flex gap-5">
