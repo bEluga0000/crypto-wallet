@@ -2,12 +2,11 @@ import { AiOutlineStock } from "react-icons/ai"
 import { IoMdLock } from "react-icons/io"
 import { MdLayers, MdMemory, MdOutlineAccountBalanceWallet } from "react-icons/md"
 
+
 type AccountTypeSchema = {
     label:string
     icon:React.ReactNode
 }
-
-
 
 export const ACCOUNT_TYPES:Record<string,AccountTypeSchema> = {
     MAIN:{
@@ -31,3 +30,5 @@ export const ACCOUNT_TYPES:Record<string,AccountTypeSchema> = {
         icon:<MdLayers />
     }
 }
+
+export type AccountTypeKey = keyof typeof ACCOUNT_TYPES

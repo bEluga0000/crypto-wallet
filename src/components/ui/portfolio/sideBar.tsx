@@ -1,3 +1,5 @@
+import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes"
+import { MdLayers, MdMemory } from "react-icons/md";
 import { RiShieldUserFill } from "react-icons/ri"
 
 const PortfolioSideBar = () => {
@@ -18,32 +20,29 @@ const PortfolioSideBar = () => {
             </div>
 
             <nav className="space-y-1">
-                {[
-                    ["account_balance_wallet", "Main Wallet"],
-                    ["monitoring", "Trading Account"],
-                    ["lock", "Cold Storage"],
-                ].map(([icon, label]) => (
-                    <div
-                        key={label}
-                        className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800"
-                    >
-                        <span className="material-symbols-outlined text-slate-500">
-                            {icon}
-                        </span>
-                        <span className="text-sm font-medium">{label}</span>
-                    </div>
-                ))}
+                {SIDEBAR_ACCOUNTS.map((key) => {
+                    const account = ACCOUNT_TYPES[key];
+                    return (
+                        <div
+                            key={key}
+                            className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800"
+                        >
+                            <span className="text-slate-500">{account.icon}</span>
+                            <span className="text-sm font-medium">{account.label}</span>
+                        </div>
+                    );
+                })}
 
                 <div className="flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/10 px-3 py-2.5 text-primary">
                     <span className="material-symbols-outlined fill-icon">
-                        memory
+                        <MdMemory />
                     </span>
                     <span className="text-sm font-bold">Hardware 1</span>
                 </div>
 
                 <div className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800">
                     <span className="material-symbols-outlined text-slate-500">
-                        layers
+                        <MdLayers />
                     </span>
                     <span className="text-sm font-medium">Staking</span>
                 </div>
@@ -68,3 +67,9 @@ const PortfolioSideBar = () => {
     </aside>
 }
 export default PortfolioSideBar
+
+const SIDEBAR_ACCOUNTS: AccountTypeKey[] = [
+    "MAIN",
+    "TRADING",
+    "COLD_STORAGE",
+];
