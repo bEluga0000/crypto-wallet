@@ -14,6 +14,7 @@ import { copyToClipboard } from "@/utils/copyToClipBoard";
 import { handleDownloadFile } from "@/utils/download";
 import { LuCopyCheck } from "react-icons/lu";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
+import { toast } from "sonner";
 
 export const SecretRecoveryPhrase = () => {
   const router = useRouter();
@@ -44,6 +45,7 @@ export const SecretRecoveryPhrase = () => {
   const handleDownloadBackup = () => {
     if (!mnemonicWords) return;
     handleDownloadFile({ data: mnemonicWords.join(" "), fileName: "recovery-phrase.txt", type: "text/plain" })
+    toast.success("Backup downloaded")
   };
   useEffect(() => {
     const storedMnemonic = localStorage.getItem(STORAGE_KEYS.MNEMONIC);
