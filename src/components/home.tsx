@@ -3,8 +3,14 @@ import HomePageCard from "./ui/home/homePageCard";
 import { MdAddModerator, MdOutlineSettingsBackupRestore } from "react-icons/md";
 import { IoMdArrowForward } from "react-icons/io";
 import { RiDownloadCloudFill } from "react-icons/ri";
-
+import { generateMnemonics } from "@/utils/generateMnemonic";
+import { useRouter } from "next/navigation";
 export default function HomePage() {
+    const router = useRouter()
+    const createNewWalletOnClick = ()=>{
+         generateMnemonics()
+        router.push("/security")
+    }
     return (
         <div className="layout-container flex min-h-screen flex-col">
             {/* Main */}
