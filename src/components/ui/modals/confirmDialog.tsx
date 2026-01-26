@@ -45,7 +45,7 @@ export const ConfirmDialog = ({
           <div className="mt-6 flex justify-end gap-3">
             <button
               onClick={() => onOpenChange(false)}
-              className="rounded-lg px-4 py-2 text-sm text-slate-300 hover:text-white"
+              className="rounded-lg px-4 py-2 text-sm text-slate-300 hover:text-white cursor-pointer"
             >
               {cancelText}
             </button>
@@ -55,7 +55,7 @@ export const ConfirmDialog = ({
                 onConfirm();
                 onOpenChange(false);
               }}
-              className={`rounded-lg px-4 py-2 text-sm font-semibold text-white ${
+              className={`rounded-lg px-4 py-2 text-sm font-semibold text-white cursor-pointer ${
                 danger
                   ? "bg-red-500 hover:bg-red-600"
                   : "bg-blue-500 hover:bg-blue-600"

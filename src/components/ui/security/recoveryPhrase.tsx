@@ -86,7 +86,7 @@ export const SecretRecoveryPhrase = () => {
           )}
 
           {
-            !hasMnemonic && <span>"Not Generated"</span>
+            !hasMnemonic && <span>Not Generated</span>
           }
 
         </span>
