@@ -6,18 +6,19 @@ import BestPracticesCard from "./ui/security/bestPractices";
 import { IoCloudOffline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 export default function SecurityPage() {
   const router = useRouter()
   const [mnemonic, setMnemonic] = useState<string | null>(null)
   useEffect(() => {
-    setMnemonic(localStorage.getItem("mnemonic"))
+    setMnemonic(localStorage.getItem(STORAGE_KEYS.MNEMONIC))
   })
   const handleDeleteAccount = () => {
     // here we need to delete everything from localstorage about the account  
     // show the confirmation popup also for confirmation
     // right now only recovery phrase 
-    localStorage.removeItem("mnemonic")
+    localStorage.removeItem(STORAGE_KEYS.MNEMONIC)
     router.push("/")
   }
   return (

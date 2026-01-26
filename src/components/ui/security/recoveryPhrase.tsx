@@ -13,6 +13,7 @@ import { MnemonicWord } from "./mnemonicWord";
 import { copyToClipboard } from "@/utils/copyToClipBoard";
 import { handleDownloadFile } from "@/utils/download";
 import { LuCopyCheck } from "react-icons/lu";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 export const SecretRecoveryPhrase = () => {
   const router = useRouter();
@@ -45,7 +46,7 @@ export const SecretRecoveryPhrase = () => {
     handleDownloadFile({ data: mnemonicWords.join(" "), fileName: "recovery-phrase.txt", type: "text/plain" })
   };
   useEffect(() => {
-    const storedMnemonic = localStorage.getItem("mnemonic");
+    const storedMnemonic = localStorage.getItem(STORAGE_KEYS.MNEMONIC);
     if (!storedMnemonic) {
       setMnemonicWords(null);
       return;
