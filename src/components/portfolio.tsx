@@ -4,6 +4,7 @@ import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import BalanceCard from "./ui/portfolio/balance";
 import PortfolioSideBar from "./ui/portfolio/sideBar";
 import ProfileTopBar from "./ui/portfolio/topBar";
+import CoinCard from "./ui/portfolio/coinCard";
 
 export default function PortfolioPage() {
   return (
@@ -17,21 +18,7 @@ export default function PortfolioPage() {
           <div className="space-y-4">
             {cointTypes.map((c,ind) => {
               const coin = COIN_TYPES[c]
-              return <div
-                key={ind}
-                className={`group relative rounded-xl border border-slate-200 bg-white p-6 transition-all hover:border-${coin.color}-500/50 hover:shadow-xl dark:border-slate-800 dark:bg-[#16181d]`}
-              >
-                <div
-                  className={`absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-full bg-${coin.color}-500`}
-                />
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold">{coin.label}</h3>
-                  <div className="text-right">
-                    <p className="text-xl font-bold">{100}</p>
-                    <p className="text-sm text-slate-500">{"oghalshgas"}</p>
-                  </div>
-                </div>
-              </div>
+              return <CoinCard coin={coin} ind={ind} key={ind}/>
             })}
           </div>
 
