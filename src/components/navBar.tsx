@@ -1,10 +1,13 @@
+"use client";
+import { useRouter } from "next/navigation";
 import { BiSolidWallet } from "react-icons/bi"
 import { IoMdHelpCircle } from "react-icons/io"
 import { MdOutlineSecurity } from "react-icons/md"
 
 const NavBar = () => {
+    const router = useRouter()
     return <div className="flex items-center justify-between border-b border-[#e5e7eb] bg-white px-6 py-4 dark:border-gray-800 dark:bg-[#1a212f] md:px-20">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 cursor-pointer" onClick={()=>router.push("/")}>
             <div className="flex items-center justify-center rounded-lg bg-primary/10 p-2 text-primary">
                 <span className="material-symbols-outlined text-[28px]">
                     <BiSolidWallet />

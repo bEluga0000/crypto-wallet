@@ -7,18 +7,21 @@ import { IoCloudOffline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
+import { ConfirmDialog } from "./ui/modals/confirmDialog";
+import { toast } from "sonner";
 
 export default function SecurityPage() {
   const router = useRouter()
   const [mnemonic, setMnemonic] = useState<string | null>(null)
+  const [openModal,setOpenModal] = useState<boolean>(false)
   useEffect(() => {
     setMnemonic(localStorage.getItem(STORAGE_KEYS.MNEMONIC))
   })
   const handleDeleteAccount = () => {
     // here we need to delete everything from localstorage about the account  
-    // show the confirmation popup also for confirmation
     // right now only recovery phrase 
     localStorage.removeItem(STORAGE_KEYS.MNEMONIC)
+    toast.success("Account Deleted")
     router.push("/")
   }
   return (
@@ -58,8 +61,8 @@ export default function SecurityPage() {
                 </p>
               </div>
               <button
-                className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white"
-                onClick={handleDeleteAccount}
+                className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white cursor-pointer"
+                onClick={()=>setOpenModal(true)}
               >
                 Delete Account
               </button>
@@ -67,6 +70,15 @@ export default function SecurityPage() {
           </div>
         }
       </main>
+      <ConfirmDialog
+        open={openModal}
+        onOpenChange={setOpenModal}
+        title="Delete Account"
+        description="This will permanently remove your Account from this device. Make sure you have backed up your recovery phrase."
+        confirmText="Delete Account"
+        danger
+        onConfirm={handleDeleteAccount}
+      />
     </div>
   );
 }

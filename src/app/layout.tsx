@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import NavBar from "@/components/navBar";
+import { ToastProvider } from "@/providers/ToastProviders";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} bg-background-light dark:bg-background-dark min-h-screen text-[#111318] dark:text-white transition-colors duration-200`}
       >
+        <ToastProvider />
         <NavBar/>
         {children}
       </body>
