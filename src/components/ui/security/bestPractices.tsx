@@ -1,7 +1,7 @@
 interface BestPracticeCardProps {
     title: string;
     desc: string;
-    icon:React.ReactNode
+    icon: React.ReactNode
 };
 const BestPracticesCard: React.FC<BestPracticeCardProps> = ({
     title,

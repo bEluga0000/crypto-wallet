@@ -1,61 +1,71 @@
-import { IoMdLock, IoMdWarning } from "react-icons/io";
+"use client";
 import { BackupReminder } from "./ui/security/backupReminder";
-import { MdDiversity3, MdOfflineBolt, MdOutlineContentCopy, MdOutlineFileDownload, MdVisibilityOff } from "react-icons/md";
+import { MdDiversity3, MdOfflineBolt } from "react-icons/md";
 import { SecretRecoveryPhrase } from "./ui/security/recoveryPhrase";
 import BestPracticesCard from "./ui/security/bestPractices";
 import { IoCloudOffline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 export default function SecurityPage() {
+  const router = useRouter()
+  const [mnemonic, setMnemonic] = useState<string | null>(null)
+  useEffect(() => {
+    setMnemonic(localStorage.getItem(STORAGE_KEYS.MNEMONIC))
+  })
+  const handleDeleteAccount = () => {
+    // here we need to delete everything from localstorage about the account  
+    // show the confirmation popup also for confirmation
+    // right now only recovery phrase 
+    localStorage.removeItem(STORAGE_KEYS.MNEMONIC)
+    router.push("/")
+  }
   return (
     <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark text-slate-900 dark:text-white">
 
-      {/* Main */}
       <main className="mx-auto flex w-full max-w-[960px] flex-1 flex-col gap-6 px-4 py-10">
-        {/* Title */}
         <div>
           <h1 className="text-4xl font-black tracking-tight">
             Security & Recovery
           </h1>
           <p className="mt-2 text-slate-500 dark:text-slate-400">
-            Manage your private keys and mnemonic recovery phrase to ensure
+            Manage your mnemonic recovery phrase to ensure
             long-term fund safety.
           </p>
         </div>
-
-        {/* Backup Reminder */}
         <section>
           <BackupReminder />
         </section>
-
-        {/* Recovery Phrase */}
         <section>
           <SecretRecoveryPhrase />
         </section>
-
-        {/* Best Practices */}
         <section className="border-t border-slate-200 pt-6 dark:border-slate-800">
           <h3 className="mb-4 font-bold">Security Best Practices</h3>
           <div className="grid gap-6 md:grid-cols-3">
-            {bestPractices.map((item,index) => (
-              <BestPracticesCard  icon={item.icon} title={item.title} desc={item.desc} key={index}/>
+            {bestPractices.map((item, index) => (
+              <BestPracticesCard icon={item.icon} title={item.title} desc={item.desc} key={index} />
             ))}
           </div>
         </section>
-
-        {/* Danger Zone */}
-        <div className="rounded-xl border border-red-900/30 bg-red-900/10 p-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-bold text-red-400">Delete Wallet Data</p>
-              <p className="text-sm text-slate-400">
-                This will remove all wallet information from this device.
-              </p>
+        {
+          mnemonic && <div className="rounded-xl border border-red-900/30 bg-red-900/10 p-5">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="font-bold text-red-400">Delete Wallet Data</p>
+                <p className="text-sm text-slate-400">
+                  This will remove all wallet information from this device.
+                </p>
+              </div>
+              <button
+                className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white"
+                onClick={handleDeleteAccount}
+              >
+                Delete Account
+              </button>
             </div>
-            <button className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white">
-              Delete Account
-            </button>
           </div>
-        </div>
+        }
       </main>
     </div>
   );
