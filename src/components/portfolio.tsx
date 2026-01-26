@@ -1,5 +1,6 @@
 "use client";
 
+import BalanceCard from "./ui/portfolio/balance";
 import PortfolioSideBar from "./ui/portfolio/sideBar";
 import ProfileTopBar from "./ui/portfolio/topBar";
 
@@ -9,21 +10,8 @@ export default function PortfolioPage() {
       <PortfolioSideBar />
       <main className="flex flex-1 flex-col overflow-y-auto">
         <ProfileTopBar />
-        {/* Content */}
         <div className="max-w-5xl px-8 py-10">
-          {/* Balance */}
-          <div className="mb-12">
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.15em] text-slate-500">
-              Combined Portfolio Balance
-            </p>
-            <div className="flex items-baseline gap-4">
-              <h2 className="text-5xl font-bold">$124,500.00</h2>
-              <span className="rounded bg-green-500/10 px-2 py-0.5 text-sm font-semibold text-green-500">
-                +3.45% (24h)
-              </span>
-            </div>
-          </div>
-
+          <BalanceCard />
           {/* Assets */}
           <div className="space-y-4">
             {[
