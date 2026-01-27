@@ -25,6 +25,6 @@ export const COIN_TYPES:Record<string, CoinTypeSchem> = {
         color:"orange",
         image:"btc.png"
     }
-}
+} as const
 
 export type COIN_TYPES_KEYS = keyof typeof COIN_TYPES

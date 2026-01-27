@@ -21,6 +21,6 @@ export const ACCOUNT_TYPES:Record<string,AccountTypeSchema> = {
         label:"Cold Storage",
         icon:<IoMdLock />
     },
-}
+} as const 
 
 export type AccountTypeKey = keyof typeof ACCOUNT_TYPES

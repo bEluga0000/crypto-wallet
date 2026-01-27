@@ -1,7 +1,7 @@
 import * as Select from "@radix-ui/react-select";
 import { FaCheck, FaChevronDown } from "react-icons/fa6";
 
-interface ItemSchema {
+export interface ItemSchema {
   label: string;
   icon: React.ReactNode;
   value: string;

@@ -3,11 +3,31 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import Field from "../formComponents/fieldWrapper";
-import SelectBox from "../formComponents/selectBox";
+import SelectBox, { ItemSchema } from "../formComponents/selectBox";
 import { IoIosCloseCircle } from "react-icons/io";
+import { ACCOUNT_TYPES } from "@/constants/accountTypes";
+import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 
-const WALLET_SOURCES = ["Main Seed Phrase"] as const;
-const CHAINS = ["Multi-chain", "Solana", "Ethereum"] as const;
+export const WALLET_SOURCES: ItemSchema[] = (
+    ["MAIN", "TRADING", "COLD_STORAGE"] as const
+  ).map((key) => ({
+    value: key,
+    label: ACCOUNT_TYPES[key].label,
+    icon: ACCOUNT_TYPES[key].icon,
+  }));
+  export const COIN_SELECT_ITEMS: ItemSchema[] = (
+    Object.keys(COIN_TYPES) as COIN_TYPES_KEYS[]
+  ).map((key) => ({
+    value: key,
+    label: COIN_TYPES[key].label,
+    icon: (
+      <img
+        src={`/coins/${COIN_TYPES[key].image}`}
+        alt={COIN_TYPES[key].label}
+        className="h-4 w-4 rounded-full"
+      />
+    ),
+  }));
 
 const AddNewAccountModal = ({
   open,
@@ -16,8 +36,8 @@ const AddNewAccountModal = ({
   open: boolean;
   onOpenChange: (v: boolean) => void;
 }) => {
-  const [walletSource, setWalletSource] = useState(WALLET_SOURCES[0]);
-  const [chain, setChain] = useState(CHAINS[0]);
+  const [walletSource, setWalletSource] = useState(WALLET_SOURCES[0].value);
+  const [chain, setChain] = useState(COIN_SELECT_ITEMS[0].value);
   const [accountName, setAccountName] = useState("");
 
   return (
@@ -61,7 +81,7 @@ const AddNewAccountModal = ({
               <SelectBox
                 value={chain}
                 onChange={()=>setChain}
-                items={CHAINS}
+                items={COIN_SELECT_ITEMS}
               />
             </Field>
 
