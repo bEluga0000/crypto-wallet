@@ -9,6 +9,7 @@ import SelectBox from "../formComponents/selectBox";
 import { ACCOUNT_TYPES } from "@/constants/accountTypes";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import { AccountSchema } from "@/constants/accounts";
+import { createNewPublicPrivateKey } from "@/utils/createNewAccount";
 
 export const WALLET_SOURCES = (
   ["MAIN", "TRADING", "COLD_STORAGE"] as const
@@ -63,7 +64,7 @@ const AddNewAccountModal = ({
 
   const onSubmit = (data: AddAccountFormSchema) => {
     console.log("Create Account:", data);
-    
+    createNewPublicPrivateKey(data)
     onOpenChange(false);
   };
 
