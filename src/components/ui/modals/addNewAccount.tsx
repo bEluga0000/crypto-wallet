@@ -8,6 +8,7 @@ import Field from "../formComponents/fieldWrapper";
 import SelectBox from "../formComponents/selectBox";
 import { ACCOUNT_TYPES } from "@/constants/accountTypes";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
+import { AccountSchema } from "@/constants/accounts";
 
 export const WALLET_SOURCES = (
   ["MAIN", "TRADING", "COLD_STORAGE"] as const
@@ -35,6 +36,7 @@ type AddAccountFormSchema = {
   walletSource: string;
   chain: string;
   accountName: string;
+  setAccounts:(val:AccountSchema[])=>void
 };
 
 const AddNewAccountModal = ({
@@ -60,7 +62,7 @@ const AddNewAccountModal = ({
 
   const onSubmit = (data: AddAccountFormSchema) => {
     console.log("Create Account:", data);
-    // 🔐 generate account + keys here
+    
     onOpenChange(false);
   };
 
