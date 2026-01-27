@@ -32,19 +32,20 @@ export const COIN_SELECT_ITEMS = (
   ),
 }));
 
-type AddAccountFormSchema = {
+export type AddAccountFormSchema = {
   walletSource: string;
   chain: string;
   accountName: string;
-  setAccounts:(val:AccountSchema[])=>void
 };
 
 const AddNewAccountModal = ({
   open,
   onOpenChange,
+  setAccounts,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
+  setAccounts:(val:AccountSchema[])=>void
 }) => {
   const {
     handleSubmit,
