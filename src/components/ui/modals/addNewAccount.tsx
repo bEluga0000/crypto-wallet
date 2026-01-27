@@ -24,7 +24,7 @@ export const COIN_SELECT_ITEMS = (
   label: COIN_TYPES[key].label,
   icon: (
     <img
-      src={`/coins/${COIN_TYPES[key].image}`}
+      src={COIN_TYPES[key].image}
       alt={COIN_TYPES[key].label}
       className="h-4 w-4 rounded-full"
     />
