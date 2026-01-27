@@ -40,7 +40,7 @@ const AddNewAccountModal = ({
               </Dialog.Description>
             </div>
 
-            <Dialog.Close className="rounded-lg p-1 hover:bg-white/10">
+            <Dialog.Close className="rounded-lg p-1  cursor-pointer hover:bg-red-700">
               <IoIosCloseCircle className="h-5 w-5" />
             </Dialog.Close>
           </div>
@@ -48,7 +48,7 @@ const AddNewAccountModal = ({
           {/* Form */}
           <div className="space-y-4">
             {/* Wallet Source */}
-            <Field label="Select Wallet Source">
+            <Field label="Common Wallet types">
               <SelectBox
                 value={walletSource}
                 onChange={()=>setWalletSource}
@@ -78,12 +78,6 @@ const AddNewAccountModal = ({
 
           {/* Footer */}
           <div className="mt-6 flex items-center justify-between">
-            <button
-              onClick={() => onOpenChange(false)}
-              className="text-sm text-slate-400 hover:text-white"
-            >
-              Cancel
-            </button>
 
             <button
               className="rounded-lg bg-blue-500 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-600"
