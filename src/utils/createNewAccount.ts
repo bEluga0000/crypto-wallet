@@ -6,7 +6,6 @@ import { STORAGE_KEYS } from "@/constants/storageKeys";
 export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
     // check do we have data in the local storage
     const accounts = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
-
     if (!accounts)
         createNewAccount(input)
     // if then create a new wallet with index zero
