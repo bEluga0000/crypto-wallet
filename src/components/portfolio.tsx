@@ -5,13 +5,20 @@ import BalanceCard from "./ui/portfolio/balance";
 import PortfolioSideBar from "./ui/portfolio/sideBar";
 import ProfileTopBar from "./ui/portfolio/topBar";
 import CoinCard from "./ui/portfolio/coinCard";
+import { useState } from "react";
 
 export default function PortfolioPage() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   return (
     <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
-      <PortfolioSideBar />
+      <PortfolioSideBar 
+      isOpen={isSidebarOpen}
+      onToggle={() => setIsSidebarOpen((p) => !p)}
+      />
       <main className="flex flex-1 flex-col overflow-y-auto">
-        <ProfileTopBar />
+        <ProfileTopBar 
+        onToggleSidebar={() => setIsSidebarOpen((p) => !p)}
+        />
         <div className="max-w-5xl px-8 py-10">
           <BalanceCard />
           {/* Assets */}
