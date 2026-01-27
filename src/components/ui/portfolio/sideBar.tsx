@@ -1,14 +1,14 @@
 import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes"
 import { IoMdAddCircle } from "react-icons/io";
 import { MdLayers, MdMemory } from "react-icons/md";
-import { RiShieldUserFill } from "react-icons/ri"
 
 type SidebarProps = {
   isOpen: boolean;
   onToggle: () => void;
+  setOpenAddAccount:(val:boolean)=>void
 };
 
-const PortfolioSideBar = ({ isOpen, onToggle }: SidebarProps) => {
+const PortfolioSideBar = ({ isOpen, onToggle,setOpenAddAccount }: SidebarProps) => {
   return (
     <aside
       className={`
@@ -19,7 +19,7 @@ const PortfolioSideBar = ({ isOpen, onToggle }: SidebarProps) => {
     >
       <div className="p-6">
         {/* Header */}
-        <div className="mb-8 flex items-center gap-3 cursor-pointer">
+        <div className="mb-8 flex items-center gap-3 cursor-pointer" onClick={()=>setOpenAddAccount(true)}>
           <div className="rounded-lg bg-primary/10 p-2">
             <IoMdAddCircle className="text-2xl text-primary" />
           </div>
