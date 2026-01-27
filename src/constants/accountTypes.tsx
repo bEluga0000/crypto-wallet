@@ -8,7 +8,7 @@ type AccountTypeSchema = {
     icon:React.ReactNode
 }
 
-export const ACCOUNT_TYPES:Record<string,AccountTypeSchema> = {
+export const ACCOUNT_TYPES= {
     MAIN:{
         label:"Main Wallet",
         icon:<MdOutlineAccountBalanceWallet />

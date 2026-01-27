@@ -6,7 +6,7 @@ type CoinTypeSchem = {
     // derivationPath:string
 }
 
-export const COIN_TYPES:Record<string, CoinTypeSchem> = {
+export const COIN_TYPES= {
     solana: {
         label: "Solana",
         short: "SOL",
