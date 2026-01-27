@@ -16,9 +16,9 @@ export default function PortfolioPage() {
           <BalanceCard />
           {/* Assets */}
           <div className="space-y-4">
-            {cointTypes.map((c,ind) => {
+            {cointTypes.map((c, ind) => {
               const coin = COIN_TYPES[c]
-              return <CoinCard coin={coin} ind={ind} key={ind}/>
+              return <CoinCard coin={coin} ind={ind} key={ind} />
             })}
           </div>
 
