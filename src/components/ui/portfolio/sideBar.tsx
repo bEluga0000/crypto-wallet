@@ -1,14 +1,15 @@
 import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes"
 import { IoMdAddCircle } from "react-icons/io";
 import { MdLayers, MdMemory } from "react-icons/md";
+import SideBarFieldCard from "./sideBarFieldCard";
 
 type SidebarProps = {
   isOpen: boolean;
   onToggle: () => void;
-  setOpenAddAccount:(val:boolean)=>void
+  setOpenAddAccount: (val: boolean) => void
 };
 
-const PortfolioSideBar = ({ isOpen, onToggle,setOpenAddAccount }: SidebarProps) => {
+const PortfolioSideBar = ({ isOpen, onToggle, setOpenAddAccount }: SidebarProps) => {
   return (
     <aside
       className={`
@@ -19,7 +20,7 @@ const PortfolioSideBar = ({ isOpen, onToggle,setOpenAddAccount }: SidebarProps) 
     >
       <div className="p-6">
         {/* Header */}
-        <div className="mb-8 flex items-center gap-3 cursor-pointer" onClick={()=>setOpenAddAccount(true)}>
+        <div className="mb-8 flex items-center gap-1 cursor-pointer" onClick={() => setOpenAddAccount(true)}>
           <div className="rounded-lg bg-primary/10 p-2">
             <IoMdAddCircle className="text-2xl text-primary" />
           </div>
@@ -29,7 +30,7 @@ const PortfolioSideBar = ({ isOpen, onToggle,setOpenAddAccount }: SidebarProps) 
               <h1 className="text-sm font-bold uppercase tracking-wider text-slate-500">
                 Add Wallet
               </h1>
-              <p className="text-xs text-slate-400">High Security</p>
+              {/* <p className="text-xs text-slate-400">High Security</p> */}
             </div>
           )}
         </div>
@@ -40,36 +41,15 @@ const PortfolioSideBar = ({ isOpen, onToggle,setOpenAddAccount }: SidebarProps) 
             const account = ACCOUNT_TYPES[key];
 
             return (
-              <div
-                key={key}
-                className="flex items-center gap-3 rounded-lg px-3 py-2.5 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
-              >
-                <span className="text-slate-500">{account.icon}</span>
-
-                {isOpen && (
-                  <span className="text-sm font-medium">
-                    {account.label}
-                  </span>
-                )}
-              </div>
+              <SideBarFieldCard icon={account.icon} label={account.label} isOpen={isOpen} key={key} />
             );
           })}
 
           {/* Hardware */}
-          <div className="flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/10 px-3 py-2.5 text-primary">
-            <MdMemory />
-            {isOpen && (
-              <span className="text-sm font-bold">Hardware 1</span>
-            )}
-          </div>
+          <SideBarFieldCard icon={<MdMemory />} isOpen={isOpen} label="Hardware 1" />
 
           {/* Staking */}
-          <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer">
-            <MdLayers className="text-slate-500" />
-            {isOpen && (
-              <span className="text-sm font-medium">Staking</span>
-            )}
-          </div>
+          <SideBarFieldCard icon={<MdLayers className="text-slate-500" />} isOpen={isOpen} label="Staking" />
         </nav>
       </div>
 
