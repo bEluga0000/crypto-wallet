@@ -8,12 +8,14 @@ import CoinCard from "./ui/portfolio/coinCard";
 import { useState } from "react";
 import AddNewAccountModal from "./ui/modals/addNewAccount";
 import { AccountSchema } from "@/constants/accounts";
+import { AccountTypeKey } from "@/constants/accountTypes";
 
 
 export default function PortfolioPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [openAddAccount, setOpenAddAccount] = useState(false)
   const [accounts,setAccounts] = useState<AccountSchema[]>([])
+  const [selectWalletType,setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
   return (
     <>
       <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
@@ -21,6 +23,8 @@ export default function PortfolioPage() {
           isOpen={isSidebarOpen}
           onToggle={() => setIsSidebarOpen((p) => !p)}
           setOpenAddAccount={setOpenAddAccount}
+          onSelect={(key) => setSelectedWalletType(key)}
+          activeKey={selectWalletType}
         />
         <main className="flex flex-1 flex-col overflow-y-auto">
           <ProfileTopBar

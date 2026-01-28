@@ -43,11 +43,11 @@ export type AddAccountFormSchema = {
 const AddNewAccountModal = ({
   open,
   onOpenChange,
-  setAccounts,
+  // setAccounts,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
-  setAccounts:(val:AccountSchema[])=>void
+  // setAccounts:(val:AccountSchema[])=>void
 }) => {
   const {
     handleSubmit,

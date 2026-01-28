@@ -6,72 +6,106 @@ import SideBarFieldCard from "./sideBarFieldCard";
 type SidebarProps = {
   isOpen: boolean;
   onToggle: () => void;
-  setOpenAddAccount: (val: boolean) => void
+  setOpenAddAccount: (val: boolean) => void;
+  activeKey: AccountTypeKey | "HARDWARE" | "STAKING";
+  onSelect: (key: SidebarProps["activeKey"]) => void;
 };
 
-const PortfolioSideBar = ({ isOpen, onToggle, setOpenAddAccount }: SidebarProps) => {
+const PortfolioSideBar = ({
+  isOpen,
+  onToggle,
+  setOpenAddAccount,
+  activeKey,
+  onSelect,
+}: SidebarProps) => {
   return (
     <aside
       className={`
-          flex flex-col border-r border-slate-200 dark:border-slate-800
-          transition-all duration-300 ease-in-out
-          ${isOpen ? "w-72" : "w-20"}
-        `}
+        flex flex-col border-r border-slate-200 dark:border-slate-800
+        bg-background-light dark:bg-background-dark
+        transition-all duration-300 ease-in-out
+        ${isOpen ? "w-72" : "w-20"}
+      `}
     >
-      <div className="p-6">
-        {/* Header */}
-        <div className="mb-8 flex items-center gap-1 cursor-pointer" onClick={() => setOpenAddAccount(true)}>
-          <div className="rounded-lg bg-primary/10 p-2">
-            <IoMdAddCircle className="text-2xl text-primary" />
+      <div className="p-4">
+        {/* Add Wallet CTA */}
+        <div
+          onClick={() => setOpenAddAccount(true)}
+          className={`
+            mb-6 flex items-center gap-3 rounded-xl border
+            px-3 py-3 cursor-pointer transition-all
+            ${
+              isOpen
+                ? "border-primary/30 bg-primary/10 hover:bg-primary/15"
+                : "justify-center border-transparent hover:bg-primary/10"
+            }
+          `}
+        >
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary text-white shadow-md">
+            <IoMdAddCircle className="text-xl" />
           </div>
 
           {isOpen && (
-            <div className="transition-opacity duration-200">
-              <h1 className="text-sm font-bold uppercase tracking-wider text-slate-500">
-                Add Wallet
-              </h1>
-              {/* <p className="text-xs text-slate-400">High Security</p> */}
+            <div>
+              <p className="text-sm font-semibold text-primary">
+                Add Account
+              </p>
+              <p className="text-xs text-slate-500">
+                Create a new wallet
+              </p>
             </div>
           )}
         </div>
 
-        {/* Navigation */}
+        {/* Accounts */}
         <nav className="space-y-1">
           {SIDEBAR_ACCOUNTS.map((key) => {
             const account = ACCOUNT_TYPES[key];
-
             return (
-              <SideBarFieldCard icon={account.icon} label={account.label} isOpen={isOpen} key={key} />
+              <SideBarFieldCard
+                key={key}
+                icon={account.icon}
+                label={account.label}
+                isOpen={isOpen}
+                active={activeKey === key}
+                onClick={() => onSelect(key)}
+              />
             );
           })}
 
-          {/* Hardware */}
-          <SideBarFieldCard icon={<MdMemory />} isOpen={isOpen} label="Hardware 1" />
+          <SideBarFieldCard
+            icon={<MdMemory />}
+            label="Hardware 1"
+            isOpen={isOpen}
+            active={activeKey === "HARDWARE"}
+            onClick={() => onSelect("HARDWARE")}
+          />
 
-          {/* Staking */}
-          <SideBarFieldCard icon={<MdLayers className="text-slate-500" />} isOpen={isOpen} label="Staking" />
+          <SideBarFieldCard
+            icon={<MdLayers />}
+            label="Staking"
+            isOpen={isOpen}
+            active={activeKey === "STAKING"}
+            onClick={() => onSelect("STAKING")}
+          />
         </nav>
       </div>
 
       {/* Footer */}
-      <div className="mt-auto border-t border-slate-200 p-6 dark:border-slate-800">
-        <div
-          className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+      <div className="mt-auto border-t border-slate-200 p-4 dark:border-slate-800">
+        <button
           onClick={onToggle}
+          className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-slate-500 transition hover:bg-slate-100 hover:text-slate-900 dark:hover:bg-slate-800 dark:hover:text-white"
         >
-          <span className="material-symbols-outlined text-slate-500">
-            menu
-          </span>
-          {isOpen && (
-            <span className="text-sm font-medium">Collapse</span>
-          )}
-        </div>
+          <span className="material-symbols-outlined text-xl">menu</span>
+          {isOpen && <span className="text-sm font-medium">Collapse</span>}
+        </button>
 
         {isOpen && (
           <div className="mt-4 flex items-center gap-2 px-3">
-            <div className="size-2 rounded-full bg-green-500" />
-            <span className="text-[10px] font-bold uppercase tracking-tighter text-slate-500">
-              Mainnet – Synced
+            <div className="h-2 w-2 rounded-full bg-green-500" />
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">
+              Mainnet • Synced
             </span>
           </div>
         )}
