@@ -2,6 +2,7 @@ import { AccountSchema } from "@/constants/accounts"
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType"
 import { copyToClipboard } from "@/utils/copyToClipBoard"
 import { MdContentCopy } from "react-icons/md"
+import CopyButton from "../formComponents/copyButton"
 
 type CoinCardProps = {
     coin: AccountSchema,
@@ -47,16 +48,7 @@ const CoinCard: React.FC<CoinCardProps> = ({
                             <span className="text-xs font-mono tracking-wide">
                                 {coin.publicKey.slice(0, 3)}…{coin.publicKey.slice(-3)}
                             </span>
-
-                            <button
-                                className="rounded p-0.5 transition-colors hover:bg-slate-100 hover:text-primary dark:hover:bg-slate-800 cursor-pointer"
-                                aria-label="Copy address"
-                                onClick={async ()=> await copyToClipboard(coin.publicKey,{
-                                    label:"Public Key"
-                                })}
-                            >
-                                <MdContentCopy className="text-[14px]" />
-                            </button>
+                            <CopyButton value={coin.publicKey} options={{ label: "Public Key", clear: false }} buttonText={false} size="text-sm" />
                         </div>
                     </div>
                 </div>
