@@ -1,7 +1,5 @@
 import { AccountSchema } from "@/constants/accounts"
-import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType"
-import { copyToClipboard } from "@/utils/copyToClipBoard"
-import { MdContentCopy } from "react-icons/md"
+import { COIN_TYPES } from "@/constants/blockChainType"
 import CopyButton from "../formComponents/copyButton"
 
 type CoinCardProps = {
@@ -18,7 +16,7 @@ const CoinCard: React.FC<CoinCardProps> = ({
     return (
         <div
             key={ind}
-            className={`group relative rounded-xl border border-slate-200 bg-white p-6 transition-all hover:shadow-xl dark:border-slate-800 dark:bg-[#16181d]`}
+            className={`group relative rounded-xl border border-slate-200 bg-white p-6 transition-all hover:shadow-xl dark:border-slate-800 dark:bg-[#16181d] cursor-pointer`}
         >
             {/* Left accent bar */}
             <div
