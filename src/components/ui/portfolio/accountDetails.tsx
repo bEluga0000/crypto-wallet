@@ -1,5 +1,7 @@
 "use client";
 
+import { AccountSchema } from "@/constants/accounts";
+import { COIN_TYPES } from "@/constants/blockChainType";
 import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import {
@@ -14,21 +16,13 @@ import {
 type AccountDetailsModalProps = {
     open: boolean;
     onOpenChange: (open: boolean) => void;
-    accountName: string;
-    chainLabel: string;
-    publicKey: string;
-    privateKey: string;
-    coinImage?: string;
+    account: AccountSchema
 };
 
 const AccountDetailsModal = ({
     open,
     onOpenChange,
-    accountName,
-    chainLabel,
-    publicKey,
-    privateKey,
-    coinImage,
+    account
 }: AccountDetailsModalProps) => {
     const [showPrivateKey, setShowPrivateKey] = useState(false);
 
@@ -50,16 +44,16 @@ const AccountDetailsModal = ({
                             <div
                                 className="h-14 w-14 rounded-full border-2 border-slate-200 bg-slate-200 bg-cover bg-center dark:border-border-dark dark:bg-[#111318]"
                                 style={
-                                    coinImage
-                                        ? { backgroundImage: `url(${coinImage})` }
+                                    COIN_TYPES[account.coin].image
+                                        ? { backgroundImage: `url(${COIN_TYPES[account.coin].image})` }
                                         : undefined
                                 }
                             />
 
                             <div>
-                                <h2 className="text-2xl font-bold">{accountName}</h2>
+                                <h2 className="text-2xl font-bold">{account.accountName}</h2>
                                 <p className="text-sm text-slate-500 dark:text-slate-400">
-                                    {chainLabel}
+                                    {COIN_TYPES[account.coin].label}
                                 </p>
                             </div>
                         </div>
@@ -79,11 +73,11 @@ const AccountDetailsModal = ({
 
                             <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-border-dark dark:bg-[#282e39]">
                                 <code className="flex-1 break-all font-mono text-sm">
-                                    {publicKey}
+                                    {account.publicKey}
                                 </code>
 
                                 <button
-                                    onClick={() => copyToClipboard(publicKey)}
+                                    onClick={() => copyToClipboard(account.publicKey)}
                                     className="p-2 text-slate-400 transition hover:text-primary"
                                 >
                                     <MdContentCopy />
@@ -102,7 +96,7 @@ const AccountDetailsModal = ({
                                     className={`flex-1 break-all font-mono text-sm ${showPrivateKey ? "" : "select-none blur-sm"
                                         }`}
                                 >
-                                    {privateKey}
+                                    {account.privateKey}
                                 </code>
 
                                 <div className="flex gap-1">
@@ -118,7 +112,7 @@ const AccountDetailsModal = ({
                                     </button>
 
                                     <button
-                                        onClick={() => copyToClipboard(privateKey)}
+                                        onClick={() => copyToClipboard(account.privateKey)}
                                         className="p-2 text-slate-400 transition hover:text-primary"
                                     >
                                         <MdContentCopy />
