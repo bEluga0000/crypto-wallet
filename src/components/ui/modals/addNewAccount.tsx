@@ -6,7 +6,7 @@ import { IoIosCloseCircle } from "react-icons/io";
 
 import Field from "../formComponents/fieldWrapper";
 import SelectBox from "../formComponents/selectBox";
-import { ACCOUNT_TYPES } from "@/constants/accountTypes";
+import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import { AccountSchema } from "@/constants/accounts";
 import { createNewPublicPrivateKey } from "@/utils/createNewAccount";
@@ -34,8 +34,8 @@ export const COIN_SELECT_ITEMS = (
 }));
 
 export type AddAccountFormSchema = {
-  walletSource: string;
-  chain: string;
+  walletSource: AccountTypeKey;
+  chain: COIN_TYPES_KEYS;
   accountName: string;
 };
 
@@ -95,7 +95,7 @@ const AddNewAccountModal = ({
             <Field label="Wallet Source">
               <SelectBox
                 value={watch("walletSource")}
-                onChange={(v) => setValue("walletSource", v)}
+                onChange={(v) => setValue("walletSource", v as AccountTypeKey)}
                 items={WALLET_SOURCES}
               />
             </Field>
@@ -103,7 +103,7 @@ const AddNewAccountModal = ({
             <Field label="Select Chain / Coin">
               <SelectBox
                 value={watch("chain")}
-                onChange={(v) => setValue("chain", v)}
+                onChange={(v) => setValue("chain", v as COIN_TYPES_KEYS)}
                 items={COIN_SELECT_ITEMS}
               />
             </Field>
