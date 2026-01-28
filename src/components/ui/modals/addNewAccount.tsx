@@ -10,6 +10,7 @@ import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import { AccountSchema } from "@/constants/accounts";
 import { createNewPublicPrivateKey } from "@/utils/createNewAccount";
+import { toast } from "sonner";
 
 export const WALLET_SOURCES = (
   ["MAIN", "TRADING", "COLD_STORAGE"] as const
@@ -64,7 +65,10 @@ const AddNewAccountModal = ({
 
   const onSubmit = (data: AddAccountFormSchema) => {
     console.log("Create Account:", data);
-    createNewPublicPrivateKey(data)
+    if(createNewPublicPrivateKey(data))
+      toast.success(`New Account Created Successfully`);
+    else
+      toast.error("Failed to create account")
     onOpenChange(false);
   };
 
