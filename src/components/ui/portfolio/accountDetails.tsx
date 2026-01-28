@@ -12,6 +12,7 @@ import {
     MdDelete,
     MdWarning,
 } from "react-icons/md";
+import CopyButton from "../formComponents/copyButton";
 
 type AccountDetailsModalProps = {
     open: boolean;
@@ -51,7 +52,9 @@ const AccountDetailsModal = ({
                             />
 
                             <div>
-                                <h2 className="text-2xl font-bold">{account.accountName}</h2>
+                                <Dialog.Title className="text-2xl font-bold">
+                                    {account.accountName}
+                                </Dialog.Title>
                                 <p className="text-sm text-slate-500 dark:text-slate-400">
                                     {COIN_TYPES[account.coin].label}
                                 </p>
@@ -76,12 +79,13 @@ const AccountDetailsModal = ({
                                     {account.publicKey}
                                 </code>
 
-                                <button
+                                {/* <button
                                     onClick={() => copyToClipboard(account.publicKey)}
                                     className="p-2 text-slate-400 transition hover:text-primary"
                                 >
                                     <MdContentCopy />
-                                </button>
+                                </button> */}
+                                <CopyButton value={account.publicKey} options={{ label: "Public key" }} buttonText={false} />
                             </div>
                         </div>
 
@@ -93,30 +97,30 @@ const AccountDetailsModal = ({
 
                             <div className="flex items-center gap-2 rounded-xl border border-slate-200 bg-slate-50 p-4 dark:border-border-dark dark:bg-[#282e39]">
                                 <code
-                                    className={`flex-1 break-all font-mono text-sm ${showPrivateKey ? "" : "select-none blur-sm"
-                                        }`}
+                                    className={`
+      flex-1 break-all font-mono text-sm transition-all
+      ${showPrivateKey
+                                            ? "text-slate-900 dark:text-white"
+                                            : "select-none text-slate-400 dark:text-slate-500"}
+    `}
                                 >
-                                    {account.privateKey}
+                                    {showPrivateKey ? account.privateKey : "•••• •••• •••• •••• •••• ••••"}
                                 </code>
 
                                 <div className="flex gap-1">
                                     <button
                                         onClick={() => setShowPrivateKey((v) => !v)}
-                                        className="p-2 text-slate-400 transition hover:text-white"
+                                        className="rounded-md p-2 text-slate-400 transition hover:bg-white/10 hover:text-white"
+                                        aria-label={showPrivateKey ? "Hide private key" : "Show private key"}
                                     >
-                                        {showPrivateKey ? (
-                                            <MdVisibilityOff />
-                                        ) : (
-                                            <MdVisibility />
-                                        )}
+                                        {showPrivateKey ? <MdVisibilityOff /> : <MdVisibility />}
                                     </button>
 
-                                    <button
-                                        onClick={() => copyToClipboard(account.privateKey)}
-                                        className="p-2 text-slate-400 transition hover:text-primary"
-                                    >
-                                        <MdContentCopy />
-                                    </button>
+                                    <CopyButton
+                                        value={account.privateKey}
+                                        options={{ label: "Private key" }}
+                                        buttonText={false}
+                                    />
                                 </div>
                             </div>
 
