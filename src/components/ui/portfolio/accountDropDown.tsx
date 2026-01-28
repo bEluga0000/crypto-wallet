@@ -52,9 +52,9 @@ const BalanceFilterSelect = ({
             className="z-50 w-[var(--radix-select-trigger-width)] rounded-xl border border-slate-200 bg-white shadow-xl dark:border-slate-700 dark:bg-[#16181d]"
           >
             <Select.Viewport className="max-h-48 overflow-y-auto p-1">
-              {options.map((opt) => (
+              {options.map((opt,ind) => (
                 <Select.Item
-                  key={opt}
+                  key={ind}
                   value={opt}
                   className="relative flex cursor-pointer items-center rounded-md px-3 py-2 text-sm hover:bg-slate-100 dark:hover:bg-slate-800"
                 >
