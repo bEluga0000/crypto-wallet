@@ -10,12 +10,22 @@ import AddNewAccountModal from "./ui/modals/addNewAccount";
 import { AccountSchema } from "@/constants/accounts";
 import { AccountTypeKey } from "@/constants/accountTypes";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
+import BalanceFilterSelect from "./ui/portfolio/accountDropDown";
 
+const FILTER_OPTIONS = [
+  "All Accounts",
+  "Main Wallet",
+  "Trading",
+  "Cold Storage",
+  "Hardware",
+  "Staking",
+];
 
 export default function PortfolioPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [openAddAccount, setOpenAddAccount] = useState(false)
   const [accounts, setAccounts] = useState<AccountSchema[]>([])
+  const [filter, setFilter] = useState(FILTER_OPTIONS[0]);
   const [selectWalletType, setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
   useEffect(() => {
     const rawAccount = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
@@ -39,6 +49,11 @@ export default function PortfolioPage() {
             walletName={selectWalletType}
           />
           <div className="max-w-5xl px-8 py-10">
+            <BalanceFilterSelect
+              value={filter}
+              options={FILTER_OPTIONS}
+              onChange={setFilter}
+            />
             <BalanceCard />
             {/* Assets */}
             <div className="space-y-4">
