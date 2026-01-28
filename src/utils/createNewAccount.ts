@@ -35,7 +35,7 @@ const createNewAccount = (input: AddAccountFormSchema) => {
             coin: input.chain,
             publicKey: publicKey,
             privateKey: privateKey,
-            accontName: input.accountName
+            accountName: input.accountName
 
         })
     localStorage.setItem(STORAGE_KEYS.ACCOUNTS,JSON.stringify(accounts))

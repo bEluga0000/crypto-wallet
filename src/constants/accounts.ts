@@ -6,6 +6,6 @@ export type AccountSchema = {
     coin:COIN_TYPES_KEYS
     publicKey:string
     privateKey:string
-    accontName:string
+    accountName:string
     index:number
 }

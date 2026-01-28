@@ -12,26 +12,32 @@ import { AccountTypeKey } from "@/constants/accountTypes";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import BalanceFilterSelect from "./ui/portfolio/accountDropDown";
 
-const FILTER_OPTIONS = [
-  "All Accounts",
-  "Main Wallet",
-  "Trading",
-  "Cold Storage",
-  "Hardware",
-  "Staking",
-];
-
 export default function PortfolioPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [openAddAccount, setOpenAddAccount] = useState(false)
   const [accounts, setAccounts] = useState<AccountSchema[]>([])
-  const [filter, setFilter] = useState(FILTER_OPTIONS[0]);
+  const [acc, setAcc] = useState<string|null>(null);
+  const [accountsOptions, setAccountOptions] = useState<string[]>([])
   const [selectWalletType, setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
   useEffect(() => {
     const rawAccount = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
     const parseAccounts: AccountSchema[] = rawAccount ? JSON.parse(rawAccount) : [];
     setAccounts(parseAccounts)
   }, [])
+  useEffect(() => {
+    const options = accounts
+      .filter((a) => a.type === selectWalletType)
+      .map((d) => d.accountName);
+    if(options.length > 0)
+    {
+      setAcc(options[0])
+    }
+    else
+    {
+      setAcc(null)
+    }
+    setAccountOptions(options)
+  }, [accounts, selectWalletType]);
   return (
     <>
       <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
@@ -48,11 +54,12 @@ export default function PortfolioPage() {
             onToggleSidebar={() => setIsSidebarOpen((p) => !p)}
             walletName={selectWalletType}
           />
-          <div className="max-w-5xl px-8 py-10">
+          <div className="max-w-5xl px-8 py-10 gap-3">
             <BalanceFilterSelect
-              value={filter}
-              options={FILTER_OPTIONS}
-              onChange={setFilter}
+              value={acc ?? ""}
+              options={accountsOptions}
+              onChange={setAcc}
+              placeholder="No Account Found"
             />
             <BalanceCard />
             {/* Assets */}
