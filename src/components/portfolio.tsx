@@ -5,17 +5,23 @@ import BalanceCard from "./ui/portfolio/balance";
 import PortfolioSideBar from "./ui/portfolio/sideBar";
 import ProfileTopBar from "./ui/portfolio/topBar";
 import CoinCard from "./ui/portfolio/coinCard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddNewAccountModal from "./ui/modals/addNewAccount";
 import { AccountSchema } from "@/constants/accounts";
 import { AccountTypeKey } from "@/constants/accountTypes";
+import { STORAGE_KEYS } from "@/constants/storageKeys";
 
 
 export default function PortfolioPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [openAddAccount, setOpenAddAccount] = useState(false)
-  const [accounts,setAccounts] = useState<AccountSchema[]>([])
-  const [selectWalletType,setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
+  const [accounts, setAccounts] = useState<AccountSchema[]>([])
+  const [selectWalletType, setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
+  useEffect(() => {
+    const rawAccount = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
+    const parseAccounts: AccountSchema[] = rawAccount ? JSON.parse(rawAccount) : [];
+    setAccounts(parseAccounts)
+  }, [])
   return (
     <>
       <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
@@ -25,6 +31,7 @@ export default function PortfolioPage() {
           setOpenAddAccount={setOpenAddAccount}
           onSelect={(key) => setSelectedWalletType(key)}
           activeKey={selectWalletType}
+          accounts={accounts}
         />
         <main className="flex flex-1 flex-col overflow-y-auto">
           <ProfileTopBar

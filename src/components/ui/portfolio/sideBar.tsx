@@ -2,6 +2,7 @@ import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes"
 import { IoMdAddCircle } from "react-icons/io";
 import { MdLayers, MdMemory } from "react-icons/md";
 import SideBarFieldCard from "./sideBarFieldCard";
+import { AccountSchema } from "@/constants/accounts";
 
 type SidebarProps = {
   isOpen: boolean;
@@ -9,6 +10,7 @@ type SidebarProps = {
   setOpenAddAccount: (val: boolean) => void;
   activeKey: AccountTypeKey | "HARDWARE" | "STAKING";
   onSelect: (key: SidebarProps["activeKey"]) => void;
+  accounts:AccountSchema[]
 };
 
 const PortfolioSideBar = ({
@@ -17,6 +19,7 @@ const PortfolioSideBar = ({
   setOpenAddAccount,
   activeKey,
   onSelect,
+  accounts
 }: SidebarProps) => {
   return (
     <aside
