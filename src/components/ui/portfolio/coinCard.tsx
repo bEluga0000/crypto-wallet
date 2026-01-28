@@ -1,9 +1,15 @@
+import { AccountSchema } from "@/constants/accounts"
+import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType"
+import { copyToClipboard } from "@/utils/copyToClipBoard"
 import { MdContentCopy } from "react-icons/md"
 
 type CoinCardProps = {
-    coin: any,
+    coin: AccountSchema,
     ind: number
 }
+// type CoinCard = {
+//     coin:COIN_TYPES_KEYS,
+// }
 const CoinCard: React.FC<CoinCardProps> = ({
     coin,
     ind
@@ -16,7 +22,7 @@ const CoinCard: React.FC<CoinCardProps> = ({
             {/* Left accent bar */}
             <div
                 className="absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-full"
-                style={{ backgroundColor: coin.color }}
+                style={{ backgroundColor: COIN_TYPES[coin.coin].color }}
             />
 
             <div className="flex items-center justify-between">
@@ -25,8 +31,8 @@ const CoinCard: React.FC<CoinCardProps> = ({
                     {/* Coin Image */}
                     <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 shadow-inner dark:bg-black/20">
                         <img
-                            src={coin.image}
-                            alt={coin.label}
+                            src={COIN_TYPES[coin.coin].image}
+                            alt={COIN_TYPES[coin.coin].label}
                             className="h-8 w-8 rounded-full"
                         />
                     </div>
@@ -34,17 +40,20 @@ const CoinCard: React.FC<CoinCardProps> = ({
                     {/* Coin Info */}
                     <div className="flex flex-col gap-1">
                         <h3 className="text-base font-semibold text-slate-900 dark:text-white">
-                            {coin.label}
+                            {COIN_TYPES[coin.coin].label}
                         </h3>
 
                         <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
                             <span className="text-xs font-mono tracking-wide">
-                                4k3…Vp2
+                                {coin.publicKey.slice(0, 3)}…{coin.publicKey.slice(-3)}
                             </span>
 
                             <button
                                 className="rounded p-0.5 transition-colors hover:bg-slate-100 hover:text-primary dark:hover:bg-slate-800 cursor-pointer"
                                 aria-label="Copy address"
+                                onClick={async ()=> await copyToClipboard(coin.publicKey,{
+                                    label:"Public Key"
+                                })}
                             >
                                 <MdContentCopy className="text-[14px]" />
                             </button>
@@ -55,7 +64,7 @@ const CoinCard: React.FC<CoinCardProps> = ({
                 {/* RIGHT SIDE */}
                 <div className="text-right">
                     <p className="text-xl font-bold">
-                        500.00 {coin.short}
+                        500.00 {COIN_TYPES[coin.coin].short}
                     </p>
                     <p className="text-sm text-slate-500">
                         $29,500.00

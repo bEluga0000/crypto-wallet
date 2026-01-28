@@ -16,9 +16,10 @@ export default function PortfolioPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [openAddAccount, setOpenAddAccount] = useState(false)
   const [accounts, setAccounts] = useState<AccountSchema[]>([])
-  const [acc, setAcc] = useState<string|null>(null);
+  const [acc, setAcc] = useState<string | null>(null);
   const [accountsOptions, setAccountOptions] = useState<string[]>([])
   const [selectWalletType, setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
+  const [filteredAccounts, setFilteredAccounts] = useState<AccountSchema[]>([])
   useEffect(() => {
     const rawAccount = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
     const parseAccounts: AccountSchema[] = rawAccount ? JSON.parse(rawAccount) : [];
@@ -28,16 +29,23 @@ export default function PortfolioPage() {
     const options = accounts
       .filter((a) => a.type === selectWalletType)
       .map((d) => d.accountName);
-    if(options.length > 0)
-    {
+    if (options.length > 0) {
       setAcc(options[0])
     }
-    else
-    {
+    else {
       setAcc(null)
     }
     setAccountOptions(options)
   }, [accounts, selectWalletType]);
+  useEffect(() => {
+    if (acc) {
+      const filteredOnes = accounts.filter(d => d.accountName == acc)
+      setFilteredAccounts(filteredOnes)
+    }
+    else {
+      setFilteredAccounts([])
+    }
+  }, [acc, accounts])
   return (
     <>
       <div className="flex h-screen overflow-hidden bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100">
@@ -54,7 +62,7 @@ export default function PortfolioPage() {
             onToggleSidebar={() => setIsSidebarOpen((p) => !p)}
             walletName={selectWalletType}
           />
-          <div className="max-w-5xl px-8 py-10 gap-3">
+          <div className="max-w-5xl px-8 py-10 gap-3 flex flex-col">
             <BalanceFilterSelect
               value={acc ?? ""}
               options={accountsOptions}
@@ -63,12 +71,13 @@ export default function PortfolioPage() {
             />
             <BalanceCard />
             {/* Assets */}
-            <div className="space-y-4">
-              {cointTypes.map((c, ind) => {
-                const coin = COIN_TYPES[c]
-                return <CoinCard coin={coin} ind={ind} key={ind} />
-              })}
-            </div>
+            {
+              filteredAccounts.length > 0 && <div className="space-y-4">
+                {filteredAccounts.map((c, ind) => {
+                  return <CoinCard coin={c} ind={ind} key={ind} />
+                })}
+              </div>
+            }
 
             {/* Allocation */}
             <div className="mt-12">
