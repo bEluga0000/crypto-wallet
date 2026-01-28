@@ -29,6 +29,7 @@ export default function PortfolioPage() {
         <main className="flex flex-1 flex-col overflow-y-auto">
           <ProfileTopBar
             onToggleSidebar={() => setIsSidebarOpen((p) => !p)}
+            walletName={selectWalletType}
           />
           <div className="max-w-5xl px-8 py-10">
             <BalanceCard />
