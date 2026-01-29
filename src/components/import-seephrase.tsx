@@ -15,7 +15,8 @@ const ImportSeedPhrasePage = () => {
                 <main className="flex flex-1 justify-center px-4 py-10">
                     <div className="flex w-full max-w-[1000px] flex-col gap-12 lg:flex-row">
                         {/* Left */}
-                        {!seedPharseAdded ? <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT} setSeedPhrase={setSeedPhraseAdded}/> : <DiscoveredAccounts />
+                        {!seedPharseAdded ? <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT} setSeedPhrase={setSeedPhraseAdded}/> :
+                         <DiscoveredAccounts words={words}/>
                         }
 
                         {/* Right Sidebar */}
