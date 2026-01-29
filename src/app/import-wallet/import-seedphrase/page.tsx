@@ -4,26 +4,6 @@ const ImportSeedPhrase = () => {
   return (
     <div className="min-h-screen bg-background-dark text-white font-display">
       <div className="flex min-h-screen flex-col">
-        {/* Header */}
-        <header className="flex items-center justify-between border-b border-gray-800 px-4 py-3 md:px-10">
-          <div className="flex items-center gap-4">
-            <div className="flex size-6 items-center justify-center text-primary">
-              <span className="material-symbols-outlined text-3xl">
-                account_balance_wallet
-              </span>
-            </div>
-            <h2 className="text-lg font-bold tracking-tight">CryptoVault</h2>
-          </div>
-
-          <div
-            className="size-10 rounded-full border border-gray-700 bg-cover bg-center"
-            style={{
-              backgroundImage:
-                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuBF8YocuQQjNfcrK7Xxu5Ymi1EBZtGF1gHf3BTBDW6x_g2R49MI5eK0LYO6G-8GP2HtDLrNXOKmmWVUVJ82QU97A6PzsEizPdkCaMgBzwSY17zz-FJFUh-1gzlNTFBPBGmnz4kfxFDJ9AJ2TKrtPdFoDAbxvujeQGNiqzXdBrbyeYvu6EcCSTOfMh8KlZcGgVY18HLP2AQ3MznD54Nlr3Z1Eqi_km6AQ_a-d4pYb9R3jn18bSobYOmfAXc9YYzMPH7dl6YHMZwFTmM")',
-            }}
-          />
-        </header>
-
         {/* Main */}
         <main className="flex flex-1 justify-center px-4 py-10">
           <div className="flex w-full max-w-[1000px] flex-col gap-12 lg:flex-row">
