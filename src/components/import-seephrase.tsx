@@ -1,8 +1,12 @@
 "use client";
+import { useState } from "react";
 import LeftSide from "./ui/import-wallet/import-seedphrase/left-side";
 import RightSide from "./ui/import-wallet/import-seedphrase/right-side";
-
+const WORD_COUNT = 12;
 const ImportSeedPhrasePage = () => {
+    const [words, setWords] = useState<string[]>(
+        Array(WORD_COUNT).fill("")
+      );
     return (
         <div className="min-h-screen bg-background-dark text-white font-display">
             <div className="flex min-h-screen flex-col">
@@ -10,7 +14,7 @@ const ImportSeedPhrasePage = () => {
                 <main className="flex flex-1 justify-center px-4 py-10">
                     <div className="flex w-full max-w-[1000px] flex-col gap-12 lg:flex-row">
                         {/* Left */}
-                        <LeftSide/>
+                        <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT}/>
 
                         {/* Right Sidebar */}
                         <RightSide/>

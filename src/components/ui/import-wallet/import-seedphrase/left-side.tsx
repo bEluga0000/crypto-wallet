@@ -1,7 +1,7 @@
 import { MdContentPaste } from "react-icons/md"
-import MnemonicInputs from "./mnemonic-inputs"
-
-const LeftSide = () => {
+import MnemonicInputs, { MnemonicInputsProps } from "./mnemonic-inputs"
+interface LeftSideProps extends MnemonicInputsProps {}
+const LeftSide = (props:LeftSideProps) => {
     return <div className="flex flex-1 flex-col gap-8">
         {/* Progress */}
         <div className="flex flex-col gap-2">
@@ -26,7 +26,7 @@ const LeftSide = () => {
         </div>
 
         {/* Mnemonic Inputs */}
-        <MnemonicInputs/>
+        <MnemonicInputs WORD_COUNT={props.WORD_COUNT} words={props.words} setWords={props.setWords}/>
 
         {/* Actions */}
         <div className="flex flex-col gap-4 sm:flex-row">
