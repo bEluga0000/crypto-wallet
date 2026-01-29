@@ -1,23 +1,18 @@
 import { MdContentPaste } from "react-icons/md"
 import MnemonicInputs, { MnemonicInputsProps } from "./mnemonic-inputs"
+import ProgressiveBar from "./progressivebar"
 interface LeftSideProps extends MnemonicInputsProps {
-    setSeedPhrase:(val:boolean)=>void
+    setSeedPhrase: (val: boolean) => void
 }
-const LeftSide = (props:LeftSideProps) => {
-    const handelContinue = ()=>{
+const LeftSide = (props: LeftSideProps) => {
+    const handelContinue = () => {
         props.setSeedPhrase(true)
     }
+    const isValidMnemonic =
+        props.words.length === 12 &&
+        props.words.every((w) => w.trim().length > 0);
     return <div className="flex flex-1 flex-col gap-8">
-        {/* Progress */}
-        <div className="flex flex-col gap-2">
-            <div className="flex justify-between text-xs font-semibold uppercase tracking-widest text-gray-400">
-                <span>Step 1 of 2</span>
-                <span>50% Complete</span>
-            </div>
-            <div className="h-1.5 w-full overflow-hidden rounded-full bg-gray-800">
-                <div className="h-full w-1/2 rounded-full bg-primary" />
-            </div>
-        </div>
+        <ProgressiveBar step={1} label="Paste Mnemonic"/>
 
         {/* Heading */}
         <div className="space-y-2">
@@ -31,7 +26,7 @@ const LeftSide = (props:LeftSideProps) => {
         </div>
 
         {/* Mnemonic Inputs */}
-        <MnemonicInputs WORD_COUNT={props.WORD_COUNT} words={props.words} setWords={props.setWords}/>
+        <MnemonicInputs WORD_COUNT={props.WORD_COUNT} words={props.words} setWords={props.setWords} />
 
         {/* Actions */}
         <div className="flex flex-col gap-4 sm:flex-row">
@@ -43,7 +38,7 @@ const LeftSide = (props:LeftSideProps) => {
             </button>
 
             <button className="flex-1 rounded-lg bg-primary px-8 py-3 text-lg font-bold shadow-lg shadow-primary/20 transition hover:bg-blue-600" onClick={handelContinue}
-            disabled={props.words.length !=12}>
+                disabled={!isValidMnemonic}>
                 Continue
             </button>
         </div>

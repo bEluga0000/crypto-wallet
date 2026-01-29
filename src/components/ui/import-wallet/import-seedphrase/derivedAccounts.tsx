@@ -1,9 +1,12 @@
 "use client";
 
+import ProgressiveBar from "./progressivebar";
+
 const DiscoveredAccounts = () => {
     return (
 
         < section className="flex flex-1 flex-col gap-8" >
+            <ProgressiveBar step={2} label="Select Accounts"/>
             {/* Heading */}
             < div className="space-y-2" >
                 <h1 className="text-3xl font-bold tracking-tight">
