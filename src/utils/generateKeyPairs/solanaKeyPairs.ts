@@ -4,11 +4,11 @@ import { mnemonicToSeedSync } from "bip39"
 import { derivePath } from "ed25519-hd-key"
 import nacl from "tweetnacl"
 import bs58 from "bs58";
-interface solanaKeyPairsoutputSchema {
+export interface ChainKeyPairsoutputSchema {
     publicKey: string | null
     privateKey: string | null
 }
-export const solanaKeyPairs = (derivationPath: string): solanaKeyPairsoutputSchema => {
+export const solanaKeyPairs = (derivationPath: string): ChainKeyPairsoutputSchema => {
     const mnemonic = localStorage.getItem(STORAGE_KEYS.MNEMONIC)
     if (!mnemonic)
         return {
