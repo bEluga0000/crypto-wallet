@@ -2,6 +2,7 @@
 import { useState } from "react";
 import LeftSide from "./ui/import-wallet/import-seedphrase/left-side";
 import RightSide from "./ui/import-wallet/import-seedphrase/right-side";
+import DiscoveredAccounts from "./ui/import-wallet/import-seedphrase/derivedAccounts";
 const WORD_COUNT = 12;
 const ImportSeedPhrasePage = () => {
     const [words, setWords] = useState<string[]>(
@@ -14,8 +15,8 @@ const ImportSeedPhrasePage = () => {
                 <main className="flex flex-1 justify-center px-4 py-10">
                     <div className="flex w-full max-w-[1000px] flex-col gap-12 lg:flex-row">
                         {/* Left */}
-                        <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT}/>
-
+                        {/* <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT}/> */}
+                        <DiscoveredAccounts/>
                         {/* Right Sidebar */}
                         <RightSide/>
                     </div>
