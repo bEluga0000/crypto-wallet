@@ -1,13 +1,9 @@
 import { STORAGE_KEYS } from "@/constants/storageKeys"
-import { Keypair } from "@solana/web3.js"
 import { mnemonicToSeedSync } from "bip39"
-import { derivePath } from "ed25519-hd-key"
-import nacl from "tweetnacl"
-import bs58 from "bs58";
 import { ChainKeyPairsoutputSchema } from "./solanaKeyPairs"
 import { HDNodeWallet } from "ethers"
 
-export const solanaKeyPairs = (derivationPath: string): ChainKeyPairsoutputSchema => {
+export const ethereumKeyPairs = (derivationPath: string): ChainKeyPairsoutputSchema => {
     const mnemonic = localStorage.getItem(STORAGE_KEYS.MNEMONIC)
     if (!mnemonic)
         return {

@@ -3,6 +3,7 @@ import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { solanaKeyPairs } from "./generateKeyPairs/solanaKeyPairs";
 import { AccountSchema } from "@/constants/accounts";
+import { ethereumKeyPairs } from "./generateKeyPairs/ethereumKeyPairs";
 
 export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
     const raw = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
@@ -25,6 +26,12 @@ export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
         const keypairs = solanaKeyPairs(derivationPath)
         privateKey = keypairs.privateKey
         publicKey = keypairs.publicKey
+    }
+    if(coinKey == "ethereum")
+    {
+        const keypairs = ethereumKeyPairs(derivationPath)
+        publicKey = keypairs.publicKey
+        privateKey=keypairs.privateKey
     }
     if (privateKey && publicKey)
         accounts.push({
