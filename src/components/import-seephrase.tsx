@@ -7,18 +7,19 @@ const WORD_COUNT = 12;
 const ImportSeedPhrasePage = () => {
     const [words, setWords] = useState<string[]>(
         Array(WORD_COUNT).fill("")
-      );
+    );
+    const [seedPharseAdded, setSeedPhraseAdded] = useState<boolean>(false)
     return (
         <div className="min-h-screen bg-background-dark text-white font-display">
             <div className="flex min-h-screen flex-col">
-                {/* Main */}
                 <main className="flex flex-1 justify-center px-4 py-10">
                     <div className="flex w-full max-w-[1000px] flex-col gap-12 lg:flex-row">
                         {/* Left */}
-                        <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT}/>
-                        {/* <DiscoveredAccounts/> */}
+                        {!seedPharseAdded ? <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT} setSeedPhrase={setSeedPhraseAdded}/> : <DiscoveredAccounts />
+                        }
+
                         {/* Right Sidebar */}
-                        <RightSide/>
+                        <RightSide seedPhraseAdded={seedPharseAdded}/>
                     </div>
                 </main>
 
