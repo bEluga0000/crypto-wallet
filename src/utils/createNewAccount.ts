@@ -4,6 +4,7 @@ import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { solanaKeyPairs } from "./generateKeyPairs/solanaKeyPairs";
 import { AccountSchema } from "@/constants/accounts";
 import { ethereumKeyPairs } from "./generateKeyPairs/ethereumKeyPairs";
+import { bitcoinKeyPairs } from "./generateKeyPairs/bitcoinKeyPairs";
 
 export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
     const raw = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
@@ -33,6 +34,12 @@ export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
         publicKey = keypairs.publicKey
         privateKey=keypairs.privateKey
     }
+    if(coinKey == "bitcoin")
+        {
+            const keypairs = bitcoinKeyPairs(derivationPath)
+            publicKey = keypairs.publicKey
+            privateKey=keypairs.privateKey
+        }
     if (privateKey && publicKey)
         accounts.push({
             index: newIndex,
