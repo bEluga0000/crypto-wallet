@@ -1,6 +1,6 @@
 import { toast } from "sonner";
 
-type CopyOptions = {
+export type CopyOptions = {
   clear?: boolean;
   label?: string;
   clearAfterMs?: number;

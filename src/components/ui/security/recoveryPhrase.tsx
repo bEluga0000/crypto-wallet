@@ -15,6 +15,7 @@ import { handleDownloadFile } from "@/utils/download";
 import { LuCopyCheck } from "react-icons/lu";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { toast } from "sonner";
+import CopyButton from "../formComponents/copyButton";
 
 export const SecretRecoveryPhrase = () => {
   const router = useRouter();
@@ -150,7 +151,7 @@ export const SecretRecoveryPhrase = () => {
           {/* Actions */}
           <div className="flex items-center justify-between text-sm text-slate-400">
             <div className="flex gap-5">
-              <button
+              {/* <button
                 onClick={handleCopyMnemonic}
                 className="group flex items-center gap-2 text-slate-400 transition-colors hover:text-white"
               >
@@ -172,7 +173,10 @@ export const SecretRecoveryPhrase = () => {
                 >
                   {textCopied ? "Copied" : "Copy to Clipboard"}
                 </span>
-              </button>
+              </button> */}
+              <CopyButton value={mnemonicWords.join(" ")} options={{
+                label: "recovery phrase",
+              }} />
               <button
                 className="flex items-center gap-2 hover:text-white"
                 onClick={handleDownloadBackup}
