@@ -48,7 +48,7 @@ export default function HomePage() {
                             desc="Restore your assets using an existing seed phrase or private
                     key."
                             button="Restore Wallet"
-                            onClick={() => { console.log("okay") }}
+                            onClick={() => { router.push("/import-wallet")}}
                             buttonIcon={<MdOutlineSettingsBackupRestore />}
                         />
                     </div>
