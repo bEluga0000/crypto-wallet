@@ -16,23 +16,16 @@ import { LuCopyCheck } from "react-icons/lu";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { toast } from "sonner";
 import CopyButton from "../formComponents/copyButton";
+import { useMnemonicStore } from "@/store/mnemonic.store";
 
 export const SecretRecoveryPhrase = () => {
   const router = useRouter();
-  const [mnemonicWords, setMnemonicWords] = useState<string[] | null>(null);
+  const mnemonic = useMnemonicStore(s=>s.mnemonic)
   const [showPhrase, setShowPhrase] = useState<boolean>(false)
   const [textCopied, setTextCopied] = useState<boolean>(false)
   const handleTogglePreview = () => {
     setShowPhrase(prev => !prev);
   };
-  const handleCopyMnemonic = async () => {
-    if (mnemonicWords) {
-      await copyToClipboard(mnemonicWords.join(" "), {
-        label: "recovery phrase",
-      });
-      setTextCopied(true)
-    }
-  }
   useEffect(() => {
     if (!textCopied) return;
 
@@ -44,20 +37,12 @@ export const SecretRecoveryPhrase = () => {
   }, [textCopied]);
 
   const handleDownloadBackup = () => {
-    if (!mnemonicWords) return;
-    handleDownloadFile({ data: mnemonicWords.join(" "), fileName: "recovery-phrase.txt", type: "text/plain" })
+    if (!mnemonic) return;
+    handleDownloadFile({ data: mnemonic.join(" "), fileName: "recovery-phrase.txt", type: "text/plain" })
     toast.success("Backup downloaded")
   };
-  useEffect(() => {
-    const storedMnemonic = localStorage.getItem(STORAGE_KEYS.MNEMONIC);
-    if (!storedMnemonic) {
-      setMnemonicWords(null);
-      return;
-    }
-    setMnemonicWords(storedMnemonic.trim().split(/\s+/));
-  }, []);
 
-  const hasMnemonic = mnemonicWords && mnemonicWords.length > 0;
+  const hasMnemonic = mnemonic && mnemonic.length > 0;
 
   return (
     <section className="space-y-4">
@@ -114,7 +99,7 @@ export const SecretRecoveryPhrase = () => {
         <>
           <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f1b34] to-[#0b1428] p-6">
             <div className="grid grid-cols-3 gap-3 md:grid-cols-4">
-              {mnemonicWords!.map((word, i) => (
+              {mnemonic!.map((word, i) => (
                 <MnemonicWord key={i} index={i} word={word} blurred={!showPhrase} />
               ))}
             </div>
@@ -174,7 +159,7 @@ export const SecretRecoveryPhrase = () => {
                   {textCopied ? "Copied" : "Copy to Clipboard"}
                 </span>
               </button> */}
-              <CopyButton value={mnemonicWords.join(" ")} options={{
+              <CopyButton value={mnemonic.join(" ")} options={{
                 label: "recovery phrase",
               }} />
               <button

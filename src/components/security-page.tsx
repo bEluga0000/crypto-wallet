@@ -5,23 +5,25 @@ import { SecretRecoveryPhrase } from "./ui/security/recoveryPhrase";
 import BestPracticesCard from "./ui/security/bestPractices";
 import { IoCloudOffline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { ConfirmDialog } from "./ui/modals/confirmDialog";
 import { toast } from "sonner";
+import { useMnemonicStore } from "@/store/mnemonic.store";
+import { useImportWalletStore } from "@/store/import-wallet.store";
 
 export default function SecurityPage() {
   const router = useRouter()
-  const [mnemonic, setMnemonic] = useState<string | null>(null)
-  const [openModal,setOpenModal] = useState<boolean>(false)
-  useEffect(() => {
-    setMnemonic(localStorage.getItem(STORAGE_KEYS.MNEMONIC))
-  })
+  const mnemonic = useMnemonicStore((s) => s.mnemonic);
+  const clearMnemonic = useMnemonicStore((s) => s.clearMnemonic);
+  const clearWalletname = useImportWalletStore(s => s.clearWalletName)
+  const [openModal, setOpenModal] = useState<boolean>(false)
   const handleDeleteAccount = () => {
-    // here we need to delete everything from localstorage about the account  
-    // right now only recovery phrase 
-    localStorage.removeItem(STORAGE_KEYS.MNEMONIC)
-    toast.success("Account Deleted")
+    clearMnemonic();
+    clearWalletname();
+    useMnemonicStore.persist.clearStorage();
+    useImportWalletStore.persist.clearStorage();
+    toast.success("Account deleted from this device");
     router.push("/")
   }
   return (
@@ -62,7 +64,7 @@ export default function SecurityPage() {
               </div>
               <button
                 className="rounded-lg border border-red-500 px-4 py-2 text-sm font-bold text-red-500 transition-all hover:bg-red-500 hover:text-white cursor-pointer"
-                onClick={()=>setOpenModal(true)}
+                onClick={() => setOpenModal(true)}
               >
                 Delete Account
               </button>

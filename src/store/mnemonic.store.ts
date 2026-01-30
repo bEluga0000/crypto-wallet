@@ -8,7 +8,7 @@ type ImportMnemonicState = {
     clearMnemonic: () => void;
 };
 
-export const useImportWalletStore = create<ImportMnemonicState>()(
+export const useMnemonicStore = create<ImportMnemonicState>()(
     persist(
         (set) => ({
             mnemonic: null,

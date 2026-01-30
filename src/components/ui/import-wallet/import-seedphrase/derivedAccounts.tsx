@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import ProgressiveBar from "./progressivebar";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
+import { useMnemonicStore } from "@/store/mnemonic.store";
 
 interface Account {
     name: string;
@@ -36,9 +37,10 @@ const DiscoveredAccounts: React.FC<DiscoveredPhraseAccountsProps> = ({
         //   checked: true,
         // },
     ];
+    const setMnemonicWords = useMnemonicStore((s)=>s.setMnemonic)
     const hasAccounts = accounts.length > 0;
     const handelButtonOnClick = () => {
-        localStorage.setItem(STORAGE_KEYS.MNEMONIC,words.join(" "))
+        setMnemonicWords(words)
         localStorage.removeItem(STORAGE_KEYS.ACCOUNTS)
         router.push("/portfolio")
     }
