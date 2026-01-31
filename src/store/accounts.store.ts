@@ -10,7 +10,7 @@ export type AccountState = {
     clearAccounts: () => void;
 }
 
-export const useImportWalletStore = create<AccountState>()(
+export const useAccountStore = create<AccountState>()(
     persist(
         (set) => ({
             accounts: [],

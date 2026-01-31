@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import ProgressiveBar from "./progressivebar";
 import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { useMnemonicStore } from "@/store/mnemonic.store";
+import { useAccountStore } from "@/store/accounts.store";
 
 interface Account {
     name: string;
@@ -41,7 +42,7 @@ const DiscoveredAccounts: React.FC<DiscoveredPhraseAccountsProps> = ({
     const hasAccounts = accounts.length > 0;
     const handelButtonOnClick = () => {
         setMnemonicWords(words)
-        localStorage.removeItem(STORAGE_KEYS.ACCOUNTS)
+        useAccountStore.getState().clearAccounts()
         router.push("/portfolio")
     }
     return (

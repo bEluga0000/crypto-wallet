@@ -1,6 +1,5 @@
 "use client";
 
-import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import BalanceCard from "./ui/portfolio/balance";
 import PortfolioSideBar from "./ui/portfolio/sideBar";
 import ProfileTopBar from "./ui/portfolio/topBar";
@@ -9,22 +8,17 @@ import { useEffect, useState } from "react";
 import AddNewAccountModal from "./ui/modals/addNewAccount";
 import { AccountSchema } from "@/constants/accounts";
 import { AccountTypeKey } from "@/constants/accountTypes";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
 import BalanceFilterSelect from "./ui/portfolio/accountDropDown";
+import { useAccountStore } from "@/store/accounts.store";
 
 export default function PortfolioPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [openAddAccount, setOpenAddAccount] = useState(false)
-  const [accounts, setAccounts] = useState<AccountSchema[]>([])
+  const accounts = useAccountStore(s=>s.accounts)
   const [acc, setAcc] = useState<string | null>(null);
   const [accountsOptions, setAccountOptions] = useState<string[]>([])
   const [selectWalletType, setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
   const [filteredAccounts, setFilteredAccounts] = useState<AccountSchema[]>([])
-  useEffect(() => {
-    const rawAccount = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
-    const parseAccounts: AccountSchema[] = rawAccount ? JSON.parse(rawAccount) : [];
-    setAccounts(parseAccounts)
-  }, [])
   useEffect(() => {
     const options = accounts
       .filter((a) => a.type === selectWalletType)
@@ -98,9 +92,3 @@ export default function PortfolioPage() {
 
   );
 }
-
-const cointTypes: COIN_TYPES_KEYS[] = [
-  "solana",
-  "ethereum",
-  "bitcoin"
-]
