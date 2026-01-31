@@ -10,7 +10,7 @@ import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
 import { createNewPublicPrivateKey } from "@/utils/createNewAccount";
 import { toast } from "sonner";
 import { useAccountStore } from "@/store/accounts.store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const WALLET_SOURCES = (
   ["MAIN", "TRADING", "COLD_STORAGE"] as const
@@ -47,12 +47,14 @@ const AddNewAccountModal = ({
   open: boolean;
   onOpenChange: (v: boolean) => void;
 }) => {
+  const [index, setIndex] = useState<number>(0)
   const accounts = useAccountStore(s => s.accounts)
   const {
     handleSubmit,
     setValue,
     watch,
     register,
+    reset,
     formState: { errors },
   } = useForm<AddAccountFormSchema>({
     defaultValues: {
@@ -61,14 +63,43 @@ const AddNewAccountModal = ({
       accountName: "",
     },
   });
-  const coinWatch = watch("chain")
-  const walletSourceWatch = watch("walletSource")
+  const coinWatch = watch("chain");
+  const walletSourceWatch = watch("walletSource");
+
+  function syncAccountName(coin: COIN_TYPES_KEYS, walletSource: AccountTypeKey) {
+    if (!coin || !walletSource) return;
+    const filtered = [...accounts].filter(
+      a => a.coin === coin && a.type === walletSource
+    );
+    const latestIndex =
+      filtered.length > 0
+        ? Math.max(...filtered.map(a => a.index)) + 1
+        : 0;
+
+    setIndex(latestIndex);
+    setValue(
+      "accountName",
+      `${ACCOUNT_TYPES[walletSource].label} ${filtered.length  + 1}`
+    );
+  }
   useEffect(() => {
-    if (coinWatch && walletSourceWatch) {
-      const filteredAccounts = accounts.filter(a => a.coin == coinWatch && a.type == walletSourceWatch)
-      setValue("accountName", `${ACCOUNT_TYPES[walletSourceWatch].label} ${filteredAccounts.length + 1}`)
-    }
-  }, [coinWatch, walletSourceWatch, setValue])
+    if (!open) return;
+
+    const defaultWallet = WALLET_SOURCES[0].value;
+    const defaultCoin = COIN_SELECT_ITEMS[0].value;
+
+    reset({
+      walletSource: defaultWallet,
+      chain: defaultCoin,
+      accountName: "",
+    });
+
+    syncAccountName(defaultCoin, defaultWallet);
+  }, [open, reset, accounts]);
+  useEffect(() => {
+    if (!coinWatch || !walletSourceWatch) return;
+    syncAccountName(coinWatch, walletSourceWatch);
+  }, [coinWatch, walletSourceWatch, accounts]);
 
   const onSubmit = (data: AddAccountFormSchema) => {
     console.log("Create Account:", data);
@@ -155,7 +186,7 @@ const AddNewAccountModal = ({
           </form>
 
           <p className="mt-4 text-xs text-slate-500">
-            🔒 Standard HD derivation path {COIN_TYPES[coinWatch].derivationPath(0)}
+            🔒 Standard HD derivation path {COIN_TYPES[coinWatch].derivationPath(index)}
           </p>
         </Dialog.Content>
       </Dialog.Portal>
