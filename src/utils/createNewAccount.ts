@@ -10,7 +10,7 @@ import { useAccountStore } from "@/store/accounts.store";
 export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
     const {accounts,addAccount} = useAccountStore.getState()
     const filteredAccounts = accounts
-        .filter(acc => acc.coin == input.chain && acc.type == input.walletSource)
+        .filter(acc => acc.coin == input.chain)
     .sort((a, b) => b.index - a.index);
     const coinKey = input.chain as COIN_TYPES_KEYS;
     const newIndex = filteredAccounts.length > 0 ? filteredAccounts[0].index + 1 : 0
