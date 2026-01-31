@@ -4,11 +4,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { MdOutlineSecurity } from "react-icons/md";
 import { IoWalletOutline } from "react-icons/io5";
 import TooltipWrapper from "../tooltipWrapper";
+import { useMnemonicStore } from "@/store/mnemonic.store";
 
 const PortfolioSecurityToggle = () => {
   const router = useRouter();
   const pathname = usePathname();
-
+  const mnemonic = useMnemonicStore(s => s.mnemonic)
   const isPortfolio = pathname.startsWith("/portfolio");
   const isSecurity = pathname.startsWith("/security");
 
@@ -24,25 +25,26 @@ const PortfolioSecurityToggle = () => {
   return (
     <div className="flex items-center gap-2">
       {/* Portfolio */}
-      <TooltipWrapper content="Portfolio">
-        <button
-          onClick={() => router.push("/portfolio")}
-          className={`${baseBtn} ${
-            !isPortfolio ? activeBtn : inactiveBtn
-          } cursor-pointer`}
-          aria-label="Go to Portfolio"
-        >
-          <IoWalletOutline className="text-lg" />
-        </button>
-      </TooltipWrapper>
+      {
+        mnemonic && <TooltipWrapper content="Portfolio">
+          <button
+            onClick={() => router.push("/portfolio")}
+            className={`${baseBtn} ${!isPortfolio ? activeBtn : inactiveBtn
+              } cursor-pointer`}
+            aria-label="Go to Portfolio"
+          >
+            <IoWalletOutline className="text-lg" />
+          </button>
+        </TooltipWrapper>
+      }
+
 
       {/* Security */}
       <TooltipWrapper content="Security & Recovery">
         <button
           onClick={() => router.push("/security")}
-          className={`${baseBtn} ${
-            !isSecurity ? activeBtn : inactiveBtn
-          } cursor-pointer`}
+          className={`${baseBtn} ${!isSecurity ? activeBtn : inactiveBtn
+            } cursor-pointer`}
           aria-label="Go to Security"
         >
           <MdOutlineSecurity className="text-lg" />
