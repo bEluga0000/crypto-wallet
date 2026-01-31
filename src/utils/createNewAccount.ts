@@ -1,8 +1,6 @@
 import { AddAccountFormSchema } from "@/components/ui/modals/addNewAccount";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { solanaKeyPairs } from "./generateKeyPairs/solanaKeyPairs";
-import { AccountSchema } from "@/constants/accounts";
 import { ethereumKeyPairs } from "./generateKeyPairs/ethereumKeyPairs";
 import { bitcoinKeyPairs } from "./generateKeyPairs/bitcoinKeyPairs";
 import { useAccountStore } from "@/store/accounts.store";
