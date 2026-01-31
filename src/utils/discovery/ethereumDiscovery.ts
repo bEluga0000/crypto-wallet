@@ -13,8 +13,8 @@ export async function discoverEthereumAccounts(
 
   for (let index = 0; index < max; index++) {
     const path = COIN_TYPES.ethereum.derivationPath(index);
-    const { publicKey } = ethereumKeyPairs(path);
-    if (!publicKey) break;
+    const { publicKey,privateKey } = ethereumKeyPairs(path);
+    if (!publicKey || !privateKey) break;
 
     const balance = await provider.getBalance(publicKey);
     const txCount = await provider.getTransactionCount(publicKey);
@@ -23,7 +23,8 @@ export async function discoverEthereumAccounts(
 
     accounts.push({
       index,
-      address: publicKey,
+      publicKey: publicKey,
+      privateKey:privateKey,
       balance: Number(balance) / 1e18,
       hasActivity,
     });

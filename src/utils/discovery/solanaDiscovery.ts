@@ -12,8 +12,8 @@ export async function discoverSolanaAccounts(
     let emptyCount = 0
     for (let index = 0; index < max; index++) {
         const path = COIN_TYPES.solana.derivationPath(index)
-        const { publicKey, privateKey } = solanaKeyPairs(path)
-        if (!publicKey) break
+        const { publicKey,privateKey } = solanaKeyPairs(path)
+        if (!publicKey || !privateKey) break
         const pub = new PublicKey(publicKey)
         const [balance, transactions] = await Promise.all([
             connection.getBalance(pub),
@@ -23,6 +23,7 @@ export async function discoverSolanaAccounts(
         accounts.push({
             index,
             publicKey,
+            privateKey,
             balance,
             hasActivity,
         });

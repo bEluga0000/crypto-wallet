@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import ProgressiveBar from "./progressivebar";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { useMnemonicStore } from "@/store/mnemonic.store";
 import { useAccountStore } from "@/store/accounts.store";
 
