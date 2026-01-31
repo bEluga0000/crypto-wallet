@@ -13,6 +13,10 @@ import {
     MdWarning,
 } from "react-icons/md";
 import CopyButton from "../formComponents/copyButton";
+import DeleteWalletDialog from "../modals/deleteAccount";
+import { useAccountStore } from "@/store/accounts.store";
+import { toast } from "sonner";
+import { useBalanceStore } from "@/store/balance.store";
 
 type AccountDetailsModalProps = {
     open: boolean;
@@ -26,11 +30,15 @@ const AccountDetailsModal = ({
     account
 }: AccountDetailsModalProps) => {
     const [showPrivateKey, setShowPrivateKey] = useState(false);
-
-    const copyToClipboard = async (value: string) => {
-        await navigator.clipboard.writeText(value);
-    };
-
+    const [deleteOpen, setDeleteOpen] = useState(false);
+    const deleteAccount = useAccountStore(s=>s.removeAccount)
+    const removebalance = useBalanceStore(s=>s.removeBalance)
+    const handleDeleteAccount = ()=>{
+        deleteAccount(account.publicKey)
+        removebalance(`${account.coin}:${account.publicKey}`)
+        toast.success(`${account.coin} wallet has been deleted`);
+        onOpenChange(false)
+    }
     return (
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
             <Dialog.Portal>
@@ -135,15 +143,19 @@ const AccountDetailsModal = ({
                     </div>
 
                     <div className="flex flex-col items-center gap-4 border-t border-slate-200 bg-slate-50 p-6 dark:border-border-dark dark:bg-[#111318]/50">
-                        <button className="flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-red-500/20 bg-red-500/10 text-sm font-bold text-red-600 transition hover:bg-red-500/20 dark:text-red-400">
+                        <button className="flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-red-500/20 bg-red-500/10 text-sm font-bold text-red-600 transition hover:bg-red-500/20 dark:text-red-400" onClick={()=>setDeleteOpen(true)}>
                             <MdDelete size={18} />
                             Delete Account
                         </button>
-
                         <p className="text-center text-[11px] text-slate-400">
                             This account can be restored using your secret recovery phrase.
                         </p>
                     </div>
+                    <DeleteWalletDialog
+                        open={deleteOpen}
+                        onOpenChange={setDeleteOpen}
+                        onConfirm={handleDeleteAccount}
+                    />
                 </Dialog.Content>
             </Dialog.Portal>
         </Dialog.Root>

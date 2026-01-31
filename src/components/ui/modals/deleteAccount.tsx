@@ -3,20 +3,21 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { MdDelete, MdWarning } from "react-icons/md";
 
-type DeleteAccountDialogProps = {
+type DeleteWalletDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: () => void;
 };
 
-const DeleteAccountDialog = ({
+const DeleteWalletDialog = ({
   open,
   onOpenChange,
   onConfirm,
-}: DeleteAccountDialogProps) => {
+}: DeleteWalletDialogProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={onOpenChange}>
       <Dialog.Portal>
+        {/* Overlay */}
         <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm" />
 
         {/* Content */}
@@ -26,16 +27,17 @@ const DeleteAccountDialog = ({
           border border-slate-200 bg-white p-6 shadow-2xl
           dark:border-slate-800 dark:bg-[#16181d]"
         >
-          {/* Title (required for accessibility) */}
+          {/* Title */}
           <Dialog.Title className="flex items-center gap-2 text-lg font-bold text-red-500">
             <MdWarning size={20} />
-            Delete Account
+            Delete Wallet
           </Dialog.Title>
 
           {/* Description */}
           <Dialog.Description className="mt-3 text-sm text-slate-500 dark:text-slate-400">
-            This will permanently remove this account from this device.
-            Make sure you have backed up your recovery phrase.
+            This will permanently remove this wallet from this device.
+            Your funds are safe on the blockchain, but you will need your
+            recovery phrase to restore access.
             <span className="block mt-2 font-semibold text-red-400">
               This action cannot be undone.
             </span>
@@ -59,7 +61,7 @@ const DeleteAccountDialog = ({
               transition hover:bg-red-600"
             >
               <MdDelete size={16} />
-              Delete
+              Delete Wallet
             </button>
           </div>
         </Dialog.Content>
@@ -68,4 +70,4 @@ const DeleteAccountDialog = ({
   );
 };
 
-export default DeleteAccountDialog;
+export default DeleteWalletDialog;
