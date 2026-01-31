@@ -134,7 +134,6 @@ const AccountDetailsModal = ({
                         </div>
                     </div>
 
-                    {/* Footer */}
                     <div className="flex flex-col items-center gap-4 border-t border-slate-200 bg-slate-50 p-6 dark:border-border-dark dark:bg-[#111318]/50">
                         <button className="flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-red-500/20 bg-red-500/10 text-sm font-bold text-red-600 transition hover:bg-red-500/20 dark:text-red-400">
                             <MdDelete size={18} />
