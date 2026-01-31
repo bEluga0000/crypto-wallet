@@ -1,6 +1,4 @@
 "use client";
-
-import BalanceCard from "./ui/portfolio/balance";
 import PortfolioSideBar from "./ui/portfolio/sideBar";
 import ProfileTopBar from "./ui/portfolio/topBar";
 import CoinCard from "./ui/portfolio/coinCard";
