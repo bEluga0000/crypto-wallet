@@ -3,14 +3,14 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import { IoIosCloseCircle } from "react-icons/io";
-
 import Field from "../formComponents/fieldWrapper";
 import SelectBox from "../formComponents/selectBox";
 import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
-import { AccountSchema } from "@/constants/accounts";
 import { createNewPublicPrivateKey } from "@/utils/createNewAccount";
 import { toast } from "sonner";
+import { useAccountStore } from "@/store/accounts.store";
+import { useEffect } from "react";
 
 export const WALLET_SOURCES = (
   ["MAIN", "TRADING", "COLD_STORAGE"] as const
@@ -49,6 +49,7 @@ const AddNewAccountModal = ({
   onOpenChange: (v: boolean) => void;
   // setAccounts:(val:AccountSchema[])=>void
 }) => {
+  const accounts = useAccountStore(s=>s.accounts)
   const {
     handleSubmit,
     setValue,
@@ -62,10 +63,19 @@ const AddNewAccountModal = ({
       accountName: "",
     },
   });
+  const coinWatch = watch("chain")
+  const walletSourceWatch = watch("walletSource")
+  useEffect(()=>{
+    if(coinWatch &&  walletSourceWatch)
+    {
+      const filteredAccounts = accounts.filter(a=>a.coin == coinWatch && a.type == walletSourceWatch)
+      setValue("accountName",`${ACCOUNT_TYPES[walletSourceWatch].label} ${filteredAccounts.length+1}`)
+    }
+  },[coinWatch,walletSourceWatch,setValue])
 
   const onSubmit = (data: AddAccountFormSchema) => {
     console.log("Create Account:", data);
-    if(createNewPublicPrivateKey(data))
+    if (createNewPublicPrivateKey(data))
       toast.success(`New Account Created Successfully`);
     else
       toast.error("Failed to create account")
@@ -121,9 +131,22 @@ const AddNewAccountModal = ({
                     message: "Minimum 3 characters",
                   },
                 })}
+                readOnly
                 placeholder="e.g., Trading Account"
-                className="w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                className={`w-full rounded-lg border px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2
+      ${errors.accountName
+                    ? "border-red-500 focus:ring-red-500/40"
+                    : "border-white/10 bg-black/30 focus:ring-blue-500/40"
+                  }
+    `}
               />
+
+              {/* ✅ Error message */}
+              {errors.accountName && (
+                <p className="mt-1 text-xs text-red-400">
+                  {errors.accountName.message}
+                </p>
+              )}
             </Field>
 
             {/* Footer */}
@@ -138,7 +161,7 @@ const AddNewAccountModal = ({
           </form>
 
           <p className="mt-4 text-xs text-slate-500">
-            🔒 Standard HD derivation path (m/44'/60'/0'/0)
+            🔒 Standard HD derivation path {COIN_TYPES[coinWatch].derivationPath(0)}
           </p>
         </Dialog.Content>
       </Dialog.Portal>
