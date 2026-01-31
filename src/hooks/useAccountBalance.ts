@@ -1,6 +1,7 @@
 
 import { AccountSchema } from "@/constants/accounts";
 import { useBalanceStore } from "@/store/balance.store";
+import { usePriceStore } from "@/store/prices.store";
 import { getEthereumBalance } from "@/utils/balances/ethereumBalance";
 import { getSolanaBalance } from "@/utils/balances/solanaBalance";
 import { useEffect, useState } from "react";
@@ -9,10 +10,9 @@ export function useAccountBalance(account: AccountSchema) {
   const key = `${account.coin}:${account.publicKey}`
   const balance = useBalanceStore((s) => s.balances[key]);
   const setBalance = useBalanceStore((s) => s.setBalance);
-
+  const prices = usePriceStore((s) => s.prices)
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     if (!account.publicKey) return;
 
@@ -72,5 +72,6 @@ export function useAccountBalance(account: AccountSchema) {
     balance: balance ?? 0,
     loading,
     error,
+    usd: prices ? balance != 0 ? balance * prices[account.coin] : 0 : null,
   };
 }

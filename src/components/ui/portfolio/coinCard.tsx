@@ -16,7 +16,7 @@ const CoinCard: React.FC<CoinCardProps> = ({
     coin,
     ind
 }) => {
-    const { balance, loading } = useAccountBalance(coin)
+    const { balance, loading, usd } = useAccountBalance(coin)
     const [open, setOpen] = useState<boolean>(false)
     return (
         <>
@@ -63,13 +63,15 @@ const CoinCard: React.FC<CoinCardProps> = ({
                         {loading ? (
                             <BalanceSkeleton />
                         ) : (
-                            <p className="text-xl font-bold">
-                                {balance.toFixed(4)} {COIN_TYPES[coin.coin].short}
-                            </p>
+                            <>
+                                <p className="text-xl font-bold">
+                                    {balance.toFixed(4)} {COIN_TYPES[coin.coin].short}
+                                </p>
+                                <p className="text-sm text-slate-500">
+                                    ${(usd || usd == 0)  ? usd : "Failed to convert"}
+                                </p>
+                            </>
                         )}
-                        {/* <p className="text-sm text-slate-500">
-                            $29,500.00
-                        </p> */}
                     </div>
                 </div>
             </div>
