@@ -1,17 +1,21 @@
-import { STORAGE_KEYS } from "@/constants/storageKeys"
-import { generateMnemonic } from "bip39"
-import { toast } from "sonner"
+import { generateMnemonic } from "bip39";
+import { toast } from "sonner";
+import { useMnemonicStore } from "@/store/mnemonic.store";
 
 export const generateMnemonics = (): string => {
-    // we need to decide which one they want is it 128 or 256, 12 words or 24 words
-    let mnemonic = localStorage.getItem(STORAGE_KEYS.MNEMONIC)
-    if (mnemonic)
-    {
-        toast.success("Mnemonic Already Present");
-        return mnemonic
-    }
-    mnemonic = generateMnemonic(128)
-    localStorage.setItem(STORAGE_KEYS.MNEMONIC, mnemonic)
-    toast.success("Mnemonic Generated");
-    return mnemonic
-}
+  const { mnemonic, setMnemonic } = useMnemonicStore.getState();
+
+  if (mnemonic && mnemonic.length > 0) {
+    toast.success("Mnemonic already present");
+    return mnemonic.join(" ");
+  }
+
+  // 128 bits → 12 words
+  const newMnemonic = generateMnemonic(128);
+  const words = newMnemonic.split(" ");
+
+  setMnemonic(words);
+
+  toast.success("Mnemonic generated");
+  return newMnemonic;
+};

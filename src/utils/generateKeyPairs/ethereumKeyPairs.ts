@@ -14,7 +14,7 @@ export const ethereumKeyPairs = (derivationPath: string): ChainKeyPairsoutputSch
     const hdNode = HDNodeWallet.fromSeed(seed);
     const wallet = hdNode.derivePath(derivationPath)
     return {
-        publicKey:wallet.publicKey,
+        publicKey:wallet.address,
         privateKey:wallet.privateKey
     }
 }

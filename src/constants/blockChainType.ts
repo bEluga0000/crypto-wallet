@@ -24,7 +24,7 @@ export const COIN_TYPES = {
       image: "eth.png",
       // m/44'/60'/account'/0/0
       derivationPath: (accountIndex: number) =>
-        `m/44'/60'/${accountIndex}'/0/0`,
+        `m/44'/60'/0'/0/${accountIndex}`,
     },
   
     bitcoin: {

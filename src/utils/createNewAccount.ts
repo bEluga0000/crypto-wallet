@@ -1,20 +1,15 @@
 import { AddAccountFormSchema } from "@/components/ui/modals/addNewAccount";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { solanaKeyPairs } from "./generateKeyPairs/solanaKeyPairs";
-import { AccountSchema } from "@/constants/accounts";
 import { ethereumKeyPairs } from "./generateKeyPairs/ethereumKeyPairs";
 import { bitcoinKeyPairs } from "./generateKeyPairs/bitcoinKeyPairs";
+import { useAccountStore } from "@/store/accounts.store";
 
 export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
-    const raw = localStorage.getItem(STORAGE_KEYS.ACCOUNTS)
-    console.log(raw)
-    const accounts: AccountSchema[] = raw ? JSON.parse(raw) : [];
-    console.log(accounts)
+    const {accounts,addAccount} = useAccountStore.getState()
     const filteredAccounts = accounts
         .filter(acc => acc.coin == input.chain)
     .sort((a, b) => b.index - a.index);
-    console.log(filteredAccounts)
     const coinKey = input.chain as COIN_TYPES_KEYS;
     const newIndex = filteredAccounts.length > 0 ? filteredAccounts[0].index + 1 : 0
     const derivationPath = getDerivationPath(
@@ -40,17 +35,17 @@ export const createNewPublicPrivateKey = (input: AddAccountFormSchema) => {
             publicKey = keypairs.publicKey
             privateKey=keypairs.privateKey
         }
-    if (privateKey && publicKey)
-        accounts.push({
-            index: newIndex,
-            type: input.walletSource,
-            coin: input.chain,
-            publicKey: publicKey,
-            privateKey: privateKey,
-            accountName: input.accountName
-        })
-    localStorage.setItem(STORAGE_KEYS.ACCOUNTS, JSON.stringify(accounts))
-    return !!publicKey && !!privateKey
+    if (!privateKey || !publicKey)
+        return false
+    addAccount({
+        index: newIndex,
+        type: input.walletSource,
+        coin: input.chain,
+        publicKey,
+        privateKey,
+        accountName: input.accountName,
+      });
+    return true
 }
 
 function getDerivationPath(

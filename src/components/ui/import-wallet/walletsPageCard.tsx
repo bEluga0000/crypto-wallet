@@ -1,3 +1,7 @@
+"use client";
+import { useImportWalletStore } from "@/store/import-wallet.store";
+import { useRouter } from "next/navigation"
+
 interface WalletsPageCardProps {
     wallets: {
         title: string
@@ -9,6 +13,11 @@ interface WalletsPageCardProps {
 }
 
 const WalletsPageCard: React.FC<WalletsPageCardProps> = ({ wallets }) => {
+    const router = useRouter()
+    const handelCardClick = () => {
+        router.push("/import-wallet/import-seedphrase")
+    }
+    const setWalletName = useImportWalletStore((s) => s.setWalletName);
     return <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {
             wallets.map((wallet) => (
@@ -18,6 +27,11 @@ const WalletsPageCard: React.FC<WalletsPageCardProps> = ({ wallets }) => {
                         ? "border-dashed border-primary bg-primary/5 hover:bg-primary/10 dark:bg-primary/10 dark:hover:bg-primary/20"
                         : "border-gray-200 bg-white hover:border-primary dark:border-gray-800 dark:bg-gray-900"
                         }`}
+                    onClick={() => {
+                        setWalletName(wallet.title)
+                        handelCardClick()
+                    }
+                    }
                 >
                     <div
                         className={`mb-4 flex h-16 w-16 items-center justify-center rounded-lg ${wallet.primary
