@@ -5,6 +5,7 @@ import ProgressiveBar from "./progressivebar";
 import { useMnemonicStore } from "@/store/mnemonic.store";
 import { useAccountStore } from "@/store/accounts.store";
 import { useDiscoverAccounts } from "@/hooks/useDiscoverAccount";
+import AccountSkeleton from "./derivedAccountSkeleton";
 
 interface Account {
     name: string;
@@ -43,10 +44,7 @@ const DiscoveredAccounts: React.FC<DiscoveredPhraseAccountsProps> = ({
             {loading && (
                 <div className="flex flex-col gap-3">
                     {[...Array(3)].map((_, i) => (
-                        <div
-                            key={i}
-                            className="h-20 animate-pulse rounded-xl border border-gray-800 bg-card-dark"
-                        />
+                        <AccountSkeleton key={i}/>
                     ))}
                 </div>
             )}
