@@ -3,6 +3,7 @@ import { COIN_TYPES } from "@/constants/blockChainType"
 import CopyButton from "../formComponents/copyButton"
 import AccountDetailsModal from "./accountDetails"
 import { useState } from "react"
+import { useAccountBalance } from "@/hooks/useAccountBalance"
 
 type CoinCardProps = {
     coin: AccountSchema,
@@ -15,6 +16,7 @@ const CoinCard: React.FC<CoinCardProps> = ({
     coin,
     ind
 }) => {
+    const {balance,loading} = useAccountBalance(coin)
     const [open,setOpen] = useState<boolean>(false)
     return (
         <>
@@ -59,11 +61,11 @@ const CoinCard: React.FC<CoinCardProps> = ({
                     {/* RIGHT SIDE */}
                     <div className="text-right">
                         <p className="text-xl font-bold">
-                            500.00 {COIN_TYPES[coin.coin].short}
+                            {balance.toFixed(4)} {COIN_TYPES[coin.coin].short}
                         </p>
-                        <p className="text-sm text-slate-500">
+                        {/* <p className="text-sm text-slate-500">
                             $29,500.00
-                        </p>
+                        </p> */}
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@ import { useBalanceStore } from "@/store/balance.store";
 import { getSolanaBalance } from "@/utils/balances/solanaBalance";
 import { useEffect, useState } from "react";
 
-export function useSolanaBalance(account: AccountSchema) {
+export function useAccountBalance(account: AccountSchema) {
   const key = `${account.coin}:${account.publicKey}`
   const balance = useBalanceStore((s) => s.balances[key]);
   const setBalance = useBalanceStore((s) => s.setBalance);
@@ -44,8 +44,17 @@ export function useSolanaBalance(account: AccountSchema) {
 
         }
         if (mounted) setBalance(key, value);
-      } catch (e) {
-        if (mounted) setError("Failed to fetch balance");
+      } catch (e: any) {
+        if (!mounted) return;
+
+        if (
+          typeof e?.message === "string" &&
+          (e.message.includes("403") || e.message.includes("Access forbidden"))
+        ) {
+          setError(null);
+          return;
+        }
+        setError("Failed to fetch balance");
       } finally {
         if (mounted) setLoading(false);
       }
@@ -56,10 +65,10 @@ export function useSolanaBalance(account: AccountSchema) {
     return () => {
       mounted = false;
     };
-  }, [account.publicKey, account.coin,key,setBalance]);
+  }, [account.publicKey, account.coin, key, setBalance]);
 
   return {
-    lamports: balance ?? 0,
+    balance: balance ?? 0,
     loading,
     error,
   };
