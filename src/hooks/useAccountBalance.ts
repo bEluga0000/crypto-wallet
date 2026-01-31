@@ -1,6 +1,7 @@
 
 import { AccountSchema } from "@/constants/accounts";
 import { useBalanceStore } from "@/store/balance.store";
+import { getEthereumBalance } from "@/utils/balances/ethereumBalance";
 import { getSolanaBalance } from "@/utils/balances/solanaBalance";
 import { useEffect, useState } from "react";
 
@@ -29,8 +30,8 @@ export function useAccountBalance(account: AccountSchema) {
             break
           }
           case "ethereum": {
-            // const res = await getEthereumBalance(account.publicKey);
-            // value = res.wei;
+            const res = await getEthereumBalance(account.publicKey);
+            value = res.eth;
             break;
           }
 
