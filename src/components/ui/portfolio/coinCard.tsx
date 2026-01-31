@@ -16,14 +16,14 @@ const CoinCard: React.FC<CoinCardProps> = ({
     coin,
     ind
 }) => {
-    const {balance,loading} = useAccountBalance(coin)
-    const [open,setOpen] = useState<boolean>(false)
+    const { balance, loading } = useAccountBalance(coin)
+    const [open, setOpen] = useState<boolean>(false)
     return (
         <>
             <div
                 key={ind}
                 className={`group relative rounded-xl border border-slate-200 bg-white p-6 transition-all hover:shadow-xl dark:border-slate-800 dark:bg-[#16181d] cursor-pointer`}
-                onClick={()=>(setOpen(true))}
+                onClick={() => (setOpen(true))}
             >
                 {/* Left accent bar */}
                 <div
@@ -60,17 +60,28 @@ const CoinCard: React.FC<CoinCardProps> = ({
 
                     {/* RIGHT SIDE */}
                     <div className="text-right">
-                        <p className="text-xl font-bold">
-                            {balance.toFixed(4)} {COIN_TYPES[coin.coin].short}
-                        </p>
+                        {loading ? (
+                            <BalanceSkeleton />
+                        ) : (
+                            <p className="text-xl font-bold">
+                                {balance.toFixed(4)} {COIN_TYPES[coin.coin].short}
+                            </p>
+                        )}
                         {/* <p className="text-sm text-slate-500">
                             $29,500.00
                         </p> */}
                     </div>
                 </div>
             </div>
-            <AccountDetailsModal open={open} onOpenChange={setOpen} account={coin}/>
+            <AccountDetailsModal open={open} onOpenChange={setOpen} account={coin} />
         </>
     );
 }
 export default CoinCard
+
+const BalanceSkeleton = () => (
+    <div className="flex flex-col items-end gap-1">
+        <div className="h-6 w-24 animate-pulse rounded-md bg-slate-200 dark:bg-slate-700" />
+        <div className="h-4 w-12 animate-pulse rounded-md bg-slate-200 dark:bg-slate-700" />
+    </div>
+);
