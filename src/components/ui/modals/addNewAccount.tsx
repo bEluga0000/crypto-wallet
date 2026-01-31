@@ -43,13 +43,11 @@ export type AddAccountFormSchema = {
 const AddNewAccountModal = ({
   open,
   onOpenChange,
-  // setAccounts,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
-  // setAccounts:(val:AccountSchema[])=>void
 }) => {
-  const accounts = useAccountStore(s=>s.accounts)
+  const accounts = useAccountStore(s => s.accounts)
   const {
     handleSubmit,
     setValue,
@@ -65,13 +63,12 @@ const AddNewAccountModal = ({
   });
   const coinWatch = watch("chain")
   const walletSourceWatch = watch("walletSource")
-  useEffect(()=>{
-    if(coinWatch &&  walletSourceWatch)
-    {
-      const filteredAccounts = accounts.filter(a=>a.coin == coinWatch && a.type == walletSourceWatch)
-      setValue("accountName",`${ACCOUNT_TYPES[walletSourceWatch].label} ${filteredAccounts.length+1}`)
+  useEffect(() => {
+    if (coinWatch && walletSourceWatch) {
+      const filteredAccounts = accounts.filter(a => a.coin == coinWatch && a.type == walletSourceWatch)
+      setValue("accountName", `${ACCOUNT_TYPES[walletSourceWatch].label} ${filteredAccounts.length + 1}`)
     }
-  },[coinWatch,walletSourceWatch,setValue])
+  }, [coinWatch, walletSourceWatch, setValue])
 
   const onSubmit = (data: AddAccountFormSchema) => {
     console.log("Create Account:", data);
@@ -88,7 +85,6 @@ const AddNewAccountModal = ({
         <Dialog.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
 
         <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f1b34] to-[#0b1428] p-6 text-white shadow-2xl">
-          {/* Header */}
           <div className="mb-4 flex items-start justify-between">
             <div>
               <Dialog.Title className="text-xl font-semibold">
@@ -104,7 +100,6 @@ const AddNewAccountModal = ({
             </Dialog.Close>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <Field label="Wallet Source">
               <SelectBox
@@ -149,7 +144,6 @@ const AddNewAccountModal = ({
               )}
             </Field>
 
-            {/* Footer */}
             <div className="mt-6 flex justify-end">
               <button
                 type="submit"
