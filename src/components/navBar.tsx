@@ -17,14 +17,14 @@ const NavBar = () => {
         </div>
 
         <div className="flex items-center gap-4 align-middle">
-            <div className="hidden items-center gap-2 rounded-full border border-green-100 bg-green-50 px-3 py-1.5 text-green-600 dark:border-green-800/30 dark:bg-green-900/20 dark:text-green-400 md:flex">
+            {/* <div className="hidden items-center gap-2 rounded-full border border-green-100 bg-green-50 px-3 py-1.5 text-green-600 dark:border-green-800/30 dark:bg-green-900/20 dark:text-green-400 md:flex">
                 <span className="material-symbols-outlined text-[16px]">
                     verified user
                 </span>
                 <span className="text-xs font-semibold uppercase tracking-wider">
                     Network: Mainnet
                 </span>
-            </div>
+            </div> */}
 
             <button className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#f0f2f4] hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700">
                 <span className="material-symbols-outlined"><MdOutlineSecurity /></span>
