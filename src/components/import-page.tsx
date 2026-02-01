@@ -1,6 +1,6 @@
 import { MdMoreHoriz, MdOutlineBackpack, MdOutlineToken, MdOutlineUsb, MdOutlineVerifiedUser } from "react-icons/md";
 import WalletsPageCard from "./ui/import-wallet/walletsPageCard";
-import { FaWandMagicSparkles } from "react-icons/fa6";
+import { FaLock, FaWandMagicSparkles } from "react-icons/fa6";
 
 export default function ImportWalletPage() {
     return (
@@ -8,7 +8,7 @@ export default function ImportWalletPage() {
             <main className="mx-auto w-full max-w-[960px] flex-1 px-4 py-12">
                 <div className="mx-auto max-w-xl text-center">
                     <div className="mb-3 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
-                        <span className="material-symbols-outlined text-base">lock</span>
+                        <span className="material-symbols-outlined text-base"><FaLock /></span>
                         Secure Import
                     </div>
 
@@ -24,7 +24,7 @@ export default function ImportWalletPage() {
                 <div>
                     <WalletsPageCard wallets={wallets} />
                 </div>
-                <div className="mt-10 text-center">
+                {/* <div className="mt-10 text-center">
                     <a
                         href="#"
                         className="inline-flex items-center gap-2 text-sm font-medium text-gray-500 transition-colors hover:text-primary dark:text-gray-400"
@@ -32,7 +32,7 @@ export default function ImportWalletPage() {
                         <span className="material-symbols-outlined text-lg">help</span>
                         Need help? View our security guide.
                     </a>
-                </div>
+                </div> */}
             </main>
 
             {/* Footer */}
@@ -56,31 +56,36 @@ const wallets = [
         title: "Backpack",
         icon: <MdOutlineBackpack />,
         desc: "Import using your Backpack account securely.",
+        // primary:true,
+        work:true
     },
     {
         title: "Phantom",
         icon: <FaWandMagicSparkles />,
         desc: "Connect your Phantom Solana wallet extension.",
+        work:true
     },
     {
         title: "MetaMask",
         icon: <MdOutlineToken />,
         desc: "The most popular Ethereum & ERC-20 wallet.",
+        work:true
     },
     {
         title: "Trust Wallet",
         icon: <MdOutlineVerifiedUser />,
         desc: "Import via mobile app or browser extension.",
+        work:false
     },
-    {
-        title: "Other Wallet",
-        icon: <MdMoreHoriz />,
-        desc: "Import via Seed Phrase, Private Key, or Hardware.",
-    },
+    // {
+    //     title: "Other Wallet",
+    //     icon: <MdMoreHoriz />,
+    //     desc: "Import via Seed Phrase, Private Key, or Hardware.",
+    // },
     {
         title: "Hardware Wallet",
         icon: <MdOutlineUsb />,
         desc: "Connect your Ledger, Trezor, or Keystone.",
-        primary: true,
+        work:false
     },
 ];
