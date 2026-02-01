@@ -91,7 +91,7 @@ const DiscoveredAccounts: React.FC<DiscoveredPhraseAccountsProps> = ({
                     </p>
 
                     <p className="mt-3 text-xs text-gray-500">
-                        Accounts with no balance or transactions won’t appear here.
+                        Accounts with no balance and no transactions won’t appear here.
                         You can create them later using{" "}
                         <span className="text-white">Add Account</span>.
                     </p>

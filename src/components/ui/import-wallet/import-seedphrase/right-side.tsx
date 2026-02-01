@@ -1,6 +1,7 @@
 
 import { MdGppMaybe, MdOfflinePin, MdVisibilityOff } from "react-icons/md";
 import { InfoBlock } from "./info-block";
+import { FaShieldAlt } from "react-icons/fa";
 
 type RightSideProps = {
     seedPhraseAdded: boolean;
@@ -10,7 +11,7 @@ const RightSide = ({ seedPhraseAdded }: RightSideProps) => {
     <aside className="flex w-full flex-col gap-6 lg:w-80">
       <div className="rounded-xl border border-gray-800 bg-card-dark p-6">
         <div className="mb-4 flex items-center gap-3 text-primary">
-          <span className="material-symbols-outlined">shield</span>
+          <span className="material-symbols-outlined"><FaShieldAlt /></span>
           <h3 className="font-bold">Security Tips</h3>
         </div>
 
@@ -35,14 +36,7 @@ const RightSide = ({ seedPhraseAdded }: RightSideProps) => {
           />
         </div>
       </div>
-      {!seedPhraseAdded ? (
-        <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-6">
-          <InfoBlock
-            title="Common Standard"
-            text="We support BIP39 standard phrases from all major wallet providers."
-          />
-        </div>
-      ) : (
+      {seedPhraseAdded &&  (
         <div className="rounded-xl border border-amber-500/20 bg-amber-500/10 p-6 space-y-3">
           <InfoBlock
             title="How accounts are imported"
