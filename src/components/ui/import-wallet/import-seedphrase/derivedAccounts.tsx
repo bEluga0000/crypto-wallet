@@ -24,7 +24,7 @@ const DiscoveredAccounts: React.FC<DiscoveredPhraseAccountsProps> = ({
     const router = useRouter()
     const accounts = useAccountStore((s) => s.accounts);
     const setMnemonicWords = useMnemonicStore((s) => s.setMnemonic)
-    const { loading } = useDiscoverAccounts({ enabled: true })
+    const { loading } = useDiscoverAccounts({ enabled: true,mnemonic:words.join(" ")})
     const hasAccounts = accounts.length > 0;
     const handleImport = () => {
         setMnemonicWords(words)

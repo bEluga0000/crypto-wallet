@@ -4,15 +4,18 @@ import * as bitcoin from "bitcoinjs-lib";
 import * as ecc from "tiny-secp256k1";
 import * as bip32 from "bip32";
 import { ChainKeyPairsoutputSchema } from "./solanaKeyPairs";
+import { useMnemonicStore } from "@/store/mnemonic.store";
 
 bitcoin.initEccLib(ecc);
 const bip32Factory = bip32.BIP32Factory(ecc);
 
 export const bitcoinKeyPairs = (
-    derivationPath: string
+    derivationPath: string,
+    optionalMnemonic:string
 ): ChainKeyPairsoutputSchema => {
     const network = bitcoin.networks.bitcoin;
-    const mnemonic = localStorage.getItem(STORAGE_KEYS.MNEMONIC);
+    const storeMnemonic = useMnemonicStore.getState().mnemonic;
+    const mnemonic = optionalMnemonic ?? (storeMnemonic ? storeMnemonic.join(" ") :null)
 
     if (!mnemonic) {
         return { publicKey: null, privateKey: null };
