@@ -18,16 +18,21 @@ export default function PortfolioPage() {
   const [selectWalletType, setSelectedWalletType] = useState<AccountTypeKey | "HARDWARE" | "STAKING">("MAIN")
   const [filteredAccounts, setFilteredAccounts] = useState<AccountSchema[]>([])
   useEffect(() => {
-    const options = accounts
-      .filter((a) => a.type === selectWalletType)
-      .map((d) => d.accountName);
-    if (options.length > 0) {
-      setAcc(options[0])
+    const uniqueOptions = Array.from(
+      new Set(
+        accounts
+          .filter(a => a.type === selectWalletType)
+          .map(a => a.accountName)
+      )
+    );
+
+    setAccountOptions(uniqueOptions);
+
+    if (uniqueOptions.length > 0) {
+      setAcc(uniqueOptions[0]);
+    } else {
+      setAcc(null);
     }
-    else {
-      setAcc(null)
-    }
-    setAccountOptions(options)
   }, [accounts, selectWalletType]);
   useEffect(() => {
     if (acc) {
