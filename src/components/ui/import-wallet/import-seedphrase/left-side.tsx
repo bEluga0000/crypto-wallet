@@ -12,7 +12,7 @@ const LeftSide = (props: LeftSideProps) => {
         props.words.length === 12 &&
         props.words.every((w) => w.trim().length > 0);
     return <div className="flex flex-1 flex-col gap-8">
-        <ProgressiveBar step={1} label="Paste Mnemonic"/>
+        <ProgressiveBar step={1} label="Paste Mnemonic" />
 
         {/* Heading */}
         <div className="space-y-2">
@@ -30,15 +30,22 @@ const LeftSide = (props: LeftSideProps) => {
 
         {/* Actions */}
         <div className="flex flex-col gap-4 sm:flex-row">
-            <button className="flex items-center justify-center gap-2 rounded-lg bg-gray-800 px-6 py-3 text-sm font-semibold transition hover:bg-gray-700">
-                <span className="material-symbols-outlined text-lg">
-                    <MdContentPaste />
-                </span>
-                Paste from clipboard
-            </button>
 
-            <button className="flex-1 rounded-lg bg-primary px-8 py-3 text-lg font-bold shadow-lg shadow-primary/20 transition hover:bg-blue-600" onClick={handelContinue}
-                disabled={!isValidMnemonic}>
+            <button
+                onClick={handelContinue}
+                disabled={!isValidMnemonic}
+                className="
+    flex-1 rounded-lg px-8 py-3 text-lg font-bold
+    bg-primary shadow-lg shadow-primary/20
+    transition
+    bg-blue-300
+    hover:bg-blue-600
+    cursor-pointer
+    disabled:cursor-not-allowed
+    disabled:opacity-50
+    disabled:hover:bg-primary
+  "
+            >
                 Continue
             </button>
         </div>
