@@ -17,7 +17,7 @@ const HomePageCard: React.FC<HomePageCardProps> = ({
     onClick,
     buttonIcon
 }) => {
-    return <div className="group flex cursor-pointer flex-col gap-6 rounded-xl border border-[#e5e7eb] bg-white p-8 shadow-sm transition-all hover:border-primary hover:shadow-xl dark:border-gray-800 dark:bg-[#1a212f]">
+    return <div className="group flex cursor-pointer flex-col gap-6 rounded-xl border border-[#e5e7eb] bg-white p-8 shadow-sm transition-all hover:border-primary hover:shadow-xl dark:border-gray-800 dark:bg-[#1a212f] justify-between">
         {
             icon && <div className="flex size-14 items-center justify-center rounded-xl bg-primary text-white shadow-lg shadow-primary/20">
                 <span className="material-symbols-outlined text-[32px]">

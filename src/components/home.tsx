@@ -34,7 +34,7 @@ export default function HomePage() {
                         <HomePageCard
                             icon={<MdAddModerator />}
                             title={"Create New Wallet"}
-                            desc="Generate a new 24-word recovery phrase for a fresh start."
+                            desc="Generate a new 12 word recovery phrase for a fresh start."
                             button="Get Started"
                             onClick={createNewWalletOnClick}
                             buttonIcon={<IoMdArrowForward />}
