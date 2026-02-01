@@ -6,14 +6,15 @@ const provider = new JsonRpcProvider("https://eth.llamarpc.com");
 
 export async function discoverEthereumAccounts(
   max = 20,
-  gapLimit = 5
+  gapLimit = 5,
+  mnemonic:string
 ) {
   const accounts = [];
   let emptyCount = 0;
 
   for (let index = 0; index < max; index++) {
     const path = COIN_TYPES.ethereum.derivationPath(index);
-    const { publicKey,privateKey } = ethereumKeyPairs(path);
+    const { publicKey,privateKey } = ethereumKeyPairs(path,mnemonic);
     if (!publicKey || !privateKey) break;
 
     const balance = await provider.getBalance(publicKey);

@@ -1,4 +1,3 @@
-import { STORAGE_KEYS } from "@/constants/storageKeys"
 import { Keypair } from "@solana/web3.js"
 import { mnemonicToSeedSync } from "bip39"
 import { derivePath } from "ed25519-hd-key"
@@ -9,14 +8,15 @@ export interface ChainKeyPairsoutputSchema {
     publicKey: string | null
     privateKey: string | null
 }
-export const solanaKeyPairs = (derivationPath: string): ChainKeyPairsoutputSchema => {
-    const {mnemonic} = useMnemonicStore.getState()
+export const solanaKeyPairs = (derivationPath: string,optionalMnemonic?:string): ChainKeyPairsoutputSchema => {
+    const storeMnemonic = useMnemonicStore.getState().mnemonic
+    const mnemonic = optionalMnemonic ?? (storeMnemonic ? storeMnemonic.join(" ") :null)
     if (!mnemonic)
         return {
             publicKey: null,
             privateKey: null
         }
-    const seed = mnemonicToSeedSync(mnemonic.join(" "))
+    const seed = mnemonicToSeedSync(mnemonic)
     const derivedSeed = derivePath(derivationPath, seed.toString("hex")).key
     const secret = nacl.sign.keyPair.fromSeed(derivedSeed).secretKey
     const publicKey = Keypair.fromSecretKey(secret).publicKey.toBase58()

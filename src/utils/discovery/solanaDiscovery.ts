@@ -6,13 +6,14 @@ const connection = new Connection("https://api.mainnet-beta.solana.com")
 
 export async function discoverSolanaAccounts(
     max = 20,
-    gapLimit = 5
+    gapLimit = 5,
+    mnemonic:string
 ) {
     const accounts = []
     let emptyCount = 0
     for (let index = 0; index < max; index++) {
         const path = COIN_TYPES.solana.derivationPath(index)
-        const { publicKey,privateKey } = solanaKeyPairs(path)
+        const { publicKey,privateKey } = solanaKeyPairs(path,mnemonic)
         if (!publicKey || !privateKey) break
         const pub = new PublicKey(publicKey)
         const [balance, transactions] = await Promise.all([

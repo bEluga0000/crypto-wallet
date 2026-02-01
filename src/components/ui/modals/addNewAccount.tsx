@@ -3,14 +3,14 @@
 import * as Dialog from "@radix-ui/react-dialog";
 import { useForm } from "react-hook-form";
 import { IoIosCloseCircle } from "react-icons/io";
-
 import Field from "../formComponents/fieldWrapper";
 import SelectBox from "../formComponents/selectBox";
 import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes";
 import { COIN_TYPES, COIN_TYPES_KEYS } from "@/constants/blockChainType";
-import { AccountSchema } from "@/constants/accounts";
 import { createNewPublicPrivateKey } from "@/utils/createNewAccount";
 import { toast } from "sonner";
+import { useAccountStore } from "@/store/accounts.store";
+import { useEffect, useState } from "react";
 
 export const WALLET_SOURCES = (
   ["MAIN", "TRADING", "COLD_STORAGE"] as const
@@ -43,17 +43,18 @@ export type AddAccountFormSchema = {
 const AddNewAccountModal = ({
   open,
   onOpenChange,
-  // setAccounts,
 }: {
   open: boolean;
   onOpenChange: (v: boolean) => void;
-  // setAccounts:(val:AccountSchema[])=>void
 }) => {
+  const [index, setIndex] = useState<number>(0)
+  const accounts = useAccountStore(s => s.accounts)
   const {
     handleSubmit,
     setValue,
     watch,
     register,
+    reset,
     formState: { errors },
   } = useForm<AddAccountFormSchema>({
     defaultValues: {
@@ -62,10 +63,47 @@ const AddNewAccountModal = ({
       accountName: "",
     },
   });
+  const coinWatch = watch("chain");
+  const walletSourceWatch = watch("walletSource");
+
+  function syncAccountName(coin: COIN_TYPES_KEYS, walletSource: AccountTypeKey) {
+    if (!coin || !walletSource) return;
+    const filtered = [...accounts].filter(
+      a => a.coin === coin && a.type === walletSource
+    );
+    const latestIndex =
+      filtered.length > 0
+        ? Math.max(...filtered.map(a => a.index)) + 1
+        : 0;
+
+    setIndex(latestIndex);
+    setValue(
+      "accountName",
+      `${ACCOUNT_TYPES[walletSource].label} ${filtered.length  + 1}`
+    );
+  }
+  useEffect(() => {
+    if (!open) return;
+
+    const defaultWallet = WALLET_SOURCES[0].value;
+    const defaultCoin = COIN_SELECT_ITEMS[0].value;
+
+    reset({
+      walletSource: defaultWallet,
+      chain: defaultCoin,
+      accountName: "",
+    });
+
+    syncAccountName(defaultCoin, defaultWallet);
+  }, [open, reset, accounts]);
+  useEffect(() => {
+    if (!coinWatch || !walletSourceWatch) return;
+    syncAccountName(coinWatch, walletSourceWatch);
+  }, [coinWatch, walletSourceWatch, accounts]);
 
   const onSubmit = (data: AddAccountFormSchema) => {
     console.log("Create Account:", data);
-    if(createNewPublicPrivateKey(data))
+    if (createNewPublicPrivateKey(data))
       toast.success(`New Account Created Successfully`);
     else
       toast.error("Failed to create account")
@@ -78,7 +116,6 @@ const AddNewAccountModal = ({
         <Dialog.Overlay className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
 
         <Dialog.Content className="fixed left-1/2 top-1/2 w-full max-w-md -translate-x-1/2 -translate-y-1/2 rounded-2xl border border-white/10 bg-gradient-to-br from-[#0f1b34] to-[#0b1428] p-6 text-white shadow-2xl">
-          {/* Header */}
           <div className="mb-4 flex items-start justify-between">
             <div>
               <Dialog.Title className="text-xl font-semibold">
@@ -94,7 +131,6 @@ const AddNewAccountModal = ({
             </Dialog.Close>
           </div>
 
-          {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
             <Field label="Wallet Source">
               <SelectBox
@@ -121,12 +157,24 @@ const AddNewAccountModal = ({
                     message: "Minimum 3 characters",
                   },
                 })}
+                readOnly
                 placeholder="e.g., Trading Account"
-                className="w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                className={`w-full rounded-lg border px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2
+      ${errors.accountName
+                    ? "border-red-500 focus:ring-red-500/40"
+                    : "border-white/10 bg-black/30 focus:ring-blue-500/40"
+                  }
+    `}
               />
+
+              {/* ✅ Error message */}
+              {errors.accountName && (
+                <p className="mt-1 text-xs text-red-400">
+                  {errors.accountName.message}
+                </p>
+              )}
             </Field>
 
-            {/* Footer */}
             <div className="mt-6 flex justify-end">
               <button
                 type="submit"
@@ -138,7 +186,7 @@ const AddNewAccountModal = ({
           </form>
 
           <p className="mt-4 text-xs text-slate-500">
-            🔒 Standard HD derivation path (m/44'/60'/0'/0)
+            🔒 Standard HD derivation path {COIN_TYPES[coinWatch].derivationPath(index)}
           </p>
         </Dialog.Content>
       </Dialog.Portal>

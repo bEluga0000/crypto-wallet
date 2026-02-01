@@ -1,4 +1,4 @@
-import { IoMdInformationCircle } from "react-icons/io";
+
 import { MdGppMaybe, MdOfflinePin, MdVisibilityOff } from "react-icons/md";
 import { InfoBlock } from "./info-block";
 
@@ -8,7 +8,6 @@ type RightSideProps = {
 const RightSide = ({ seedPhraseAdded }: RightSideProps) => {
   return (
     <aside className="flex w-full flex-col gap-6 lg:w-80">
-      {/* Security Tips */}
       <div className="rounded-xl border border-gray-800 bg-card-dark p-6">
         <div className="mb-4 flex items-center gap-3 text-primary">
           <span className="material-symbols-outlined">shield</span>
@@ -36,8 +35,6 @@ const RightSide = ({ seedPhraseAdded }: RightSideProps) => {
           />
         </div>
       </div>
-
-      {/* Dynamic Info */}
       {!seedPhraseAdded ? (
         <div className="rounded-xl border border-blue-500/20 bg-blue-500/10 p-6">
           <InfoBlock
@@ -60,7 +57,7 @@ const RightSide = ({ seedPhraseAdded }: RightSideProps) => {
 
           <p className="text-xs text-amber-200/80 leading-relaxed">
             You can recreate the exact same account by clicking{" "}
-            <strong>“Add Account”</strong>. Wallets derive accounts
+            <strong>“Add Wallet”</strong>. Wallets derive accounts
             deterministically from your recovery phrase.
           </p>
         </div>

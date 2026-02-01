@@ -2,6 +2,7 @@ import { IoSwapHorizontalSharp } from "react-icons/io5";
 import { MdNorthEast, MdSouthWest, MdVisibility } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 import TopBarButton from "./topBarButton";
+import { ACCOUNT_TYPES } from "@/constants/accountTypes";
 
 type ProfileTopBarProps = {
   onToggleSidebar: () => void;
@@ -23,7 +24,7 @@ const ProfileTopBar = ({ onToggleSidebar, walletName }: ProfileTopBarProps) => {
 
         {/* Wallet Name */}
         <h1 className="text-lg font-semibold tracking-tight text-slate-900 dark:text-slate-100">
-          {walletName}
+          {ACCOUNT_TYPES[walletName as keyof typeof ACCOUNT_TYPES]?.label ?? walletName}
         </h1>
       </div>
 

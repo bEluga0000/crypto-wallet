@@ -6,21 +6,27 @@ import BestPracticesCard from "./ui/security/bestPractices";
 import { IoCloudOffline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { ConfirmDialog } from "./ui/modals/confirmDialog";
 import { toast } from "sonner";
 import { useMnemonicStore } from "@/store/mnemonic.store";
 import { useImportWalletStore } from "@/store/import-wallet.store";
+import { useAccountStore } from "@/store/accounts.store";
+import { useBalanceStore } from "@/store/balance.store";
 
 export default function SecurityPage() {
   const router = useRouter()
   const mnemonic = useMnemonicStore((s) => s.mnemonic);
   const clearMnemonic = useMnemonicStore((s) => s.clearMnemonic);
   const clearWalletname = useImportWalletStore(s => s.clearWalletName)
+  const clearAccounts = useAccountStore(s=>s.clearAccounts)
+  const clearBalances = useBalanceStore(s=>s.clearBalances)
   const [openModal, setOpenModal] = useState<boolean>(false)
   const handleDeleteAccount = () => {
     clearMnemonic();
     clearWalletname();
+    clearAccounts()
+    clearBalances()
+    useAccountStore.persist.clearStorage()
     useMnemonicStore.persist.clearStorage();
     useImportWalletStore.persist.clearStorage();
     toast.success("Account deleted from this device");

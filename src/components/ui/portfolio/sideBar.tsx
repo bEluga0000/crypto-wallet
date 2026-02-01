@@ -1,6 +1,5 @@
 import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes"
 import { IoMdAddCircle } from "react-icons/io";
-import { MdLayers, MdMemory } from "react-icons/md";
 import SideBarFieldCard from "./sideBarFieldCard";
 import { AccountSchema } from "@/constants/accounts";
 
@@ -31,7 +30,6 @@ const PortfolioSideBar = ({
       `}
     >
       <div className="p-4">
-        {/* Add Wallet CTA */}
         <div
           onClick={() => setOpenAddAccount(true)}
           className={`
@@ -51,7 +49,7 @@ const PortfolioSideBar = ({
           {isOpen && (
             <div>
               <p className="text-sm font-semibold text-primary">
-                Add Account
+                Add Wallet
               </p>
               <p className="text-xs text-slate-500">
                 Create a new wallet
@@ -59,8 +57,6 @@ const PortfolioSideBar = ({
             </div>
           )}
         </div>
-
-        {/* Accounts */}
         <nav className="space-y-1">
           {SIDEBAR_ACCOUNTS.map((key) => {
             const account = ACCOUNT_TYPES[key];
@@ -76,7 +72,7 @@ const PortfolioSideBar = ({
             );
           })}
 
-          <SideBarFieldCard
+          {/* <SideBarFieldCard
             icon={<MdMemory />}
             label="Hardware 1"
             isOpen={isOpen}
@@ -90,11 +86,9 @@ const PortfolioSideBar = ({
             isOpen={isOpen}
             active={activeKey === "STAKING"}
             onClick={() => onSelect("STAKING")}
-          />
+          /> */}
         </nav>
       </div>
-
-      {/* Footer */}
       <div className="mt-auto border-t border-slate-200 p-4 dark:border-slate-800">
         <button
           onClick={onToggle}

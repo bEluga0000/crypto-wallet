@@ -6,7 +6,7 @@ export type AccountState = {
     accounts: AccountSchema[]
     addAccount: (account: AccountSchema) => void
     setAccounts: (accounts: AccountSchema[]) => void
-    removeAccount: (index: number) => void;
+    removeAccount: (publicKey: string) => void;
     clearAccounts: () => void;
 }
 
@@ -21,9 +21,9 @@ export const useAccountStore = create<AccountState>()(
 
             setAccounts: (accounts) => set({ accounts }),
 
-            removeAccount: (index) =>
+            removeAccount: (publicKey) =>
                 set((state) => ({
-                    accounts: state.accounts.filter((a) => a.index !== index),
+                    accounts: state.accounts.filter((a) => a.publicKey !== publicKey),
                 })),
 
             clearAccounts: () => set({ accounts: [] }),

@@ -9,12 +9,14 @@ type UseDiscoverAccountsProps = {
     enabled: boolean;
     max?: number;
     gap?: number;
+    mnemonic:string
 };
 
 export function useDiscoverAccounts({
     enabled,
     max = 20,
     gap = 10,
+    mnemonic
 }: UseDiscoverAccountsProps) {
     const addAccount = useAccountStore((s) => s.addAccount);
     const setBalance = useBalanceStore((s) => s.setBalance);
@@ -32,8 +34,8 @@ export function useDiscoverAccounts({
                 setLoading(true);
 
                 const [solAccounts, ethAccounts] = await Promise.all([
-                    discoverSolanaAccounts(max, gap),
-                    discoverEthereumAccounts(max, gap),
+                    discoverSolanaAccounts(max, gap,mnemonic),
+                    discoverEthereumAccounts(max, gap,mnemonic),
                 ]);
 
                 if (cancelled) return;
