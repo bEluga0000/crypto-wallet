@@ -11,7 +11,7 @@ const bip32Factory = bip32.BIP32Factory(ecc);
 
 export const bitcoinKeyPairs = (
     derivationPath: string,
-    optionalMnemonic:string
+    optionalMnemonic?:string
 ): ChainKeyPairsoutputSchema => {
     const network = bitcoin.networks.bitcoin;
     const storeMnemonic = useMnemonicStore.getState().mnemonic;
