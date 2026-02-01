@@ -49,7 +49,7 @@ export default function SecurityPage() {
           <BackupReminder />
         </section>
         <section>
-          <SecretRecoveryPhrase />
+          <SecretRecoveryPhrase deleteOpen={openModal}/>
         </section>
         <section className="border-t border-slate-200 pt-6 dark:border-slate-800">
           <h3 className="mb-4 font-bold">Security Best Practices</h3>

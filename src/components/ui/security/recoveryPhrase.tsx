@@ -17,8 +17,12 @@ import { STORAGE_KEYS } from "@/constants/storageKeys";
 import { toast } from "sonner";
 import CopyButton from "../formComponents/copyButton";
 import { useMnemonicStore } from "@/store/mnemonic.store";
-
-export const SecretRecoveryPhrase = () => {
+type SecretRecoveryPhraseProps = {
+  deleteOpen:boolean
+}
+export const SecretRecoveryPhrase:React.FC<SecretRecoveryPhraseProps> = ({
+  deleteOpen
+}) => {
   const router = useRouter();
   const mnemonic = useMnemonicStore(s=>s.mnemonic)
   const [showPhrase, setShowPhrase] = useState<boolean>(false)
@@ -109,8 +113,8 @@ export const SecretRecoveryPhrase = () => {
               <div className="pointer-events-none absolute inset-0 bg-black/60 backdrop-blur-md" />
             )}
 
-            {!showPhrase && (
-              <div className="pointer-events-auto absolute inset-0 z-10 flex items-center justify-center">
+            {!showPhrase &&!deleteOpen&& (
+              <div className="pointer-events-auto absolute inset-0 z-5 flex items-center justify-center">
                 <div className="flex max-w-sm flex-col items-center text-center px-4">
                   <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-500/20">
                     <MdVisibilityOff className="text-2xl text-blue-400" />
