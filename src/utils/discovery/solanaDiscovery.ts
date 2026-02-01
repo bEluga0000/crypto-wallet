@@ -35,5 +35,6 @@ export async function discoverSolanaAccounts(
             emptyCount = 0;
         }
     }
+    
     return accounts
 }

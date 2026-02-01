@@ -11,7 +11,6 @@ export async function discoverEthereumAccounts(
 ) {
   const accounts = [];
   let emptyCount = 0;
-
   for (let index = 0; index < max; index++) {
     const path = COIN_TYPES.ethereum.derivationPath(index);
     const { publicKey,privateKey } = ethereumKeyPairs(path,mnemonic);
