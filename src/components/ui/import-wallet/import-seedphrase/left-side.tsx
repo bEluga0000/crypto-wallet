@@ -13,8 +13,6 @@ const LeftSide = (props: LeftSideProps) => {
         props.words.every((w) => w.trim().length > 0);
     return <div className="flex flex-1 flex-col gap-8">
         <ProgressiveBar step={1} label="Paste Mnemonic" />
-
-        {/* Heading */}
         <div className="space-y-2">
             <h1 className="text-3xl font-bold tracking-tight">
                 Enter Recovery Phrase
@@ -24,11 +22,7 @@ const LeftSide = (props: LeftSideProps) => {
                 recover your wallet.
             </p>
         </div>
-
-        {/* Mnemonic Inputs */}
         <MnemonicInputs WORD_COUNT={props.WORD_COUNT} words={props.words} setWords={props.setWords} />
-
-        {/* Actions */}
         <div className="flex flex-col gap-4 sm:flex-row">
 
             <button

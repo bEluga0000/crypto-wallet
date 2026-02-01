@@ -42,12 +42,8 @@ const AccountDetailsModal = ({
     return (
         <Dialog.Root open={open} onOpenChange={onOpenChange}>
             <Dialog.Portal>
-                {/* Overlay */}
                 <Dialog.Overlay className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm" />
-
-                {/* Modal */}
                 <Dialog.Content className="fixed left-1/2 top-1/2 z-50 w-full max-w-[560px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-xl border border-slate-200 bg-background-light shadow-2xl dark:border-border-dark dark:bg-surface-dark">
-                    {/* Header */}
                     <div className="flex items-start justify-between p-6">
                         <div className="flex items-center gap-4">
                             <div
@@ -73,8 +69,6 @@ const AccountDetailsModal = ({
                             <MdClose size={20} />
                         </Dialog.Close>
                     </div>
-
-                    {/* Content */}
                     <div className="space-y-6 px-6 pb-8">
                         {/* Public Key */}
                         <div className="space-y-2">

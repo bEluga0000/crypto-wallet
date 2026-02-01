@@ -48,7 +48,6 @@ const DiscoveredAccounts: React.FC<DiscoveredPhraseAccountsProps> = ({
                     ))}
                 </div>
             )}
-            {/* Accounts List OR Empty State */}
             {!loading && hasAccounts && (
                 <div className="custom-scrollbar flex max-h-[480px] flex-col gap-3 overflow-y-auto pr-2">
                     {accounts.map((acc, i) => (

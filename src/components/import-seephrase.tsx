@@ -14,18 +14,13 @@ const ImportSeedPhrasePage = () => {
             <div className="flex min-h-screen flex-col">
                 <main className="flex flex-1 justify-center px-4 py-10">
                     <div className="flex w-full max-w-[1000px] flex-col gap-12 lg:flex-row">
-                        {/* Left */}
                         {!seedPharseAdded ? <LeftSide words={words} setWords={setWords} WORD_COUNT={WORD_COUNT} setSeedPhrase={setSeedPhraseAdded}/> :
                          <DiscoveredAccounts words={words}/>
                         }
-
-                        {/* Right Sidebar */}
                         <RightSide seedPhraseAdded={seedPharseAdded}/>
                     </div>
                 </main>
-
-                {/* Footer */}
-                <footer className="mt-auto border-t border-gray-800 px-5 py-10 text-center">
+                {/* <footer className="mt-auto border-t border-gray-800 px-5 py-10 text-center">
                     <div className="flex flex-wrap justify-center gap-6">
                         {["Terms of Service", "Privacy Policy", "Security Audit"].map(
                             (item) => (
@@ -43,7 +38,7 @@ const ImportSeedPhrasePage = () => {
                     <p className="mt-6 text-xs text-gray-600">
                         © 2024 CryptoVault Inc. Seed phrases are locally encrypted (AES-256).
                     </p>
-                </footer>
+                </footer> */}
             </div>
         </div>
     );

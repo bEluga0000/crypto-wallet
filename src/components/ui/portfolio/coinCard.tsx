@@ -25,16 +25,13 @@ const CoinCard: React.FC<CoinCardProps> = ({
                 className={`group relative rounded-xl border border-slate-200 bg-white p-6 transition-all hover:shadow-xl dark:border-slate-800 dark:bg-[#16181d] cursor-pointer`}
                 onClick={() => (setOpen(true))}
             >
-                {/* Left accent bar */}
                 <div
                     className="absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-full"
                     style={{ backgroundColor: COIN_TYPES[coin.coin].color }}
                 />
 
                 <div className="flex items-center justify-between">
-                    {/* LEFT SIDE */}
                     <div className="flex items-center gap-4">
-                        {/* Coin Image */}
                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/5 shadow-inner dark:bg-black/20">
                             <img
                                 src={COIN_TYPES[coin.coin].image}
@@ -43,7 +40,6 @@ const CoinCard: React.FC<CoinCardProps> = ({
                             />
                         </div>
 
-                        {/* Coin Info */}
                         <div className="flex flex-col gap-1">
                             <h3 className="text-base font-semibold text-slate-900 dark:text-white">
                                 {COIN_TYPES[coin.coin].label}
@@ -58,7 +54,6 @@ const CoinCard: React.FC<CoinCardProps> = ({
                         </div>
                     </div>
 
-                    {/* RIGHT SIDE */}
                     <div className="text-right">
                         {loading ? (
                             <BalanceSkeleton />

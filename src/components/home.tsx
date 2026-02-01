@@ -14,10 +14,8 @@ export default function HomePage() {
     }
     return (
         <div className="layout-container flex min-h-screen flex-col">
-            {/* Main */}
             <main className="flex flex-1 flex-col items-center justify-center px-4 py-12">
                 <div className="w-full max-w-[1024px] space-y-12">
-                    {/* Headline */}
                     <div className="space-y-4 text-center">
                         <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">
                             Welcome to Your Secure Gateway
@@ -27,10 +25,7 @@ export default function HomePage() {
                             Secure, private, and non-custodial.
                         </p>
                     </div>
-
-                    {/* CTA Cards */}
                     <div className="grid grid-cols-1 gap-8 px-4 md:grid-cols-2">
-                        {/* Create */}
                         <HomePageCard
                             icon={<MdAddModerator />}
                             title={"Create New Wallet"}
@@ -39,10 +34,6 @@ export default function HomePage() {
                             onClick={createNewWalletOnClick}
                             buttonIcon={<IoMdArrowForward />}
                         />
-
-                        {/* Import */}
-
-
                         <HomePageCard
                             icon={<RiDownloadCloudFill />}
                             title={"Import Existing Wallet"}
@@ -57,7 +48,7 @@ export default function HomePage() {
             </main>
 
             {/* Footer */}
-            <footer className="flex flex-col items-center justify-between gap-4 border-t border-[#e5e7eb] px-6 py-6 text-xs font-medium uppercase tracking-widest text-[#616f89] dark:border-gray-800 dark:text-gray-500 md:flex-row md:px-20">
+            {/* <footer className="flex flex-col items-center justify-between gap-4 border-t border-[#e5e7eb] px-6 py-6 text-xs font-medium uppercase tracking-widest text-[#616f89] dark:border-gray-800 dark:text-gray-500 md:flex-row md:px-20">
                 <div className="flex items-center gap-6">
                     <span className="flex items-center gap-1.5">
                         <span className="size-2 rounded-full bg-green-500" />
@@ -71,7 +62,7 @@ export default function HomePage() {
                     <a className="hover:text-primary">Terms of Service</a>
                     <a className="hover:text-primary">Security Audit</a>
                 </div>
-            </footer>
+            </footer> */}
         </div>
     );
 }

@@ -26,7 +26,6 @@ const BalanceFilterSelect = ({
       onValueChange={onChange}
       disabled={isDisabled}
     >
-      {/* Trigger */}
       <Select.Trigger
         className={`
           inline-flex items-center gap-2 rounded-lg border px-3 py-1.5 text-sm font-semibold

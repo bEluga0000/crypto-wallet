@@ -1,8 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { BiSolidWallet } from "react-icons/bi"
-import { IoMdHelpCircle } from "react-icons/io"
-import { MdOutlineSecurity } from "react-icons/md"
 import PortfolioSecurityToggle from "./ui/nav/navBarToggleButton";
 
 const NavBar = () => {

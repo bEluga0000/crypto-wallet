@@ -12,15 +12,13 @@ const ProgressiveBar:React.FC<ProgressiveBarProps> = ({
   
     return (
       <div className="flex flex-col gap-3">
-        {/* Step info */}
         <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-widest text-gray-400">
           <span>
             Step {step} of {totalSteps}: {label}
           </span>
           <span className="text-gray-300">{progress}% Complete</span>
         </div>
-  
-        {/* Progress bar */}
+
         <div className="relative h-2 w-full overflow-hidden rounded-full bg-gray-800/70">
           <div
             className="

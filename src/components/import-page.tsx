@@ -5,9 +5,7 @@ import { FaWandMagicSparkles } from "react-icons/fa6";
 export default function ImportWalletPage() {
     return (
         <div className="flex min-h-screen flex-col bg-background-light dark:bg-background-dark">
-            {/* Main */}
             <main className="mx-auto w-full max-w-[960px] flex-1 px-4 py-12">
-                {/* Heading */}
                 <div className="mx-auto max-w-xl text-center">
                     <div className="mb-3 flex items-center justify-center gap-2 text-sm font-semibold uppercase tracking-wider text-primary">
                         <span className="material-symbols-outlined text-base">lock</span>
@@ -23,13 +21,9 @@ export default function ImportWalletPage() {
                         are encrypted locally and never leave your device.
                     </p>
                 </div>
-
-                {/* Wallet Grid */}
                 <div>
                     <WalletsPageCard wallets={wallets} />
                 </div>
-
-                {/* Help */}
                 <div className="mt-10 text-center">
                     <a
                         href="#"
@@ -42,7 +36,7 @@ export default function ImportWalletPage() {
             </main>
 
             {/* Footer */}
-            <footer className="border-t border-gray-200 px-6 py-16 text-center dark:border-gray-800">
+            {/* <footer className="border-t border-gray-200 px-6 py-16 text-center dark:border-gray-800">
                 <div className="flex flex-wrap justify-center gap-8 text-sm text-gray-500 dark:text-gray-400">
                     <a className="hover:text-primary">Terms of Service</a>
                     <a className="hover:text-primary">Privacy Policy</a>
@@ -52,7 +46,7 @@ export default function ImportWalletPage() {
                 <p className="mt-8 text-sm text-gray-400 dark:text-gray-500">
                     © 2024 CryptoVault Inc. Encrypted & Secure.
                 </p>
-            </footer>
+            </footer> */}
         </div>
     );
 }
