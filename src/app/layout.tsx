@@ -22,6 +22,9 @@ const inter = Inter({
 export const metadata = {
   title: "CryptoHD - Wallet Onboarding",
   description: "Secure HD wallet onboarding",
+  icons: {
+    icon:"/vercel.svg"
+  }
 };
 
 

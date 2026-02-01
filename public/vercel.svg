@@ -1,1 +1,53 @@
-<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1155 1000"><path d="m577.3 0 577.4 1000H0z" fill="#fff"/></svg>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  width="120"
+  height="120"
+  viewBox="0 0 120 120"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <!-- Outer Circle -->
+  <circle
+    cx="60"
+    cy="60"
+    r="54"
+    stroke="#2563EB"
+    stroke-width="6"
+    fill="url(#grad)"
+  />
+
+  <!-- Wallet Body -->
+  <rect
+    x="30"
+    y="42"
+    width="60"
+    height="36"
+    rx="8"
+    fill="#0F172A"
+  />
+
+  <!-- Wallet Slot -->
+  <rect
+    x="36"
+    y="50"
+    width="36"
+    height="6"
+    rx="3"
+    fill="#2563EB"
+  />
+
+  <!-- Lock -->
+  <path
+    d="M60 48c-6 0-10 4-10 10v4h20v-4c0-6-4-10-10-10z"
+    fill="#2563EB"
+  />
+  <circle cx="60" cy="64" r="3" fill="#E5E7EB" />
+
+  <!-- Gradient -->
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="120" y2="120">
+      <stop offset="0%" stop-color="#2563EB" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#2563EB" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+</svg>
