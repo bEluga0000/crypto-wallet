@@ -27,16 +27,16 @@ const ProfileTopBar = ({ onToggleSidebar, walletName }: ProfileTopBarProps) => {
       </div>
 
       <div className="flex items-center gap-4">
-        <div className="hidden lg:flex overflow-hidden rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
+        {/* <div className="hidden lg:flex overflow-hidden rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
           {TOPBAR_ICONS.map((item, ind) => (
             <TopBarButton key={item.label} ind={ind} icon={item.icon} />
           ))}
-        </div>
+        </div> */}
 
-        <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-blue-700">
+        {/* <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-blue-700">
           <MdVisibility className="text-[18px]" />
           Privacy Mode
-        </button>
+        </button> */}
       </div>
     </header>
   );
