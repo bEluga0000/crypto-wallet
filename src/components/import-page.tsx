@@ -57,25 +57,25 @@ const wallets = [
         icon: <MdOutlineBackpack />,
         desc: "Import using your Backpack account securely.",
         // primary:true,
-        work:true
+        work: true
     },
     {
         title: "Phantom",
         icon: <FaWandMagicSparkles />,
         desc: "Connect your Phantom Solana wallet extension.",
-        work:true
+        work: true
     },
     {
         title: "MetaMask",
         icon: <MdOutlineToken />,
         desc: "The most popular Ethereum & ERC-20 wallet.",
-        work:true
+        work: true
     },
     {
-        title: "Trust Wallet",
+        title: "Private Key",
         icon: <MdOutlineVerifiedUser />,
-        desc: "Import via mobile app or browser extension.",
-        work:false
+        desc: "Restore an account using a raw private key.",
+        work: false,
     },
     // {
     //     title: "Other Wallet",
@@ -86,6 +86,6 @@ const wallets = [
         title: "Hardware Wallet",
         icon: <MdOutlineUsb />,
         desc: "Connect your Ledger, Trezor, or Keystone.",
-        work:false
+        work: false
     },
 ];

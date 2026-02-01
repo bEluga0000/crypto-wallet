@@ -87,7 +87,7 @@ export const SecretRecoveryPhrase:React.FC<SecretRecoveryPhraseProps> = ({
             Recovery Phrase Not Found
           </h3>
           <p className="mt-2 text-slate-400">
-            Go to the home page to generate a new wallet and create your recovery
+            Go to the home page to import wallet or create new recovery
             phrase.
           </p>
 

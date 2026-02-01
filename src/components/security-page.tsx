@@ -18,8 +18,8 @@ export default function SecurityPage() {
   const mnemonic = useMnemonicStore((s) => s.mnemonic);
   const clearMnemonic = useMnemonicStore((s) => s.clearMnemonic);
   const clearWalletname = useImportWalletStore(s => s.clearWalletName)
-  const clearAccounts = useAccountStore(s=>s.clearAccounts)
-  const clearBalances = useBalanceStore(s=>s.clearBalances)
+  const clearAccounts = useAccountStore(s => s.clearAccounts)
+  const clearBalances = useBalanceStore(s => s.clearBalances)
   const [openModal, setOpenModal] = useState<boolean>(false)
   const handleDeleteAccount = () => {
     clearMnemonic();
@@ -45,11 +45,13 @@ export default function SecurityPage() {
             long-term fund safety.
           </p>
         </div>
+        {
+          mnemonic && <section>
+            <BackupReminder />
+          </section>
+        }
         <section>
-          <BackupReminder />
-        </section>
-        <section>
-          <SecretRecoveryPhrase deleteOpen={openModal}/>
+          <SecretRecoveryPhrase deleteOpen={openModal} />
         </section>
         <section className="border-t border-slate-200 pt-6 dark:border-slate-800">
           <h3 className="mb-4 font-bold">Security Best Practices</h3>
