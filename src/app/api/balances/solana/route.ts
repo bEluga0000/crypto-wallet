@@ -2,10 +2,13 @@ import { NextResponse } from "next/server";
 
 import { Connection, PublicKey, LAMPORTS_PER_SOL } from "@solana/web3.js";
 
-const connection = new Connection("https://api.devnet.solana.com");
 
 export async function POST(req: Request) {
     try {
+        if(!process.env.SOLANA_RPC_URL)
+            throw new Error("No RPC link found")
+        const connection = new Connection(process.env.SOLANA_RPC_URL,"confirmed");
+        
         const { publicKey } = await req.json();
 
         const key = new PublicKey(publicKey);
