@@ -1,8 +1,9 @@
 import { IoSwapHorizontalSharp } from "react-icons/io5";
 import { MdNorthEast, MdSouthWest, MdVisibility } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
-import TopBarButton from "./topBarButton";
 import { ACCOUNT_TYPES } from "@/constants/accountTypes";
+import TopBarButton from "./topBarButton";
+import { useTransferStore } from "@/store/transfer-modal.store";
 
 type ProfileTopBarProps = {
   onToggleSidebar: () => void;
@@ -10,6 +11,10 @@ type ProfileTopBarProps = {
 };
 
 const ProfileTopBar = ({ onToggleSidebar, walletName }: ProfileTopBarProps) => {
+  const setTransferModal = useTransferStore(s=>s.setModalOpen)
+  const sendButtonOnClick = ()=>{
+    setTransferModal(true)
+  }
   return (
     <header className="flex items-center justify-between border-b border-slate-200 px-8 py-4 dark:border-slate-800">
       <div className="flex items-center gap-4">
@@ -27,11 +32,11 @@ const ProfileTopBar = ({ onToggleSidebar, walletName }: ProfileTopBarProps) => {
       </div>
 
       <div className="flex items-center gap-4">
-        {/* <div className="hidden lg:flex overflow-hidden rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
+        <div className="flex  rounded-lg border border-slate-200 bg-slate-100 dark:border-slate-700 dark:bg-slate-800">
           {TOPBAR_ICONS.map((item, ind) => (
-            <TopBarButton key={item.label} ind={ind} icon={item.icon} />
+            <TopBarButton key={item.label} ind={ind} icon={item.icon} onClick={sendButtonOnClick}/>
           ))}
-        </div> */}
+        </div>
 
         {/* <button className="flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white shadow-lg shadow-primary/20 transition-colors hover:bg-blue-700">
           <MdVisibility className="text-[18px]" />

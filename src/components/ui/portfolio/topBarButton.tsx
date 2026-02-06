@@ -1,10 +1,12 @@
 type TopBarButtonProps = {
     ind: number
     icon: React.ReactNode
+    onClick:()=>void
 }
 const TopBarButton: React.FC<TopBarButtonProps>= ({
     icon,
-    ind
+    ind,
+    onClick,
 }: TopBarButtonProps) => {
     return <button
         key={ind}
@@ -16,6 +18,7 @@ dark:hover:bg-slate-700
 cursor-pointer
 ${ind !== 0 ? "border-l border-slate-200 dark:border-slate-700" : ""}
 `}
+    onClick={onClick}
     >
         <span className="material-symbols-outlined text-[20px]">
             {icon}
