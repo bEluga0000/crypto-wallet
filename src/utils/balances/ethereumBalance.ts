@@ -1,10 +1,10 @@
-import axios from "axios"
+import nextApi from "../apiConnection";
 export async function getEthereumBalance(address: string) {
-    const res = await axios.post("/api/balances/ethereum", {
+    const res = await nextApi.post("/api/balances/ethereum", {
         address
     });
-    if (!res.data ) {
-        return { lamports: 0, sol: 0 };
+    if (!res.data) {
+        return { wei: "0", eth: 0 };
     }
     return res.data
 }
