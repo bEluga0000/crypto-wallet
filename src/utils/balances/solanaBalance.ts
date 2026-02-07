@@ -1,7 +1,7 @@
 import nextApi from "../apiConnection";
 
 export const getSolanaBalance = async (publicKey: string) => {
-    const res = await nextApi.post("/api/balances/solana", {
+    const res = await nextApi.post("/api/balances/sol", {
       publicKey
       });
 
