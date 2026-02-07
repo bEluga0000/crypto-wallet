@@ -1,15 +1,16 @@
 "use client";
 
-import { useSendEth } from "@/hooks/useSendEth";
+import { useSendAmount } from "@/hooks/useSendAmount";
+import { useNetworkStore } from "@/store/network.store";
 import { useTransferStore } from "@/store/useTransferStore";
 
 const ReviewTransferButton = () => {
-  const { mutate, isPending, isError, error, data } = useSendEth();
-
+  const { mutate, isPending, isError, error, data } = useSendAmount();
   const wallet = useTransferStore((s) => s.wallet);
   const recipient = useTransferStore((s) => s.recipient);
   const balance = useTransferStore((s) => s.balance);
   const amount = useTransferStore((s) => s.transferAmount);
+  const network = useNetworkStore((s) => s.network)
 
   const disabled =
     !wallet ||
@@ -21,14 +22,13 @@ const ReviewTransferButton = () => {
 
   const handleSendEth = () => {
     if (!wallet || !wallet.privateKey || !recipient || amount <= 0) return;
-
     mutate({
       privateKey: wallet.privateKey,
       to: recipient,
       amount,
+      network
     });
   };
-
   return (
     <div className="space-y-2">
       <button
@@ -36,10 +36,9 @@ const ReviewTransferButton = () => {
         onClick={handleSendEth}
         className={`
           w-full rounded-xl py-4 text-lg font-black transition-all
-          ${
-            disabled || isPending
-              ? "cursor-not-allowed bg-slate-300 text-slate-500 dark:bg-slate-700"
-              : "cursor-pointer bg-blue-500 text-white hover:bg-blue-600 shadow-lg"
+          ${disabled || isPending
+            ? "cursor-not-allowed bg-slate-300 text-slate-500 dark:bg-slate-700"
+            : "cursor-pointer bg-blue-500 text-white hover:bg-blue-600 shadow-lg"
           }
         `}
       >
