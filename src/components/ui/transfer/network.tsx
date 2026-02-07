@@ -1,11 +1,17 @@
 "use client";
 import { useNetworkStore } from "@/store/network.store";
+import { useTransferStore } from "@/store/useTransferStore";
 import clsx from "clsx";
+import { useEffect } from "react";
 
 
 const NetworkTab = () => {
     const value = useNetworkStore(s=>s.network)
     const onChange = useNetworkStore(s=>s.setNetwork)
+    const resetTransfer = useTransferStore((s) => s.reset);
+    useEffect(()=>{
+      resetTransfer()
+    },[value,resetTransfer])
   return (
     <div className="flex gap-1 rounded-xl border border-slate-200 bg-white p-1 dark:border-[#282e39] dark:bg-[#1c1f27]">
       <button

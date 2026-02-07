@@ -23,9 +23,8 @@ const FromAccountDropdown = () => {
 
     const filteredAccounts = accounts.filter((a) => a.coin === network);
 
-    // Always runs — SAFE
     useEffect(() => {
-        if (!selected && filteredAccounts.length > 0) {
+        if (filteredAccounts.length > 0) {
             setSelected(filteredAccounts[0]);
         }
     
@@ -39,18 +38,16 @@ const FromAccountDropdown = () => {
             ? balances[balanceKey(selected.coin, selected.publicKey)] ?? 0
             : 0;
 
-    // Always runs — SAFE
     useEffect(() => {
         if (selected) {
             setTransferBalance(balance);
         }
     }, [balance, selected, setTransferBalance]);
 
-    // Conditional return AFTER hooks ✅
     if (!selected) {
         return (
             <div className="mt-2 rounded-xl border border-dashed border-slate-300 p-4 text-center text-sm text-slate-500 dark:border-slate-700">
-                No accounts available for this network
+                No accounts available for this network 
             </div>
         );
     }
