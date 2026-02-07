@@ -8,7 +8,6 @@ import { AccountSchema } from "@/constants/accounts";
 import { ACCOUNT_TYPES, AccountTypeKey } from "@/constants/accountTypes";
 import BalanceFilterSelect from "./ui/portfolio/accountDropDown";
 import { useAccountStore } from "@/store/accounts.store";
-import TransferDialog from "./ui/modals/transferDialog";
 
 export default function PortfolioPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -106,7 +105,6 @@ export default function PortfolioPage() {
         </main>
       </div>
       <AddNewAccountModal open={openAddAccount} onOpenChange={setOpenAddAccount} />
-      <TransferDialog/>
     </>
 
   );

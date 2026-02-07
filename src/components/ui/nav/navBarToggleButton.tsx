@@ -5,6 +5,7 @@ import { MdOutlineSecurity } from "react-icons/md";
 import { IoWalletOutline } from "react-icons/io5";
 import TooltipWrapper from "../tooltipWrapper";
 import { useMnemonicStore } from "@/store/mnemonic.store";
+import { BiTransfer } from "react-icons/bi";
 
 const PortfolioSecurityToggle = () => {
   const router = useRouter();
@@ -12,6 +13,7 @@ const PortfolioSecurityToggle = () => {
   const mnemonic = useMnemonicStore(s => s.mnemonic)
   const isPortfolio = pathname.startsWith("/portfolio");
   const isSecurity = pathname.startsWith("/security");
+  const isTransfer = pathname.startsWith("/transfer")
 
   const baseBtn =
     "flex h-10 w-10 items-center justify-center rounded-lg transition-colors";
@@ -38,6 +40,16 @@ const PortfolioSecurityToggle = () => {
         </TooltipWrapper>
       }
 
+      <TooltipWrapper content="transfer">
+        <button
+          onClick={() => router.push("/transfer")}
+          className={`${baseBtn} ${!isTransfer ? activeBtn : inactiveBtn
+            } cursor-pointer`}
+          aria-label="Go to Security"
+        >
+          <BiTransfer className="text-lg" />
+        </button>
+      </TooltipWrapper>
 
       {/* Security */}
       <TooltipWrapper content="Security & Recovery">
