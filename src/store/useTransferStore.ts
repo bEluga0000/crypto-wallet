@@ -4,7 +4,8 @@ import { AccountSchema } from "@/constants/accounts";
 type TransferState = {
     recipient: string | null;
     setRecipient: (recipient: string | null) => void;
-
+    transferAmount:number
+    setTransferAmount:(transferAmount:number)=>void
     wallet: AccountSchema | null;
     setWallet: (wallet: AccountSchema | null) => void;
 
@@ -19,7 +20,8 @@ export const useTransferStore = create<TransferState>()(
             recipient: null,
             wallet: null,
             balance: 0,
-
+            transferAmount:0,
+            setTransferAmount:(transferAmount)=>set({transferAmount}),
             setRecipient: (recipient) => set({ recipient }),
 
             setWallet: (wallet) => set({ wallet }),

@@ -14,9 +14,8 @@ const AmountToSendCard = ({ onChange }: Props) => {
     const prices = usePriceStore((s) => s.prices);
     const balance = useTransferStore((s) => s.balance);
     const network = useNetworkStore((s) => s.network);
-
-    const [amount, setAmount] = useState<number>(0);
-
+    const amount = useTransferStore(s=>s.transferAmount)
+    const setAmount = useTransferStore(s=>s.setTransferAmount)
     const usdValue = amount * (prices?.[network] ?? 0);
     const isOverBalance = amount > balance;
 

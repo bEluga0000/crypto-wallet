@@ -1,17 +1,16 @@
 import { useTransferStore } from "@/store/useTransferStore";
 
 type ReviewButtonProps = {
-    amount: number;
     onClick: () => void;
   };
   
   const ReviewTransferButton = ({
-    amount,
     onClick,
   }: ReviewButtonProps) => {
     const walletSelected = useTransferStore(s=>s.wallet)
     const recipient = useTransferStore(s=>s.recipient)
     const balance = useTransferStore(s=>s.balance)
+    const amount = useTransferStore(s=>s.transferAmount)
     const disabled =
       !walletSelected ||
       !recipient ||
