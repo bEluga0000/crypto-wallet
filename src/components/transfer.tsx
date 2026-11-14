@@ -28,7 +28,7 @@ export default function TransferPage() {
 
                     <NetworkFeeCard/>
 
-                    <ReviewTransferButton  onClick={()=>{}}/>
+                    <ReviewTransferButton />
 
                     <p className="text-center text-xs text-slate-500">
                         Testnet transactions carry no real monetary value
